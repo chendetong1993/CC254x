@@ -1,6 +1,21 @@
 # CC254x
-CC254x BLE  Module (Support Command)
+CC254x BLE UART Module Firmware
 
-This is a CC254x firmware can support iphone4s or later.
-But does not support the version is lower than the android 4.3 phone(it don't support classic bluetooth 2.0 spp features)
+1) This is a customized CC254x firmware based on BLE Stack 1.4.2, user can easily control the related module by using specific instruction via UART.
+
+2) This Firmware supports many features listed below
+    1. Role Switch between Master and Slave
+    2. Scan \ Connect(1 master <=>3 Slaves) \ Advertisement
+    3. Transmit data
+    4. Set BLE Parameters
+    5. Reboot
+    6. Sleep
+    7. Peripheral: LED \ KEY \ ADC \ RSSI
+
+3) The format of instruction is defined below
+(Length) + (Role) + (Instruction Type) + (Data) + (Check Bit)
+
+For more detail, please view the "instruction.xlsx"
+
+
 
