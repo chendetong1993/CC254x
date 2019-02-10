@@ -84,29 +84,76 @@
 #define HAL_ADC_SCHN        HAL_ADC_CHN_VDD3
 #define HAL_ADC_ECHN        HAL_ADC_CHN_GND
 
+#define HAL_ADC_CHN_AIN0    0x00    /* AIN0 */
+#define HAL_ADC_CHN_AIN1    0x01    /* AIN1 */
+#define HAL_ADC_CHN_AIN2    0x02    /* AIN2 */
+#define HAL_ADC_CHN_AIN3    0x03    /* AIN3 */
+#define HAL_ADC_CHN_AIN4    0x04    /* AIN4 */
+#define HAL_ADC_CHN_AIN5    0x05    /* AIN5 */
+#define HAL_ADC_CHN_AIN6    0x06    /* AIN6 */
+#define HAL_ADC_CHN_AIN7    0x07    /* AIN7 */
+#define HAL_ADC_CHN_A0A1    0x08    /* AIN0,AIN1 */
+#define HAL_ADC_CHN_A2A3    0x09    /* AIN2,AIN3 */
+#define HAL_ADC_CHN_A4A5    0x0a    /* AIN4,AIN5 */
+#define HAL_ADC_CHN_A6A7    0x0b    /* AIN6,AIN7 */
+#define HAL_ADC_CHN_GND     0x0c    /* GND */
+#define HAL_ADC_CHN_VREF    0x0d    /* Positive voltage reference */
+#define HAL_ADC_CHN_TEMP    0x0e    /* Temperature sensor */
+#define HAL_ADC_CHN_VDD3    0x0f    /* VDD/3 */
+#define HAL_ADC_CHN_BITS    0x0f    /* Bits [3:0] */
+
+#define HAL_ADC_CHANNEL_TEMP       HAL_ADC_CHN_TEMP
+#define HAL_ADC_CHANNEL_VDD        HAL_ADC_CHN_VDD3   /* channel VDD divided by 3 */
+
+/* Vdd Limits */
+#define HAL_ADC_VDD_LIMIT_0        0x00
+#define HAL_ADC_VDD_LIMIT_1        0x01
+#define HAL_ADC_VDD_LIMIT_2        0x02
+#define HAL_ADC_VDD_LIMIT_3        0x03
+#define HAL_ADC_VDD_LIMIT_4        0x04
+#define HAL_ADC_VDD_LIMIT_5        0x05
+#define HAL_ADC_VDD_LIMIT_6        0x06
+#define HAL_ADC_VDD_LIMIT_7        0x07
+
+/* Reference Voltages */
+#define HAL_ADC_REF_125V          0x00    /* Internal Reference (1.25V-CC2430)(1.15V-CC2530) */
+#define HAL_ADC_REF_AIN7          0x40    /* AIN7 Reference */
+#define HAL_ADC_REF_AVDD          0x80    /* AVDD_SOC Pin Reference */
+#define HAL_ADC_REF_DIFF          0xc0    /* AIN7,AIN6 Differential Reference */
+#define HAL_ADC_REF_BITS          0xc0    /* Bits [7:6] */
+
+
+uint16 HalAdcReadCore ( uint8 channel, uint8 resolution );
+bool HalAdcCheckVdd(uint8 vdd);
+bool HalAdcRead (uint8 channel, uint8 resolution, uint8* status);
+
 /* ------------------------------------------------------------------------------------------------
  *                                       Local Variables
  * ------------------------------------------------------------------------------------------------
  */
 
-#if (HAL_ADC == TRUE)
-static uint8 adcRef;
-#endif
+uint8 adcRef = HAL_ADC_REF_VOLT;
+
 
 /**************************************************************************************************
- * @fn      HalAdcInit
+ * @fn      HalAdcRead
  *
- * @brief   Initialize ADC Service
+ * @brief   Read the ADC based on given channel and resolution
  *
- * @param   None
+ * @param   channel - channel where ADC will be read
+ * @param   resolution - the resolution of the value
  *
- * @return  None
+ * @return  16 bit value of the ADC in offset binary format.
+ *
+ *          Note that the ADC is "bipolar", which means the GND (0V) level is mid-scale.
+ *          Note2: This function assumes that ADCCON3 contains the voltage reference.
  **************************************************************************************************/
-void HalAdcInit (void)
-{
-#if (HAL_ADC == TRUE)
-  adcRef = HAL_ADC_REF_VOLT;
-#endif
+bool HalAdcRead (uint8 channel, uint8 resolution, uint8* status){
+  if((channel < HAL_ADC_CHANNEL_NUM) && (resolution < HAL_ADC_RESOLUTION_NUM)){
+    *status = (uint8)((float)HalAdcReadCore(channel, resolution) / 2048 * 255);
+    return TRUE;
+  }
+  return FALSE;
 }
 
 /**************************************************************************************************
@@ -122,7 +169,7 @@ void HalAdcInit (void)
  *          Note that the ADC is "bipolar", which means the GND (0V) level is mid-scale.
  *          Note2: This function assumes that ADCCON3 contains the voltage reference.
  **************************************************************************************************/
-uint16 HalAdcRead (uint8 channel, uint8 resolution)
+uint16 HalAdcReadCore (uint8 channel, uint8 resolution)
 {
   int16  reading = 0;
 
@@ -208,23 +255,6 @@ uint16 HalAdcRead (uint8 channel, uint8 resolution)
 #endif
 
   return ((uint16)reading);
-}
-
-/**************************************************************************************************
- * @fn      HalAdcSetReference
- *
- * @brief   Sets the reference voltage for the ADC and initializes the service
- *
- * @param   reference - the reference voltage to be used by the ADC
- *
- * @return  none
- *
- **************************************************************************************************/
-void HalAdcSetReference ( uint8 reference )
-{
-#if (HAL_ADC == TRUE)
-  adcRef = reference;
-#endif
 }
 
 /*********************************************************************

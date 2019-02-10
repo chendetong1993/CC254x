@@ -99,16 +99,6 @@ extern "C"
  */
 extern bool HalLedSet( uint8 led, bool mode );
 
-/*
- * Put LEDs in sleep state - store current values
- */
-extern void HalLedEnterSleep( void );
-
-/*
- * Retore LEDs from sleep state
- */
-extern void HalLedExitSleep( void );
-
 /*********************************************************************
 *********************************************************************/
 

@@ -131,7 +131,7 @@ extern bStatus_t SimpleProfile_RegisterAppCBs( simpleProfileCBs_t *appCallbacks 
  *          data type (example: data type of uint16 will be cast to 
  *          uint16 pointer).
  */
-extern bStatus_t SimpleProfile_SetParameter( uint8 param, uint8 len, void *value );
+extern bStatus_t SimpleProfile_SetParameter( uint8 param, void *value, uint8 len );
   
 /*
  * SimpleProfile_GetParameter - Get a Simple GATT Profile parameter.
@@ -142,12 +142,12 @@ extern bStatus_t SimpleProfile_SetParameter( uint8 param, uint8 len, void *value
  *          data type (example: data type of uint16 will be cast to 
  *          uint16 pointer).
  */
-extern bStatus_t SimpleProfile_GetParameter( uint8 param, uint8* len, void *value );
+extern bStatus_t SimpleProfile_GetParameter( uint8 param, uint8 **value, uint8** len );
 
 /*
  * SimpleProfile_WriteCharValue -
  */
-bStatus_t SimpleProfile_WriteCharValue(uint8 taskId, uint16 connHandle, uint16 handle, uint8 len, void *value );
+bStatus_t SimpleProfile_WriteCharValue(uint8 taskId, uint16 connHandle, uint16 handle, void *value, uint8 len );
 
 /*********************************************************************
 *********************************************************************/

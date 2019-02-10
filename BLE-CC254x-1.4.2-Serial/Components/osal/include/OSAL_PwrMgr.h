@@ -104,42 +104,42 @@ extern pwrmgr_attribute_t pwrmgr_attribute;
  * FUNCTIONS
  */
 
-  /*
-   * Initialize the power management system.
-   *   This function is called from OSAL.
-   *
-   */
-  extern void osal_pwrmgr_init( void );
+/*
+* Initialize the power management system.
+*   This function is called from OSAL.
+*
+*/
+extern void osal_pwrmgr_init( void );
 
-  /*
-   * This function is called by each task to state whether or not this
-   * task wants to conserve power. The task will call this function to
-   * vote whether it wants the OSAL to conserve power or it wants to
-   * hold off on the power savings. By default, when a task is created,
-   * its own power state is set to conserve. If the task always wants
-   * to converse power, it doesn't need to call this function at all.
-   * It is important for the task that changed the power manager task
-   * state to PWRMGR_HOLD to switch back to PWRMGR_CONSERVE when the
-   * hold period ends.
-   */
-  extern uint8 osal_pwrmgr_task_state( uint8 task_id, uint8 state );
+/*
+* This function is called by each task to state whether or not this
+* task wants to conserve power. The task will call this function to
+* vote whether it wants the OSAL to conserve power or it wants to
+* hold off on the power savings. By default, when a task is created,
+* its own power state is set to conserve. If the task always wants
+* to converse power, it doesn't need to call this function at all.
+* It is important for the task that changed the power manager task
+* state to PWRMGR_HOLD to switch back to PWRMGR_CONSERVE when the
+* hold period ends.
+*/
+extern uint8 osal_pwrmgr_task_state( uint8 task_id, uint8 state );
 
-  /*
-   * This function is called on power-up, whenever the device characteristic
-   * change (ex. Battery backed coordinator). This function works with the timer
-   * to set HAL's power manager sleep state when power saving is entered.
-   * This function should be called form HAL initialization. After power up
-   * initialization, it should only be called from NWK or ZDO.
-   */
-  extern void osal_pwrmgr_device( uint8 pwrmgr_device );
+/*
+* This function is called on power-up, whenever the device characteristic
+* change (ex. Battery backed coordinator). This function works with the timer
+* to set HAL's power manager sleep state when power saving is entered.
+* This function should be called form HAL initialization. After power up
+* initialization, it should only be called from NWK or ZDO.
+*/
+extern void osal_pwrmgr_device( uint8 pwrmgr_device );
 
-  /*
-   * This function is called from the main OSAL loop when there are
-   * no events scheduled and shouldn't be called from anywhere else.
-   */
-  extern void osal_pwrmgr_powerconserve( void );
-  
-  extern bool pwrmgr_IsSleep;
+/*
+* This function is called from the main OSAL loop when there are
+* no events scheduled and shouldn't be called from anywhere else.
+*/
+extern void osal_pwrmgr_powerconserve( void );
+
+extern void osal_pwrmgr_prevent_sleep( bool );
 
 /*********************************************************************
 *********************************************************************/

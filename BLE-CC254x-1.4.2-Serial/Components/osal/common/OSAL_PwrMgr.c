@@ -87,7 +87,7 @@
 /* This global variable stores the power management attributes.
  */
 pwrmgr_attribute_t pwrmgr_attribute;
-bool pwrmgr_IsSleep = false;
+bool pwrmgr_PreventSleep = true;
 #if defined USE_ICALL || defined OSAL_PORT2TIRTOS
 uint8 pwrmgr_initialized = FALSE;
 #endif /* defined USE_ICALL || defined OSAL_PORT2TIRTOS */
@@ -244,7 +244,7 @@ void osal_pwrmgr_powerconserve( void )
   halIntState_t intState;
 
   // Should we even look into power conservation
-  if ( pwrmgr_attribute.pwrmgr_device != PWRMGR_ALWAYS_ON  && pwrmgr_IsSleep == true)
+  if ( pwrmgr_attribute.pwrmgr_device != PWRMGR_ALWAYS_ON  && pwrmgr_PreventSleep == false)
   {
     // Are all tasks in agreement to conserve
     if ( pwrmgr_attribute.pwrmgr_task_state == 0 )
@@ -262,6 +262,11 @@ void osal_pwrmgr_powerconserve( void )
       OSAL_SET_CPU_INTO_SLEEP( next );
     }
   }
+}
+
+void osal_pwrmgr_prevent_sleep( bool prevent)
+{
+  pwrmgr_PreventSleep = prevent;
 }
 #endif /* POWER_SAVING */
 

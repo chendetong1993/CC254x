@@ -65,6 +65,8 @@ typedef unsigned short  uint16;   //!< Unsigned 16 bit integer
 
 typedef signed   long   int32;    //!< Signed 32 bit integer
 typedef unsigned long   uint32;   //!< Unsigned 32 bit integer
+typedef unsigned long long uint64;
+typedef signed long long int64;
 
 typedef unsigned char   bool;     //!< Boolean data type
 

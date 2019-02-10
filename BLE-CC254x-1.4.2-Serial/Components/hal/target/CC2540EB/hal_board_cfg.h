@@ -91,59 +91,6 @@ extern "C"
 // Minimum Time for Stable External 32kHz Clock (in ms)
 #define MIN_TIME_TO_STABLE_32KHZ_XOSC 400
 
-/* LCD Max Chars and Buffer */
-#define HAL_LCD_MAX_CHARS   16
-#define HAL_LCD_MAX_BUFF    25
-
-/* LED Configuration */
-
-#if defined (HAL_BOARD_CC2530EB_REV17) && !defined (HAL_PA_LNA) && !defined (HAL_PA_LNA_CC2590)
-  #define HAL_NUM_LEDS                 3
-#elif defined (HAL_BOARD_CC2530EB_REV13) || defined (HAL_PA_LNA) || defined (HAL_PA_LNA_CC2590)
-  #define HAL_NUM_LEDS                 1
-#else
-  #error Unknown Board Indentifier
-#endif
-
-#define HAL_LED_BLINK_DELAY()   st( { volatile uint32 i; for (i=0; i<0x5800; i++) { }; } )
-
-/* 1 - Green */
-#define LED1_BV                        BV(0)
-#define LED1_SBIT                      P1_0
-#define LED1_DDR                       P1DIR
-#define LED1_POLARITY                  ACTIVE_HIGH
-
-#ifdef HAL_BOARD_CC2530EB_REV17
-  /* 2 - Red */
-  #define LED2_BV                      BV(1)
-  #define LED2_SBIT                    P1_1
-  #define LED2_DDR                     P1DIR
-  #define LED2_POLARITY                ACTIVE_HIGH
-
-  /* 3 - Yellow */
-  #define LED3_BV                      BV(4)
-  #define LED3_SBIT                    P1_4
-  #define LED3_DDR                     P1DIR
-  #define LED3_POLARITY                ACTIVE_HIGH
-#endif
-
-/* Push Button Configuration */
-
-#define ACTIVE_LOW                     !
-#define ACTIVE_HIGH                    !!    /* double negation forces result to be '1' */
-
-/* S1 */
-#define PUSH1_BV                       BV(1)
-#define PUSH1_SBIT                     P0_1
-
-#ifdef HAL_BOARD_CC2530EB_REV17
-  #define PUSH1_POLARITY               ACTIVE_HIGH
-#elif defined (HAL_BOARD_CC2530EB_REV13)
-  #define PUSH1_POLARITY               ACTIVE_LOW
-#else
-  #error Unknown Board Indentifier
-#endif
-
 /* Joystick Center Press */
 #define PUSH2_BV                       BV(0)
 #define PUSH2_SBIT                     P2_0
@@ -267,62 +214,6 @@ It is meant to be used by TI only */
 /* Debounce */
 #define HAL_DEBOUNCE(expr)    { int i; for (i=0; i<500; i++) { if (!(expr)) i = 0; } }
 
-/* ----------- Push Buttons ---------- */
-#define HAL_PUSH_BUTTON1()        (PUSH1_POLARITY (PUSH1_SBIT))
-#define HAL_PUSH_BUTTON2()        (PUSH2_POLARITY (PUSH2_SBIT))
-#define HAL_PUSH_BUTTON3()        (0)
-#define HAL_PUSH_BUTTON4()        (0)
-#define HAL_PUSH_BUTTON5()        (0)
-#define HAL_PUSH_BUTTON6()        (0)
-
-/* LED's */
-
-#if defined (HAL_BOARD_CC2530EB_REV17) && !defined (HAL_PA_LNA) && !defined (HAL_PA_LNA_CC2590)
-
-  #define HAL_TURN_OFF_LED1()       st( LED1_SBIT = LED1_POLARITY (0); )
-  #define HAL_TURN_OFF_LED2()       st( LED2_SBIT = LED2_POLARITY (0); )
-  #define HAL_TURN_OFF_LED3()       st( LED3_SBIT = LED3_POLARITY (0); )
-  #define HAL_TURN_OFF_LED4()       HAL_TURN_OFF_LED1()
-
-  #define HAL_TURN_ON_LED1()        st( LED1_SBIT = LED1_POLARITY (1); )
-  #define HAL_TURN_ON_LED2()        st( LED2_SBIT = LED2_POLARITY (1); )
-  #define HAL_TURN_ON_LED3()        st( LED3_SBIT = LED3_POLARITY (1); )
-  #define HAL_TURN_ON_LED4()        HAL_TURN_ON_LED1()
-
-  #define HAL_TOGGLE_LED1()         st( if (LED1_SBIT) { LED1_SBIT = 0; } else { LED1_SBIT = 1;} )
-  #define HAL_TOGGLE_LED2()         st( if (LED2_SBIT) { LED2_SBIT = 0; } else { LED2_SBIT = 1;} )
-  #define HAL_TOGGLE_LED3()         st( if (LED3_SBIT) { LED3_SBIT = 0; } else { LED3_SBIT = 1;} )
-  #define HAL_TOGGLE_LED4()         HAL_TOGGLE_LED1()
-
-  #define HAL_STATE_LED1()          (LED1_POLARITY (LED1_SBIT))
-  #define HAL_STATE_LED2()          (LED2_POLARITY (LED2_SBIT))
-  #define HAL_STATE_LED3()          (LED3_POLARITY (LED3_SBIT))
-  #define HAL_STATE_LED4()          HAL_STATE_LED1()
-
-#elif defined (HAL_BOARD_CC2530EB_REV13) || defined (HAL_PA_LNA) || defined (HAL_PA_LNA_CC2590)
-
-  #define HAL_TURN_OFF_LED1()       st( LED1_SBIT = LED1_POLARITY (0); )
-  #define HAL_TURN_OFF_LED2()       HAL_TURN_OFF_LED1()
-  #define HAL_TURN_OFF_LED3()       HAL_TURN_OFF_LED1()
-  #define HAL_TURN_OFF_LED4()       HAL_TURN_OFF_LED1()
-
-  #define HAL_TURN_ON_LED1()        st( LED1_SBIT = LED1_POLARITY (1); )
-  #define HAL_TURN_ON_LED2()        HAL_TURN_ON_LED1()
-  #define HAL_TURN_ON_LED3()        HAL_TURN_ON_LED1()
-  #define HAL_TURN_ON_LED4()        HAL_TURN_ON_LED1()
-
-  #define HAL_TOGGLE_LED1()         st( if (LED1_SBIT) { LED1_SBIT = 0; } else { LED1_SBIT = 1;} )
-  #define HAL_TOGGLE_LED2()         HAL_TOGGLE_LED1()
-  #define HAL_TOGGLE_LED3()         HAL_TOGGLE_LED1()
-  #define HAL_TOGGLE_LED4()         HAL_TOGGLE_LED1()
-
-  #define HAL_STATE_LED1()          (LED1_POLARITY (LED1_SBIT))
-  #define HAL_STATE_LED2()          HAL_STATE_LED1()
-  #define HAL_STATE_LED3()          HAL_STATE_LED1()
-  #define HAL_STATE_LED4()          HAL_STATE_LED1()
-
-#endif
-
 /* XNV */
 
 #define XNV_SPI_BEGIN()             st(P1_3 = 0;)
@@ -393,24 +284,6 @@ st( \
 
 #ifndef HAL_AES_DMA
 #define HAL_AES_DMA TRUE
-#endif
-
-/* Set to TRUE enable LCD usage, FALSE disable it */
-#ifndef HAL_LCD
-#define HAL_LCD TRUE
-#endif
-
-/* Set to TRUE enable LED usage, FALSE disable it */
-#ifndef HAL_LED
-#define HAL_LED TRUE
-#endif
-#if (!defined BLINK_LEDS) && (HAL_LED == TRUE)
-#define BLINK_LEDS
-#endif
-
-/* Set to TRUE enable KEY usage, FALSE disable it */
-#ifndef HAL_KEY
-#define HAL_KEY TRUE
 #endif
 
 /* Set to TRUE enable UART usage, FALSE disable it */

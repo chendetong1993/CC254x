@@ -2156,7 +2156,31 @@
     <group>
         <name>APP</name>
         <file>
+            <name>$PROJ_DIR$\..\Source\app_key.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\Source\app_key.h</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\Source\app_RssiCheck.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\Source\app_RssiCheck.h</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\Source\app_UartModule.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\Source\app_UartModule.h</name>
+        </file>
+    </group>
+    <group>
+        <name>BLE</name>
+        <file>
             <name>$PROJ_DIR$\..\Source\OSAL_simpleBLE.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\Source\simpleBLE.c</name>
         </file>
         <file>
             <name>$PROJ_DIR$\..\Source\simpleBLE.h</name>
@@ -2168,7 +2192,7 @@
             <name>$PROJ_DIR$\..\Source\simpleBLEC.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\Source\SimpleBLEC.h</name>
+            <name>$PROJ_DIR$\..\Source\simpleBLEC.h</name>
         </file>
         <file>
             <name>$PROJ_DIR$\..\Source\simpleBLEP.c</name>
@@ -2191,6 +2215,9 @@
                 <name>$PROJ_DIR$\..\..\..\..\Components\hal\include\hal_adc.h</name>
             </file>
             <file>
+                <name>$PROJ_DIR$\..\..\..\..\Components\hal\target\CC2540EB\hal_aes.h</name>
+            </file>
+            <file>
                 <name>$PROJ_DIR$\..\..\..\..\Components\hal\include\hal_assert.h</name>
             </file>
             <file>
@@ -2204,6 +2231,9 @@
             </file>
             <file>
                 <name>$PROJ_DIR$\..\..\..\..\Components\hal\include\hal_flash.h</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\..\..\..\Components\hal\include\hal_interrupt.h</name>
             </file>
             <file>
                 <name>$PROJ_DIR$\..\..\..\..\Components\hal\include\hal_key.h</name>
@@ -2249,6 +2279,9 @@
                         <name>$PROJ_DIR$\..\..\..\..\Components\hal\target\CC2540EB\hal_flash.c</name>
                     </file>
                     <file>
+                        <name>$PROJ_DIR$\..\..\..\..\Components\hal\target\CC2540EB\hal_interrupt.c</name>
+                    </file>
+                    <file>
                         <name>$PROJ_DIR$\..\..\..\..\Components\hal\target\CC2540EB\hal_key.c</name>
                     </file>
                     <file>
@@ -2269,9 +2302,6 @@
                 </group>
                 <group>
                     <name>Includes</name>
-                    <file>
-                        <name>$PROJ_DIR$\..\..\..\..\Components\hal\target\CC2540EB\hal_aes.h</name>
-                    </file>
                     <file>
                         <name>$PROJ_DIR$\..\..\..\..\Components\hal\target\CC2540EB\hal_ccm.h</name>
                     </file>

@@ -363,18 +363,6 @@ void halSleep( uint32 osal_timeout )
     // check if radio allows sleep, and if so, preps system for shutdown
     if ( halSleepPconValue && ( LL_PowerOffReq(halPwrMgtMode) == LL_SLEEP_REQUEST_ALLOWED ) )
     {
-#if ((defined HAL_KEY) && (HAL_KEY == TRUE))
-      // get peripherals ready for sleep
-      HalKeyEnterSleep();
-#endif // ((defined HAL_KEY) && (HAL_KEY == TRUE))
-
-#ifdef HAL_SLEEP_DEBUG_LED
-      HAL_TURN_OFF_LED3();
-#else
-      // use this to turn LEDs off during sleep
-      HalLedEnterSleep();
-#endif // HAL_SLEEP_DEBUG_LED
-
       // enable sleep timer interrupt
       if (timeout != 0)
       {
@@ -437,13 +425,6 @@ void halSleep( uint32 osal_timeout )
       // Note: This is done here to ensure the 32MHz XOSC has stablized, in
       //       case it is needed (e.g. the ADC is used by the joystick).
       LL_PowerOnReq( (halPwrMgtMode == CC2540_PM3), wakeForRF );
-
-#ifdef HAL_SLEEP_DEBUG_LED
-      HAL_TURN_ON_LED3();
-#else //!HAL_SLEEP_DEBUG_LED
-      // use this to turn LEDs back on after sleep
-      HalLedExitSleep();
-#endif // HAL_SLEEP_DEBUG_LED
 
 #if ((defined HAL_KEY) && (HAL_KEY == TRUE))
       // handle peripherals

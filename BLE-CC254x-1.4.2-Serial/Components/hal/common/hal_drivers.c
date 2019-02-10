@@ -48,14 +48,6 @@
 /**************************************************************************************************
  *                                            INCLUDES
  **************************************************************************************************/
-
-#include "hal_adc.h"
-#if (defined HAL_AES) && (HAL_AES == TRUE)
-#include "hal_aes.h"
-#endif
-#if (defined HAL_DMA) && (HAL_DMA == TRUE)
-#include "hal_dma.h"
-#endif
 #include "hal_drivers.h"
 #include "hal_sleep.h"
 #include "hal_timer.h"
@@ -73,6 +65,12 @@
 #endif
 #if (defined HAL_SPI) && (HAL_SPI == TRUE)
 #include "hal_spi.h"
+#endif
+#if (defined HAL_AES) && (HAL_AES == TRUE)
+#include "hal_aes.h"
+#endif
+#if (defined HAL_DMA) && (HAL_DMA == TRUE)
+#include "hal_dma.h"
 #endif
 
 /**************************************************************************************************
@@ -112,11 +110,6 @@ void HalDriverInit (void)
 {
   /* TIMER */
 #if (defined HAL_TIMER) && (HAL_TIMER == TRUE)
-#endif
-
-  /* ADC */
-#if (defined HAL_ADC) && (HAL_ADC == TRUE)
-  HalAdcInit();
 #endif
 
   /* DMA */

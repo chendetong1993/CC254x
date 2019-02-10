@@ -40,9 +40,23 @@
 /**************************************************************************************************
  *                                            INCLUDES
  **************************************************************************************************/
+#if !(defined ( BLE_PERIPHERAL )) &&  !(defined ( BLE_CENTRAL ))
+  BLE_PERIPHERAL BLE_CENTRAL Not Defined;
+#endif
+    
+
+
 #include "hal_types.h"
 #include "OSAL.h"
 #include "OSAL_Tasks.h"
+
+#if defined ( APP_UART_MODULE )
+  #include "app_UartModule.h"
+#elif defined ( APP_RSSI_CHECK )
+  #include "app_RssiCheck.h"
+#elif defined ( APP_KEY )
+  #include "app_Key.h"
+#endif
 
 /* HAL */
 #include "hal_drivers.h"
@@ -71,22 +85,34 @@
 #include "gattservapp.h"
 
 /* Profiles */
-#include "central.h"
+
+#if defined ( BLE_CENTRAL )
+  #include "central.h"
+#endif
    
-/* Profiles */
+#if defined ( BLE_PERIPHERAL )
 #if defined ( PLUS_BROADCASTER )
   #include "peripheralBroadcaster.h"
 #else
   #include "peripheral.h"
 #endif
+#endif
+
 
 #include "OSAL_snv.h"
    
 #include "simpleBLE.h"
-#include "simpleBLEP.h"
-#include "simpleBLEC.h"
+
+#if defined ( BLE_CENTRAL )
+  #include "simpleBLEC.h"
+#endif
+
+#if defined ( BLE_PERIPHERAL )
+  #include "simpleBLEP.h"
+#endif
+
+#include "hal_interrupt.h"
 #include "OSAL_PwrMgr.h"
-#include "npi.h"
 
 /*********************************************************************
  * Const
@@ -103,16 +129,16 @@ void BLE_UART_Send( uint8*, uint8 );
 void BLE_SwitchRole();
 void BLE_Power_ForceSleep();
 void BLE_Power_ForceWakeup();
-void BLE_WaitUs(uint16);
 
 BLE_Type_CommFunc BLE_CommFunc = {
   .SwitchRole = BLE_SwitchRole,
   .WakeupNotify = 0,
   .ForceSleep = BLE_Power_ForceSleep,
   .ForceWakeup = BLE_Power_ForceWakeup,
-  .UartReceive = 0,
-  .UartSend = BLE_UART_Send
+  .CmdReceive = 0,
+  .CmdSend = APP_BleCmd_Send
 };
+
 
 // The order in this table must be identical to the task initialization calls below in osalInitTask.
 const pTaskEventHandlerFn tasksArr[] =
@@ -130,20 +156,22 @@ const pTaskEventHandlerFn tasksArr[] =
   BLE_Role_ProcessEvent,                                             // task 8
   GAPBondMgr_ProcessEvent,
   GATTServApp_ProcessEvent,
-  BLE_ProcessEvent
+  BLE_ProcessEvent,
+  APP_ProcessEvent
 };
 
 const uint8 tasksCnt = sizeof( tasksArr ) / sizeof( tasksArr[0] );
 uint16 *tasksEvents;
 
 BLE_Type_Editable_CP BLE_Editable_CP;
+bool BLE_IsSleep = false;
 
 /*********************************************************************
  * FUNCTIONS
  *********************************************************************/
 
 /*********************************************************************
- * @fn      BLE_ProcessEvent
+ * @fn      BLE_Role_ProcessEvent
  *
  * @brief   
  *
@@ -153,9 +181,13 @@ BLE_Type_Editable_CP BLE_Editable_CP;
  */
 uint16 BLE_Role_ProcessEvent( uint8 task_id, uint16 events ){
   if(BLE_Editable_CP.CP == BLEMode_Central){
+#if defined ( BLE_CENTRAL )
     return GAPCentralRole_ProcessEvent(task_id, events);
+#endif
   } else if(BLE_Editable_CP.CP == BLEMode_Peripheral){
+#if defined ( BLE_PERIPHERAL )
     return GAPRole_ProcessEvent(task_id, events);
+#endif
   }
   return 0;
 }
@@ -171,9 +203,13 @@ uint16 BLE_Role_ProcessEvent( uint8 task_id, uint16 events ){
  */
 uint16 BLE_ProcessEvent( uint8 task_id, uint16 events ){
   if(BLE_Editable_CP.CP == BLEMode_Central){
+#if defined ( BLE_CENTRAL )
     return BLEC_ProcessEvent(task_id, events);
+#endif
   } else if(BLE_Editable_CP.CP == BLEMode_Peripheral){
+#if defined ( BLE_PERIPHERAL )
     return BLEP_ProcessEvent(task_id, events);
+#endif
   }
   return 0;
 }
@@ -191,63 +227,18 @@ uint16 BLE_ProcessEvent( uint8 task_id, uint16 events ){
  */
 void BLE_SwitchRole(){
   if(BLE_Editable_CP.CP == BLEMode_Central){
+#if defined ( BLE_PERIPHERAL )
     BLE_Editable_CP.CP = BLEMode_Peripheral;
     osal_snv_write(BLE_CP_Flash_Idx, sizeof(BLE_Editable_CP), (uint8*)&BLE_Editable_CP);
     BLE_Editable_CP.CP = BLEMode_Central;
+#endif
   } else if(BLE_Editable_CP.CP == BLEMode_Peripheral){
+#if defined ( BLE_CENTRAL )
     BLE_Editable_CP.CP = BLEMode_Central;
     osal_snv_write(BLE_CP_Flash_Idx, sizeof(BLE_Editable_CP), (uint8*)&BLE_Editable_CP);
     BLE_Editable_CP.CP = BLEMode_Peripheral;
+#endif
   }
-}
-
-
-/*********************************************************************
- * @fn      Hal_HW_WaitUs
- *
- * @brief   WaitUs
- *
- * @param   void
- *
- * @return  none
- */
-
-void BLE_WaitUs(uint16 microSecs)
-{
-  while(microSecs--)
-  {
-    //32 NOPs == 1 usecs
-    asm("nop"); asm("nop"); asm("nop"); asm("nop"); asm("nop");
-    asm("nop"); asm("nop"); asm("nop"); asm("nop"); asm("nop");
-    asm("nop"); asm("nop"); asm("nop"); asm("nop"); asm("nop");
-    asm("nop"); asm("nop"); asm("nop"); asm("nop"); asm("nop");
-    asm("nop"); asm("nop"); asm("nop"); asm("nop"); asm("nop");
-    asm("nop"); asm("nop"); asm("nop"); asm("nop"); asm("nop");
-    asm("nop"); asm("nop");
-  }
-}
-
-
-/*********************************************************************
- * @fn      P0_ISR (BLE_Power_Wakeup)
- *
- * @brief   Wait up
- *
- * @param   void
- *
- * @return  none
- */
-#pragma vector = P0INT_VECTOR
-__interrupt void P0_ISR(void)
-{
-  HAL_ENTER_ISR();
-  if(0x04 & P0IFG)              //判断 是否是 P0.2 RX 引脚 中断
-  {
-    BLE_Power_ForceWakeup();
-  }
-  P0IFG = 0;                    //清中断标志
-  P0IF = 0;                     //清中断标志，IRCON[5],P0口中断
-  HAL_EXIT_ISR();
 }
 
 /*********************************************************************
@@ -260,23 +251,19 @@ __interrupt void P0_ISR(void)
  * @return  none
  */
 void BLE_Power_ForceWakeup(){
-  if(pwrmgr_IsSleep == true){
-    P0IFG &= ~(0x04);           //清中断标志
-    P0IEN &= ~(0x04);           //P0.2 RX 中断使能
-    IEN1  &= ~(0x20);           //端口P0中断关闭
-    U0CSR  &= ~(0x04);         //开 串口 接收使能
-      
-    pwrmgr_IsSleep = false;;
-    CLEAR_SLEEP_MODE();//退出 休眠 ，进入工作状态
-    HAL_BOARD_INIT();//切换到外部32M 晶振 并且 等待稳定
+  if(BLE_IsSleep == true){
+    HalInterruptSet(APP_WAKEUP_INTERRUPT_CHANNEL, 0);
     
-    
+    osal_pwrmgr_prevent_sleep(true);
+    CLEAR_SLEEP_MODE();         //退出 休眠 ，进入工作状态
+    HAL_BOARD_INIT();           //切换到外部32M 晶振 并且 等待稳定
     HCI_EXT_ClkDivOnHaltCmd( HCI_EXT_DISABLE_CLK_DIVIDE_ON_HALT );
     HCI_EXT_HaltDuringRfCmd( HCI_EXT_HALT_DURING_RF_DISABLE );
-      
-
-    NPI_InitTransport(BLE_UART_Receive); 
+    
     BLE_CommFunc.WakeupNotify();
+    APP_Enter_Wakeup();
+
+    BLE_IsSleep = false;
   }
 }
 
@@ -291,57 +278,16 @@ void BLE_Power_ForceWakeup(){
  */
 void BLE_Power_ForceSleep(void)
 {
-  if(pwrmgr_IsSleep == false){
-    P0IFG &= ~(0x04);           //P0.2 清除中断标记
-    PICTL &= ~(0x04);             //P0端口下降沿触发
-    P0IEN |=  (0x04);             //P0.2 RX 中断使能
-    IEN1  |=  (0x20);             //端口P0中断使能
-    U0CSR  &= ~(0x04);            //关闭 串口 接收使能
+  if(BLE_IsSleep == false){
+    APP_Enter_Sleep();
     
     HCI_EXT_ClkDivOnHaltCmd( HCI_EXT_ENABLE_CLK_DIVIDE_ON_HALT );
     HCI_EXT_HaltDuringRfCmd( HCI_EXT_HALT_DURING_RF_ENABLE );
-    pwrmgr_IsSleep = true;
+    osal_pwrmgr_prevent_sleep(false);
+    
+    HalInterruptSet(APP_WAKEUP_INTERRUPT_CHANNEL, BLE_Power_ForceWakeup);
+    BLE_IsSleep = true;
   }
-}
-
-
-/*********************************************************************
- * @fn      BLE_UART_Receive
- *
- * @brief   UART Cakkback
- *
- * @param   ......
- *
- * @return  none
- */
-void BLE_UART_Receive( uint8 port, uint8 events )
-{
-  (void)port;
-  if (events & (HAL_UART_RX_TIMEOUT | HAL_UART_RX_FULL))
-  {
-    //Read all data from UART buffer
-    uint8 CurrentBufferRLen = NPI_RxBufLen();
-    uint8* CurrentBuffer = osal_mem_alloc(CurrentBufferRLen);
-    NPI_ReadTransport(CurrentBuffer, CurrentBufferRLen);
-    if(BLE_CommFunc.UartReceive != 0){
-      BLE_CommFunc.UartReceive( CurrentBuffer, CurrentBufferRLen);
-    }
-    osal_mem_free(CurrentBuffer);
-  }
-}
-
-/*********************************************************************
- * @fn      BLE_UART_Send
- *
- * @brief   
- *
- * @param   ......
- *
- * @return  none
- */
-void BLE_UART_Send( uint8* Data, uint8 DataLen )
-{
-  NPI_WriteTransport(Data, DataLen);
 }
 
 /*********************************************************************
@@ -360,11 +306,14 @@ void osalInitTasks( void )
   //Read From flash check Central or Pheripheral
   if(osal_snv_read(BLE_CP_Flash_Idx, sizeof(BLE_Editable_CP), (uint8*)&BLE_Editable_CP) != SUCCESS || 
   BLE_Editable_CP.INTER_VERSION != BLE_Editable_CP.INTER_VERSION){      //Check whether data is valid
+#if defined ( BLE_CENTRAL )
+    BLE_Editable_CP.CP = BLEMode_Central;
+#endif
+#if defined ( BLE_PERIPHERAL )
     BLE_Editable_CP.CP = BLEMode_Peripheral;
+#endif
     BLE_Editable_CP.INTER_VERSION = BLE_Parm_INTER_VERSION;
   }
- 
-  
 
   tasksEvents = (uint16 *)osal_mem_alloc( sizeof( uint16 ) * tasksCnt);
   osal_memset( tasksEvents, 0, (sizeof( uint16 ) * tasksCnt));
@@ -398,22 +347,33 @@ void osalInitTasks( void )
 
   /* Profiles */
   if(BLE_Editable_CP.CP == BLEMode_Central){
+#if defined ( BLE_CENTRAL )
     GAPCentralRole_Init( taskID++ );
+#endif
   } else if(BLE_Editable_CP.CP == BLEMode_Peripheral){
+#if defined ( BLE_PERIPHERAL )
     GAPRole_Init( taskID++ );
+#endif
   }
   
   GAPBondMgr_Init( taskID++ );
   GATTServApp_Init( taskID++ );
 
   /* Application */
-  
-  NPI_InitTransport(BLE_UART_Receive);
+
   if(BLE_Editable_CP.CP == BLEMode_Central){
+#if defined ( BLE_CENTRAL )
     BLEC_Init(taskID++, &BLE_CommFunc);
+#endif
   } else if(BLE_Editable_CP.CP == BLEMode_Peripheral){
+#if defined ( BLE_PERIPHERAL )
     BLEP_Init(taskID++, &BLE_CommFunc);
+#endif
+  } else {
+    taskID++;
   }
+  APP_BleCmd_Receive(BLE_CommFunc.CmdReceive);
+  APP_Init(taskID++);
 }
 
 /*********************************************************************

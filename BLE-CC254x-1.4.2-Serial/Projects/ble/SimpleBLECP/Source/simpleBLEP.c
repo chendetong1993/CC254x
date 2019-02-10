@@ -41,6 +41,8 @@
  * INCLUDES
  */
 
+#if defined ( BLE_PERIPHERAL )
+
 #include "bcomdef.h"
 #include "OSAL.h"
 #include "OSAL_PwrMgr.h"
@@ -65,13 +67,27 @@
  * MACROS
  */
 
-#define Array_Len(__Array__) (sizeof(__Array__) / sizeof(__Array__[0]))
-#define Is_Bool(__VAR__) (__VAR__ == true || __VAR__ == false)
-
 /*********************************************************************
  * CONSTANTS
  */
-
+#define E      BLEP_GVar
+#define PS     BLEP_GVar->EParms_Save
+#define P      BLEP_GVar->EParms
+   
+#define QM    ((Msg_Executed = true) == true)
+#define MF    (Msg_Executed == false)
+#define MT    (Msg_Executed == true)
+#define Bool(_V_)  (_V_ == 0 || _V_ == 1)
+#define PU16(_V_)  (0 < _V_ && _V_ <= 0xFFFF)
+#define U16(_V_)  (_V_ <= 0xFFFF)
+#define PU8(_V_)  (0 < _V_ && _V_ <= 0xFF)
+#define U8(_V_)  (_V_ <= 0xFF)
+#define PU32(_V_)  (0 < _V_ && _V_ <= 0xFFFFFFFF)
+#define U32(_V_)  (_V_ <= 0xFFFFFFFF)
+#define Sm(_V0_, _V1_)  (_V0_ < _V1_)
+#define SE(_V0_, _V1_)  (_V0_ <= _V1_)
+#define Eq(_V0_, _V1_)  (_V0_ == _V1_)
+   
 #define BLEP_DISCOVERABLE_MODE                  GAP_ADTYPE_FLAGS_GENERAL     // Limited discoverable mode advertises for 30.72s, and then stops, General discoverable mode advertises indefinitely
 #if defined ( PLUS_BROADCASTER )
   #define BLEP_ADV_IN_CONN_WAIT                    500                          // delay 500 ms
@@ -81,16 +97,8 @@
 #define BLEP_SBP_START_DEVICE_EVT                               (0x0001 << 0)             // Simple BLE Peripheral Task Events
 #define BLEP_RESET_EVT                                          (0x0001 << 1)             // Reset Timer
 #define BLEP_SEND_DONE_EVT                                      (0x0001 << 2)             // Send Done Timer
-#define BLEP_UART_TIMEOUT_EVT                                   (0x0001 << 3)             // Uart Timeout Timer
+#define BLEP_Uart_TIMEOUT_EVT                                   (0x0001 << 3)             // Uart Timeout Timer
 #define BLEP_Sleep_EVT                                          (0x0001 << 4)             // Sleep Timer
-
-#if defined FEATURE_OAD
-#include "OAD.h"
-#include "OAD_target.h"
-#endif
-#include "hal_led.h"
-#include "hal_key.h"
-#include "hal_adc.h"
 /*********************************************************************
 * TYPEDEFS
 */
@@ -117,12 +125,6 @@ typedef struct{
   uint8 advertDataLen;
   //bool Char7DoWrite;
   bool Connected;
-  //UART Buffer
-  uint8 UARTReceiveBuffer[BLE_CMD_Msg_Max_Len];
-  uint8 BLEReceiveBuffer[BLE_CMD_Msg_Max_Len];
-  uint8 SendBuffer[BLE_CMD_Msg_Max_Len];
-  uint8 UARTReceiveBufferLen;
-  uint32 UARTReceiveBuffer_LastTime;
   bool SendDone;
   //BLE Buffer
   uint8 ConnHandle;
@@ -141,25 +143,19 @@ void BLEP_Reset_EParms(BLEP_Type_EParms*);
 void BLEP_Init_GlobalVar();
 void BLEP_ScanAdvertData_Construct(BLEP_Type_ScanAdvertData*, uint8, uint8*, uint8*);
 void BLEP_ProcessOSALMsg( osal_event_hdr_t * );
-void BLEP_StateNotificationCB( gaprole_States_t  );
-void BLEP_ProfileChangeCB( uint8  );
+void BLEP_StateNotificationCB( gaprole_States_t );
+void BLEP_ProfileChangeCB( uint8 );
 
-void BLEP_MsgRead(uint8*, uint8, uint8*, uint8*, uint32*, void (*)(uint8*, uint8));
-void BLEP_UARTMsgHandle(uint8*, uint8);
+void BLEP_CmdHandle(uint8*, uint8);
 
-void BLEP_U32_To_U8Array(uint32, uint8*, uint8*);
-void BLEP_U8Array_To_U32(uint8*, uint8, uint32*);
-void BLEP_SerialReturnResult(BLE_Type_MsgType, uint8*, uint8);
-bool BLEP_Check_SerailMsgValid(uint8*, uint8);
-uint32 BLEP_End_Conn_Advert();
+uint32 BLEP_End_Conn(bool);
 void BLEP_Set_AdvertEnable(bool);
 void BLEP_CentralPasscodeCB( uint8*, uint16, uint8, uint8 );
 void BLEP_CentralPairStateCB( uint16, uint8, uint8 );
-void BLEP_SerialReturnRoleStatus(BLE_Type_PowerStatus);
-void BLEP_SerialReturnConnStatus();
 void BLEP_RssiCB(int8);
 void BLEP_ProcessGATTMsg( gattMsgEvent_t * );
-void BLEP_UART_RECEIVE( uint8* , uint8 );
+void BLEP_Cmd_RECEIVE( uint8* , uint8 );
+bool BLEP_BleSend(uint8, uint8*, uint8);
 void BLEP_Main_Loop();
 /*********************************************************************
  * LOCAL Variables
@@ -179,9 +175,8 @@ BLEP_Type_GlobalVar* BLEP_GVar = 0;
  f @return  none
  */
 void BLEP_WakeupNotify(){
-  HalLedExitSleep();
-  HalKeyExitSleep();
-  BLEP_SerialReturnRoleStatus(BLE_PowerStatus_Awake);
+  BLE_CmdRetRoleStatus();
+  BLE_CmdRetConnStatus(&E->Connected, 1);
 }
 
 /*********************************************************************
@@ -211,10 +206,11 @@ void BLEP_Reset_EParms(BLEP_Type_EParms* EParms){
   EParms->NAME_LEN = NameIdx;  
   EParms->PASSCODE = 123456;
   EParms->PAIR_MODE = BLE_PairMode_Passcode_Initiate;
-  EParms->VERSION = 0;
+  osal_memset(EParms->INFO, 0x00, BLE_Parm_Dev_Info_Len);
+  EParms->INFO_LEN = 0;
   EParms->AUTO_ADVERT = true;
   EParms->SEND_DONE_DELAY = 35;
-  EParms->ENABLE_TRANSMIT_ENCRYPT = true;
+  EParms->ENABLE_TRANSMIT_ENCRYPT = false;
   osal_memset(EParms->TRANSMIT_ENCRYPT_KEY, 0x00, BLE_TRANSMIT_ENCRYPT_DATA_LEN);
   EParms->WATCHDOG_MODE = HAL_SYSTEM_WD_MODE_DISABLE;
   EParms->ENABLE_CMD_CHECK_BIT = false;
@@ -222,32 +218,27 @@ void BLEP_Reset_EParms(BLEP_Type_EParms* EParms){
 
 void BLEP_Init_GlobalVar(){
   
-  BLEP_GVar = (BLEP_Type_GlobalVar*)osal_mem_alloc(sizeof(BLEP_Type_GlobalVar));
+  E = (BLEP_Type_GlobalVar*)osal_mem_alloc(sizeof(BLEP_Type_GlobalVar));
   // Others
-  BLEP_GVar->ConnHandle = 0x00;
-  BLEP_GVar->scanRspDataLen = 0;        // GAP - SCAN RSP data (max size = 31 bytes)
-  BLEP_GVar->advertDataLen = 0;         // GAP - Advertisement data (max size = 31 bytes, though this is
-  BLEP_GVar->EParms_Save_Updated = false;
-  BLEP_GVar->AdverEnable = false;
-  BLEP_GVar->TaskId = 0;
-  BLEP_GVar->Connected = false;
-  BLEP_GVar->SendDone = true;
-  //UART Buffer
-  BLEP_GVar->UARTReceiveBufferLen = 0;
-  BLEP_GVar->UARTReceiveBuffer_LastTime = 0;
-
-  //BLE Buffer
+  E->ConnHandle = 0x00;
+  E->scanRspDataLen = 0;        // GAP - SCAN RSP data (max size = 31 bytes)
+  E->advertDataLen = 0;         // GAP - Advertisement data (max size = 31 bytes, though this is
+  E->EParms_Save_Updated = false;
+  E->AdverEnable = false;
+  E->TaskId = 0;
+  E->Connected = false;
+  E->SendDone = true;
 
   //System
-  BLEP_GVar->PeripheralCBs.pfnStateChange = BLEP_StateNotificationCB;
-  BLEP_GVar->PeripheralCBs.pfnRssiRead = BLEP_RssiCB;
+  E->PeripheralCBs.pfnStateChange = BLEP_StateNotificationCB;
+  E->PeripheralCBs.pfnRssiRead = BLEP_RssiCB;
 
-  BLEP_GVar->BondMgrCBs.passcodeCB = BLEP_CentralPasscodeCB;
-  BLEP_GVar->BondMgrCBs.pairStateCB = BLEP_CentralPairStateCB;
+  E->BondMgrCBs.passcodeCB = BLEP_CentralPasscodeCB;
+  E->BondMgrCBs.pairStateCB = BLEP_CentralPairStateCB;
   
-  BLEP_GVar->SimpleProfileCBs.pfnSimpleProfileChange = BLEP_ProfileChangeCB;
+  E->SimpleProfileCBs.pfnSimpleProfileChange = BLEP_ProfileChangeCB;
   
-  BLEP_GVar->gapProfileState = GAPROLE_INIT;
+  E->gapProfileState = GAPROLE_INIT;
 }
 
 /*********************************************************************
@@ -281,9 +272,9 @@ void BLEP_ScanAdvertData_Construct(BLEP_Type_ScanAdvertData* Data, uint8 DataLen
  * @return  none
  */
 void BLEP_Set_AdvertEnable(bool IsEnable){
-  if(BLEP_GVar->AdverEnable != IsEnable){
-    BLEP_GVar->AdverEnable = IsEnable;
-    GAPRole_SetParameter( GAPROLE_ADVERT_ENABLED, sizeof( BLEP_GVar->AdverEnable ), &BLEP_GVar->AdverEnable );
+  if(E->AdverEnable != IsEnable){
+    E->AdverEnable = IsEnable;
+    GAPRole_SetParameter( GAPROLE_ADVERT_ENABLED, sizeof( E->AdverEnable ), &E->AdverEnable );
   }
 }
 
@@ -306,35 +297,35 @@ void BLEP_Init( uint8 task_id , BLE_Type_CommFunc* BLE_CommFunc)
 {
   BLEP_Init_GlobalVar();
   osal_set_loop_func(BLEP_Main_Loop);
-  BLEP_GVar->BLE_CommFunc = BLE_CommFunc;
-  BLEP_GVar->BLE_CommFunc->UartReceive = BLEP_UART_RECEIVE;
-  BLEP_GVar->BLE_CommFunc->WakeupNotify = BLEP_WakeupNotify;
+  E->BLE_CommFunc = BLE_CommFunc;
+  E->BLE_CommFunc->CmdReceive = BLEP_Cmd_RECEIVE;
+  E->BLE_CommFunc->WakeupNotify = BLEP_WakeupNotify;
     
-  BLEP_GVar->TaskId = task_id;
+  E->TaskId = task_id;
   
   //Read Parms from flash
-  if(osal_snv_read(BLEP_Parms_Flash_Idx, sizeof(BLEP_GVar->EParms), (uint8*)&BLEP_GVar->EParms) != SUCCESS ||
-  BLEP_GVar->EParms.INTER_VERSION != BLE_Parm_INTER_VERSION){      //Check whether data is valid
-    BLEP_Reset_EParms(&BLEP_GVar->EParms);
+  if(osal_snv_read(BLEP_Parms_Flash_Idx, sizeof(P), (uint8*)&P) != SUCCESS ||
+  P.INTER_VERSION != BLE_Parm_INTER_VERSION){      //Check whether data is valid
+    BLEP_Reset_EParms(&P);
   }
-  BLEP_GVar->EParms_Save = BLEP_GVar->EParms;
-  BLEP_GVar->AdverEnable = BLEP_GVar->EParms.AUTO_ADVERT;
+  PS = P;
+  E->AdverEnable = P.AUTO_ADVERT;
   
   //Init SCAN RSP data
   {
     // GAP - SCAN RSP data (max size = 31 bytes)
     uint8 CONN_INTERVAL_RANGE[] = {
-      LO_UINT16( BLEP_GVar->EParms.DESIRED_MIN_CONN_INTERVAL ),   // 100ms
-      HI_UINT16( BLEP_GVar->EParms.DESIRED_MIN_CONN_INTERVAL ),
-      LO_UINT16( BLEP_GVar->EParms.DESIRED_MAX_CONN_INTERVAL ),   // 1s
-      HI_UINT16( BLEP_GVar->EParms.DESIRED_MAX_CONN_INTERVAL )};
+      LO_UINT16( P.DESIRED_MIN_CONN_INTERVAL ),   // 100ms
+      HI_UINT16( P.DESIRED_MIN_CONN_INTERVAL ),
+      LO_UINT16( P.DESIRED_MAX_CONN_INTERVAL ),   // 1s
+      HI_UINT16( P.DESIRED_MAX_CONN_INTERVAL )};
     uint8 POWER_LEVEL[] = { 0 };
     BLEP_Type_ScanAdvertData SCAN_DATA[] = {
-      {GAP_ADTYPE_LOCAL_NAME_COMPLETE, BLEP_GVar->EParms.NAME, BLEP_GVar->EParms.NAME_LEN},
-      {GAP_ADTYPE_SLAVE_CONN_INTERVAL_RANGE, CONN_INTERVAL_RANGE, Array_Len(CONN_INTERVAL_RANGE) },
-      {GAP_ADTYPE_POWER_LEVEL, POWER_LEVEL, Array_Len(POWER_LEVEL) }
+      {GAP_ADTYPE_LOCAL_NAME_COMPLETE, P.NAME, P.NAME_LEN},
+      {GAP_ADTYPE_SLAVE_CONN_INTERVAL_RANGE, CONN_INTERVAL_RANGE, BLE_Array_Len(CONN_INTERVAL_RANGE) },
+      {GAP_ADTYPE_POWER_LEVEL, POWER_LEVEL, BLE_Array_Len(POWER_LEVEL) }
     };
-    BLEP_ScanAdvertData_Construct(SCAN_DATA, Array_Len(SCAN_DATA), BLEP_GVar->scanRspData, &BLEP_GVar->scanRspDataLen);
+    BLEP_ScanAdvertData_Construct(SCAN_DATA, BLE_Array_Len(SCAN_DATA), E->scanRspData, &E->scanRspDataLen);
   }  
   //Init ADV RSP data
   {
@@ -345,13 +336,13 @@ void BLEP_Init( uint8 task_id , BLE_Type_CommFunc* BLE_CommFunc)
       HI_UINT16( SIMPLEPROFILE_SERV_UUID )
     };
     BLEP_Type_ScanAdvertData ADVERT_DATA[] = {
-      {GAP_ADTYPE_FLAGS, FLAGS, Array_Len(FLAGS)},
-      {GAP_ADTYPE_16BIT_MORE, _16BIT_MORE, Array_Len(_16BIT_MORE) }
+      {GAP_ADTYPE_FLAGS, FLAGS, BLE_Array_Len(FLAGS)},
+      {GAP_ADTYPE_16BIT_MORE, _16BIT_MORE, BLE_Array_Len(_16BIT_MORE) }
     };
-    BLEP_ScanAdvertData_Construct(ADVERT_DATA, Array_Len(ADVERT_DATA), BLEP_GVar->advertData, &BLEP_GVar->advertDataLen);
+    BLEP_ScanAdvertData_Construct(ADVERT_DATA, BLE_Array_Len(ADVERT_DATA), E->advertData, &E->advertDataLen);
   }
   // Setup the GAP
-  VOID GAP_SetParamValue( TGAP_CONN_PAUSE_PERIPHERAL, BLEP_GVar->EParms.CONN_PAUSE_PERIPHERAL );
+  VOID GAP_SetParamValue( TGAP_CONN_PAUSE_PERIPHERAL, P.CONN_PAUSE_PERIPHERAL );
   
   // Setup the GAP Peripheral Role Profile
   {
@@ -363,25 +354,25 @@ void BLEP_Init( uint8 task_id , BLE_Type_CommFunc* BLE_CommFunc)
     uint16 gapRole_AdvertOffTime = 0;
 
     // Set the GAP Role Parameters
-    GAPRole_SetParameter( GAPROLE_ADVERT_ENABLED, sizeof( BLEP_GVar->AdverEnable ), &BLEP_GVar->AdverEnable );
+    GAPRole_SetParameter( GAPROLE_ADVERT_ENABLED, sizeof( E->AdverEnable ), &E->AdverEnable );
     GAPRole_SetParameter( GAPROLE_ADVERT_OFF_TIME, sizeof( gapRole_AdvertOffTime ), &gapRole_AdvertOffTime );
 
-    GAPRole_SetParameter( GAPROLE_SCAN_RSP_DATA, BLEP_GVar->scanRspDataLen, BLEP_GVar->scanRspData );
-    GAPRole_SetParameter( GAPROLE_ADVERT_DATA, BLEP_GVar->advertDataLen, BLEP_GVar->advertData );
+    GAPRole_SetParameter( GAPROLE_SCAN_RSP_DATA, E->scanRspDataLen, E->scanRspData );
+    GAPRole_SetParameter( GAPROLE_ADVERT_DATA, E->advertDataLen, E->advertData );
     
-    GAPRole_SetParameter( GAPROLE_PARAM_UPDATE_ENABLE, sizeof( BLEP_GVar->EParms.ENABLE_DESIRED_REQUEST ), &BLEP_GVar->EParms.ENABLE_DESIRED_REQUEST );
-    GAPRole_SetParameter( GAPROLE_MIN_CONN_INTERVAL, sizeof( BLEP_GVar->EParms.DESIRED_MIN_CONN_INTERVAL ), &BLEP_GVar->EParms.DESIRED_MIN_CONN_INTERVAL );
-    GAPRole_SetParameter( GAPROLE_MAX_CONN_INTERVAL, sizeof( BLEP_GVar->EParms.DESIRED_MAX_CONN_INTERVAL ), &BLEP_GVar->EParms.DESIRED_MAX_CONN_INTERVAL );
-    GAPRole_SetParameter( GAPROLE_SLAVE_LATENCY, sizeof( BLEP_GVar->EParms.DESIRED_SLAVE_LATENCY ), &BLEP_GVar->EParms.DESIRED_SLAVE_LATENCY );
-    GAPRole_SetParameter( GAPROLE_TIMEOUT_MULTIPLIER, sizeof( BLEP_GVar->EParms.DESIRED_CONN_TIMEOUT ), &BLEP_GVar->EParms.DESIRED_CONN_TIMEOUT );
+    GAPRole_SetParameter( GAPROLE_PARAM_UPDATE_ENABLE, sizeof( P.ENABLE_DESIRED_REQUEST ), &P.ENABLE_DESIRED_REQUEST );
+    GAPRole_SetParameter( GAPROLE_MIN_CONN_INTERVAL, sizeof( P.DESIRED_MIN_CONN_INTERVAL ), &P.DESIRED_MIN_CONN_INTERVAL );
+    GAPRole_SetParameter( GAPROLE_MAX_CONN_INTERVAL, sizeof( P.DESIRED_MAX_CONN_INTERVAL ), &P.DESIRED_MAX_CONN_INTERVAL );
+    GAPRole_SetParameter( GAPROLE_SLAVE_LATENCY, sizeof( P.DESIRED_SLAVE_LATENCY ), &P.DESIRED_SLAVE_LATENCY );
+    GAPRole_SetParameter( GAPROLE_TIMEOUT_MULTIPLIER, sizeof( P.DESIRED_CONN_TIMEOUT ), &P.DESIRED_CONN_TIMEOUT );
   }
 
   // Set the GAP Characteristics
-  GGS_SetParameter( GGS_DEVICE_NAME_ATT, BLEP_GVar->EParms.NAME_LEN, BLEP_GVar->EParms.NAME );
+  GGS_SetParameter( GGS_DEVICE_NAME_ATT, P.NAME_LEN, P.NAME );
 
   // Set advertising interval
   {
-    uint16 advInt = BLEP_GVar->EParms.ADVERTISING_INTERVAL;
+    uint16 advInt = P.ADVERTISING_INTERVAL;
 
     GAP_SetParamValue( TGAP_LIM_DISC_ADV_INT_MIN, advInt );
     GAP_SetParamValue( TGAP_LIM_DISC_ADV_INT_MAX, advInt );
@@ -393,19 +384,19 @@ void BLEP_Init( uint8 task_id , BLE_Type_CommFunc* BLE_CommFunc)
   {
     uint32 passkey = 0;
     uint8 pairMode = 
-      (BLEP_GVar->EParms.PAIR_MODE == BLE_PairMode_Passcode_Initiate || BLEP_GVar->EParms.PAIR_MODE == BLE_PairMode_Initiate)?
+      (P.PAIR_MODE == BLE_PairMode_Passcode_Initiate || P.PAIR_MODE == BLE_PairMode_Initiate)?
       GAPBOND_PAIRING_MODE_INITIATE:
       GAPBOND_PAIRING_MODE_WAIT_FOR_REQ;
     uint8 mitm = 
-      (BLEP_GVar->EParms.PAIR_MODE == BLE_PairMode_Passcode_Initiate || BLEP_GVar->EParms.PAIR_MODE == BLE_PairMode_Passcode_WaitForReq)?
+      (P.PAIR_MODE == BLE_PairMode_Passcode_Initiate || P.PAIR_MODE == BLE_PairMode_Passcode_WaitForReq)?
       true:
       false;
     uint8 ioCap = 
-      (BLEP_GVar->EParms.PAIR_MODE == BLE_PairMode_Passcode_Initiate || BLEP_GVar->EParms.PAIR_MODE == BLE_PairMode_Initiate)?
+      (P.PAIR_MODE == BLE_PairMode_Passcode_Initiate || P.PAIR_MODE == BLE_PairMode_Initiate)?
       GAPBOND_IO_CAP_DISPLAY_ONLY:
-      GAPBOND_IO_CAP_KEYBOARD_ONLY;    
+      GAPBOND_IO_CAP_KEYBOARD_ONLY;
     uint8 bonding = 
-      (BLEP_GVar->EParms.PAIR_MODE == BLE_PairMode_Passcode_Initiate || BLEP_GVar->EParms.PAIR_MODE == BLE_PairMode_Initiate)?
+      (P.PAIR_MODE == BLE_PairMode_Passcode_Initiate || P.PAIR_MODE == BLE_PairMode_Initiate)?
       false:
       true;
       
@@ -437,16 +428,29 @@ void BLEP_Init( uint8 task_id , BLE_Type_CommFunc* BLE_CommFunc)
   }
   */
   // Register callback with SimpleGATTprofile
-  VOID SimpleProfile_RegisterAppCBs( &BLEP_GVar->SimpleProfileCBs );
+  VOID SimpleProfile_RegisterAppCBs( &E->SimpleProfileCBs );
 
-  osal_set_event( BLEP_GVar->TaskId, BLEP_SBP_START_DEVICE_EVT );
+  osal_set_event( E->TaskId, BLEP_SBP_START_DEVICE_EVT );
 
   HCI_EXT_ClkDivOnHaltCmd( LL_EXT_DISABLE_CLK_DIVIDE_ON_HALT );
   
   //Set POWER
-  HCI_EXT_SetTxPowerCmd(BLEP_GVar->EParms.POWER_LEVEL);
+  HCI_EXT_SetTxPowerCmd(P.POWER_LEVEL);
   
-  HAL_SYSTEM_SET_WATCHDOG(BLEP_GVar->EParms.WATCHDOG_MODE);
+  HAL_SYSTEM_SET_WATCHDOG(P.WATCHDOG_MODE);
+  
+  BLE_Type_Argv BLE_Argv = {
+    .Role = BLE_CMD_Msg_RelDev_P,
+    .Info = P.INFO,
+    .InfoLen = P.INFO_LEN,
+    .EnCmdCheckBit= P.ENABLE_CMD_CHECK_BIT,
+    .EnTranEncry = P.ENABLE_TRANSMIT_ENCRYPT,
+    .TranEncryKey = P.TRANSMIT_ENCRYPT_KEY,
+    .CmdSend = BLE_CommFunc->CmdSend,
+    .BleSend = BLEP_BleSend,
+    .CmdRec = BLEP_CmdHandle
+  };
+  BLE_Init(&BLE_Argv);
 }
 
 /*********************************************************************
@@ -460,9 +464,8 @@ void BLEP_Init( uint8 task_id , BLE_Type_CommFunc* BLE_CommFunc)
  */
 void BLEP_RssiCB( int8 rssi )
 {
-  if(BLEP_GVar->Connected == true){
-    uint8 Ext[] = {BLE_HalInfoReturned_ReadRssiStatus, BLEP_GVar->ConnHandle, -rssi};
-    BLEP_SerialReturnResult(BLE_MsgType_HalInfo_Returned, Ext, sizeof(Ext) );
+  if(E->Connected){
+    BLE_CmdRetHal(BLE_HalRet_ReadRssi, E->ConnHandle, -rssi);
   }
 }
 /*********************************************************************
@@ -486,7 +489,7 @@ uint16 BLEP_ProcessEvent( uint8 task_id, uint16 events )
   {
     uint8 *pMsg;
 
-    if ( (pMsg = osal_msg_receive( BLEP_GVar->TaskId )) != NULL )
+    if ( (pMsg = osal_msg_receive( E->TaskId )) != NULL )
     {
       BLEP_ProcessOSALMsg( (osal_event_hdr_t *)pMsg );
 
@@ -501,35 +504,32 @@ uint16 BLEP_ProcessEvent( uint8 task_id, uint16 events )
   if ( events & BLEP_SBP_START_DEVICE_EVT )
   {
     // Start the Device
-    VOID GAPRole_StartDevice( &BLEP_GVar->PeripheralCBs );
+    VOID GAPRole_StartDevice( &E->PeripheralCBs );
 
     // Start Bond Manager
-    VOID GAPBondMgr_Register( &BLEP_GVar->BondMgrCBs );
+    VOID GAPBondMgr_Register( &E->BondMgrCBs );
 
     return ( events ^ BLEP_SBP_START_DEVICE_EVT );
   }
   // *********************** Handle Own defined Timer ********************************* //
   if ( events & BLEP_RESET_EVT ) {
-    if(BLEP_GVar->EParms_Save_Updated == TRUE) {
-      osal_snv_write(BLEP_Parms_Flash_Idx, sizeof(BLEP_Type_EParms), (uint8*)&BLEP_GVar->EParms_Save);
+    if(E->EParms_Save_Updated == TRUE) {
+      osal_snv_write(BLEP_Parms_Flash_Idx, sizeof(BLEP_Type_EParms), (uint8*)&PS);
     }
     SystemResetSoft();
     return ( events ^ BLEP_RESET_EVT );
   }
   if ( events & BLEP_SEND_DONE_EVT ) {
-    BLEP_GVar->SendDone = true;
-    BLEP_SerialReturnResult(BLE_MsgType_Sended, &BLEP_GVar->ConnHandle, sizeof(BLEP_GVar->ConnHandle));
+    E->SendDone = true;
+    BLE_CmdRetTransmitDone(E->ConnHandle, true);
     return ( events ^ BLEP_SEND_DONE_EVT );
   }
-  if ( events & BLEP_UART_TIMEOUT_EVT ) {
-    if(BLEP_GVar->UARTReceiveBufferLen != 0){
-       BLEP_GVar->UARTReceiveBufferLen = 0;
-       BLEP_SerialReturnResult(BLE_MsgType_CMD_Invalid, 0, 0);
-    }
-    return ( events ^ BLEP_UART_TIMEOUT_EVT );
+  if ( events & BLEP_Uart_TIMEOUT_EVT ) {
+    BLE_UartRecTimeout();
+    return ( events ^ BLEP_Uart_TIMEOUT_EVT );
   }
   if ( events & BLEP_Sleep_EVT ) {
-    BLEP_GVar->BLE_CommFunc->ForceSleep();
+    E->BLE_CommFunc->ForceSleep();
     return ( events ^ BLEP_Sleep_EVT );
   }
   // ****************************************************************************** //
@@ -577,51 +577,9 @@ void BLEP_ProcessOSALMsg( osal_event_hdr_t *pMsg )
       // Process GATT message
       BLEP_ProcessGATTMsg( (gattMsgEvent_t *)pMsg );
       break;
-      
     default:
       // do nothing
       break;
-  }
-}
-
-/*********************************************************************
- * @fn      BLEC_U32_To_U8Array
- *
- * @brief   
- *
- * @param   
- *
- * @return  none
- */
-void BLEP_U32_To_U8Array(uint32 source, uint8* dest, uint8* destLen){
-  uint8 Offset = 32, OffsetStep = 8, Val = 0; 
-  uint8 Count = 0, FindHead = false;
-  do {
-    Offset -= OffsetStep;
-    if(((Val = (source >> Offset) & 0xFF) != 0) || (FindHead == true)){
-      FindHead = true;
-      dest[(Count++)] = Val;
-    }
-  } while(Offset >= OffsetStep);
-  (*destLen) = Count;
-  if((*destLen) == 0){
-    dest[(*destLen)++] = 0;
-  }
-}
-
-/*********************************************************************
- * @fn      BLEC_U8Array_To_U32
- *
- * @brief   
- *
- * @param   
- *
- * @return  none
- */
-void BLEP_U8Array_To_U32(uint8* source, uint8 sourceLen, uint32* dest){
-  (*dest) = 0;
-  for(uint8 i = 0; i < sourceLen; i++){
-    (*dest)  = ((*dest) << 8) + source[i];
   }
 }
 
@@ -643,32 +601,25 @@ void BLEP_StateNotificationCB( gaprole_States_t newState )
       {
         uint8 ownAddress[B_ADDR_LEN];
         uint8 systemId[DEVINFO_SYSTEM_ID_LEN];
-
         GAPRole_GetParameter(GAPROLE_BD_ADDR, ownAddress);
-
         // use 6 bytes of device address for 8 bytes of system ID value
         systemId[0] = ownAddress[0];
         systemId[1] = ownAddress[1];
         systemId[2] = ownAddress[2];
-
         // set middle bytes to zero
         systemId[4] = 0x00;
         systemId[3] = 0x00;
-
         // shift three bytes up
         systemId[7] = ownAddress[5];
         systemId[6] = ownAddress[4];
         systemId[5] = ownAddress[3];
-
-        DevInfo_SetParameter(DEVINFO_SYSTEM_ID, DEVINFO_SYSTEM_ID_LEN, systemId);
-        
-        BLEP_SerialReturnRoleStatus(BLE_PowerStatus_Awake);
+        DevInfo_SetParameter(DEVINFO_SYSTEM_ID, DEVINFO_SYSTEM_ID_LEN, systemId);      
+        BLE_CmdRetRoleStatus();
+        BLE_CmdRetConnStatus(&E->Connected, 1);
       }
       break;
-
     case GAPROLE_ADVERTISING:
       {
-
       }
       break;
     case GAPROLE_CONNECTED:
@@ -688,30 +639,31 @@ void BLEP_StateNotificationCB( gaprole_States_t newState )
       break;
     case GAPROLE_ERROR:
       {
-        ConnectDisConnect = 2;
       }
       break;
     default:
       {
       }
       break;
-
   }
   if(ConnectDisConnect == 1){
-    BLEP_GVar->BLE_CommFunc->ForceWakeup();
-    BLEP_GVar->Connected = true;
-    BLEP_GVar->SendDone = true;
-    osal_stop_timerEx( BLEP_GVar->TaskId, BLEP_SEND_DONE_EVT);
-    BLEP_SerialReturnConnStatus();
+    if(E->Connected == false){
+      E->BLE_CommFunc->ForceWakeup();
+      E->Connected = true;
+      E->SendDone = true;
+      osal_stop_timerEx( E->TaskId, BLEP_SEND_DONE_EVT);
+      BLE_CmdRetConnStatus(&E->Connected, 1); 
+    }
   } else if(ConnectDisConnect == 2){
-    BLEP_GVar->Connected = false;
-    BLEP_GVar->SendDone = true;
-    osal_stop_timerEx( BLEP_GVar->TaskId, BLEP_SEND_DONE_EVT);
-    BLEP_SerialReturnConnStatus();
+    if(E->Connected == true){
+      E->Connected = false;
+      E->SendDone = true;
+      osal_stop_timerEx( E->TaskId, BLEP_SEND_DONE_EVT);
+      BLE_CmdRetConnStatus(&E->Connected, 1); 
+    }
   }
-  BLEP_GVar->gapProfileState = newState;
-  
-  VOID BLEP_GVar->gapProfileState;     // added to prevent compiler warning with
+  E->gapProfileState = newState;
+  VOID E->gapProfileState;     // added to prevent compiler warning with
 }
 
 /*********************************************************************
@@ -729,30 +681,9 @@ void BLEP_ProfileChangeCB( uint8 paramID )
   {
     case SIMPLEPROFILE_CHAR_SC:
       {
-        bStatus_t status = FAILURE;
-        
-        uint8 *Msg = BLEP_GVar->BLEReceiveBuffer;
-        uint8 *MsgLen = &Msg[0];
-        uint8 *MsgFrom = &Msg[1];
-        uint8 *MsgContent = &Msg[2];
-        (*MsgFrom) = BLEP_GVar->ConnHandle;
-        if(SimpleProfile_GetParameter( SIMPLEPROFILE_CHAR_SC, MsgLen, MsgContent) == SUCCESS){
-          if(BLEP_GVar->EParms.ENABLE_TRANSMIT_ENCRYPT == true) {
-            if((*MsgLen) == BLE_TRANSMIT_ENCRYPT_DATA_LEN && LL_EXT_Decrypt(BLEP_GVar->EParms.TRANSMIT_ENCRYPT_KEY, MsgContent, MsgContent) == SUCCESS) {
-              MsgLen = &MsgContent[BLE_TRANSMIT_ENCRYPT_DATA_LEN - 1];
-              if((*MsgLen) < BLE_TRANSMIT_ENCRYPT_DATA_LEN){
-                status = SUCCESS;
-              }
-            }
-          } else {
-            status = SUCCESS;
-          }
-        }
-        if(status == SUCCESS){
-          BLEP_SerialReturnResult(BLE_MsgType_Received, MsgFrom, (*MsgLen) + 1);
-        } else {
-          BLEP_SerialReturnResult(BLE_MsgType_UnReceived, MsgFrom, 1);
-        }
+        uint8 *pValue = 0, *len = 0;
+        SimpleProfile_GetParameter(SIMPLEPROFILE_CHAR_SC, &pValue, &len);
+        BLE_BleRetToUart(E->ConnHandle, pValue, *len);
       }
       break;
     default:
@@ -794,102 +725,11 @@ void BLEP_CentralPairStateCB( uint16 connHandle, uint8 state, uint8 status ){
  * @return  none
  */
 void BLEP_CentralPasscodeCB( uint8 *deviceAddr, uint16 connectionHandle, uint8 uiInputs, uint8 uiOutputs ){
-  GAPBondMgr_PasscodeRsp( connectionHandle, SUCCESS, BLEP_GVar->EParms.PASSCODE );
+  GAPBondMgr_PasscodeRsp( connectionHandle, SUCCESS, P.PASSCODE );
 }
 
 /*********************************************************************
- * @fn      BLEP_SerialReturnResult
- *
- * @brief   Send result via UART
- *
- * @param   MsgType - Msg Type
- *
- * @return  none
- */
-void BLEP_SerialReturnResult(BLE_Type_MsgType MsgType, uint8* ExtData, uint8 ExtDataLen){
-  BLEP_GVar->SendBuffer[BLE_CMD_Msg_LenIdx] = BLE_CMD_Msg_Len(ExtDataLen);
-  BLEP_GVar->SendBuffer[BLE_CMD_Msg_RelDevIdx] = BLE_CMD_Msg_RelDev_P;
-  BLEP_GVar->SendBuffer[BLE_CMD_Msg_TypeIdx] = MsgType;
-  osal_memcpy(&BLEP_GVar->SendBuffer[BLE_CMD_Msg_ExtHeadIdx], ExtData, ExtDataLen);
-  //Calculate Sum
-  BLEP_GVar->SendBuffer[BLE_CMD_Msg_CheckSumIdx(ExtDataLen)] = 0;
-  if(BLEP_GVar->EParms_Save.ENABLE_CMD_CHECK_BIT){
-  for(uint8 i = BLE_CMD_Msg_CheckSumHeadIdx, end = BLE_CMD_Msg_CheckSumEndIdx(ExtDataLen); i <= end; i++){
-      BLEP_GVar->SendBuffer[BLE_CMD_Msg_CheckSumIdx(ExtDataLen)] += BLEP_GVar->SendBuffer[i];
-    }
-  }
-  BLEP_GVar->BLE_CommFunc->UartSend(BLEP_GVar->SendBuffer, BLE_CMD_Msg_Len(ExtDataLen));
-}
-/*********************************************************************
- * @fn      BLEC_Check_SerailMsgValid
- *
- * @brief   
- *
- * @param   Check whether serial data is valid
- *
- * @return  none
- */
-bool BLEP_Check_SerailMsgValid(uint8* msg, uint8 Len){
-  //Check Length
-  if(msg[BLE_CMD_Msg_LenIdx] != Len || Len < BLE_CMD_Msg_Len(0)){
-    return false;
-  }
-  
-  // Check Related Device
-  if(msg[BLE_CMD_Msg_RelDevIdx] != BLE_CMD_Msg_RelDev_P){
-    return false;
-  }
-  
-  uint8 ExtLen = BLE_CMD_Msg_ExtLen(Len);
-  //Check Msg Type
-  /*
-  if(msg[BLE_CMD_Msg_TypeIdx] != BLE_MsgType_Connect_EnAdvert &&
-    msg[BLE_CMD_Msg_TypeIdx] != BLE_MsgType_Disconnect_DisAdvert &&
-    msg[BLE_CMD_Msg_TypeIdx] != BLE_MsgType_ConnStatus_Get &&
-    (msg[BLE_CMD_Msg_TypeIdx] != BLE_MsgType_Parms_Set) &&
-    (msg[BLE_CMD_Msg_TypeIdx] != BLE_MsgType_Hal_Set) &&
-    (msg[BLE_CMD_Msg_TypeIdx] != BLE_MsgType_Send) &&
-    msg[BLE_CMD_Msg_TypeIdx] != BLE_MsgType_Reboot &&
-    msg[BLE_CMD_Msg_TypeIdx] != BLE_MsgType_SwitchRole &&
-    msg[BLE_CMD_Msg_TypeIdx] != BLE_MsgType_Sleep){
-    return false;
-  }
-  */
-  if(BLEP_GVar->EParms_Save.ENABLE_CMD_CHECK_BIT){
-    //Check sum
-    uint8 sum = 0;
-    uint8 CheckSumEndIdx = BLE_CMD_Msg_CheckSumEndIdx(ExtLen);
-    uint8 CheckSumIdx = BLE_CMD_Msg_CheckSumIdx(ExtLen);
-    for(uint8 i = BLE_CMD_Msg_CheckSumHeadIdx; i <= CheckSumEndIdx; i++){
-      sum += msg[i];
-    }
-    if(sum != msg[CheckSumIdx]){
-      return false;
-    }
-  }
-  
-  return true;
-}
-
-
-/*********************************************************************
- * @fn      BLEC_SerialReturnConnStatus
- *
- * @brief   R
- *
- * @param   
- *
- * @return  none
- */
-void BLEP_SerialReturnConnStatus()
-{
-  uint8 Ext[] = { BLEP_GVar->Connected, BLEP_GVar->ConnHandle };
-  uint8 ExtLen = (BLEP_GVar->Connected == true) ? 2 : 1;
-  BLEP_SerialReturnResult(BLE_MsgType_ConnStatus_Returned, Ext, ExtLen);
-}
-
-/*********************************************************************
- * @fn      BLEP_SerialReturnRoleStatus
+ * @fn      BLEP_End_Conn
  *
  * @brief   
  *
@@ -897,367 +737,199 @@ void BLEP_SerialReturnConnStatus()
  *
  * @return  none
  */
-void BLEP_SerialReturnRoleStatus(BLE_Type_PowerStatus SleepAwake)
-{
-  uint8 Data[5], DatLen = 0;
-  Data[0] = SleepAwake;
-  BLEP_U32_To_U8Array(BLEP_GVar->EParms.VERSION, &Data[1], &DatLen);
-  BLEP_SerialReturnResult(BLE_MsgType_Device_Inited, Data, DatLen + 1);
+uint32 BLEP_End_Conn(bool Advert) {
+  osal_stop_timerEx( E->TaskId, BLEP_SEND_DONE_EVT);
+  BLE_CmdRetConnStatus(&E->Connected, 1);
+  if(E->Connected == true){
+    GAPRole_TerminateConnection();
+  }
+  if(Advert != E->AdverEnable){
+    BLEP_Set_AdvertEnable(Advert);
+  }
+  return P.END_ALL_SCAN_CONN_REQ_TIME;
 }
 
 /*********************************************************************
- * @fn      BLEP_End_Conn_Advert
+ * @fn      BLEP_BleSend
  *
  * @brief   
  *
- * @param   
- *
  * @return  none
  */
-uint32 BLEP_End_Conn_Advert() {
-  osal_stop_timerEx( BLEP_GVar->TaskId, BLEP_SEND_DONE_EVT);
-  GAPRole_TerminateConnection();
-  return BLEP_GVar->EParms.END_ALL_SCAN_CONN_REQ_TIME;
+bool BLEP_BleSend(uint8 connHandle, uint8* data, uint8 dataLen){
+  if(connHandle == E->ConnHandle) {
+    if((E->Connected) && (E->SendDone) && (SimpleProfile_SetParameter(SIMPLEPROFILE_CHAR_CS, data, dataLen) == SUCCESS)){
+      return true;
+    }
+  }
+  return false;
 }
-
 /*********************************************************************
- * @fn      BLEP_UARTMsgHandle
+ * @fn      BLEP_CmdHandle
  *
- * @brief   Handle UART msg
+ * @brief   Handle Uart msg
  *
  * @param   msg - Data, Len - Length of Data
  *
  * @return  none
  */
-void BLEP_UARTMsgHandle(uint8* Msg, uint8 Len){
+void BLEP_CmdHandle(uint8* Cmd, uint8 CmdLen){
+  uint8 Role;
+  uint8 Type;
+  uint8* Ext;
+  uint8 ExtLen;
+  if(!BLE_CmdParse(Cmd, CmdLen, &Role, &Type, &Ext, &ExtLen)){
+    BLE_CmdRetCmdInvalid();
+    return;
+  }
+  uint8 PType0, PType1;
+  uint32 PValL;
+  uint8* PValArr;
+  uint8 PvalArrLen;
+  
   bool Msg_Executed = false;
-  if(BLEP_Check_SerailMsgValid(Msg, Len) == true){
-      uint8 ExtLen = BLE_CMD_Msg_ExtLen(Len);
-      switch(Msg[BLE_CMD_Msg_TypeIdx]){
-        case BLE_MsgType_Connect_EnAdvert:
-          if(ExtLen == 0){
-            BLEP_End_Conn_Advert();
-            BLEP_Set_AdvertEnable(TRUE);
-            BLEP_SerialReturnConnStatus();
-            Msg_Executed = true;
+  switch(Type){
+    case BLE_MsgType_Connect_EnAdvert:
+      if(BLE_CmdExtParse(Ext, ExtLen) && QM) BLEP_End_Conn(true);
+      break;
+    case BLE_MsgType_Disconnect_DisAdvert:
+      if(BLE_CmdExtParse(Ext, ExtLen) && QM) BLEP_End_Conn(false);
+      break;
+    case BLE_MsgType_RoleStatus_Get:
+      if(BLE_CmdExtParse(Ext, ExtLen) && QM) BLE_CmdRetRoleStatus();
+      break;
+    case BLE_MsgType_ConnStatus_Get:
+      if(BLE_CmdExtParse(Ext, ExtLen) && QM) BLE_CmdRetConnStatus(&E->Connected, 1);
+      break;
+    case BLE_MsgType_Parms_Set:       //Change Parms
+      {
+        if(BLE_CmdExtParse_8_N(Ext, ExtLen, &PType0, &PValArr, &PvalArrLen)) {
+          switch(PType0){
+            case BLEP_SetParm_NAME:
+              if(SE(PvalArrLen, BLE_Parm_Dev_Name_Len) && QM) BLE_Copy_Array(PS.NAME, PS.NAME_LEN , PValArr, PvalArrLen);
+              break;
+            case BLEP_SetParm_TRANSMIT_ENCRYPT_KEY:
+              if(Eq(PvalArrLen, BLE_TRANSMIT_ENCRYPT_DATA_LEN) && QM) osal_memcpy(PS.TRANSMIT_ENCRYPT_KEY, PValArr, PvalArrLen);
+              break;
+             case BLEP_SetParm_INFO:
+              if(SE(PvalArrLen, BLE_Parm_Dev_Info_Len) && QM) BLE_Copy_Array(PS.INFO, PS.INFO_LEN, PValArr, PvalArrLen);
+              break;
           }
-          break;
-        case BLE_MsgType_Disconnect_DisAdvert:
-          if(ExtLen == 0){
-            BLEP_End_Conn_Advert();
-            BLEP_Set_AdvertEnable(FALSE);
-            BLEP_SerialReturnConnStatus();
-            Msg_Executed = true;
+        }
+        if(MF && BLE_CmdExtParse_8_32(Ext, ExtLen, &PType0, &PValL)) {
+          switch(PType0){
+            case BLEP_SetParm_RESET:
+              if(QM) BLEP_Reset_EParms(&PS);
+              break;
+            case BLEP_SetParm_ADVERTISING_INTERVAL:
+              if(PU16(PValL) && QM) PS.ADVERTISING_INTERVAL = PValL;
+              break;
+            case BLEP_SetParm_ENABLE_DESIRED_REQUEST:
+              if(Bool(PValL) && QM) PS.ENABLE_DESIRED_REQUEST = PValL;
+              break;
+            case BLEP_SetParm_DESIRED_MIN_CONN_INTERVAL:
+              if(PU16(PValL) && QM) PS.DESIRED_MIN_CONN_INTERVAL = PValL;
+              break;
+            case BLEP_SetParm_DESIRED_MAX_CONN_INTERVAL:
+              if(PU16(PValL) && QM) PS.DESIRED_MAX_CONN_INTERVAL = PValL;
+              break;
+            case BLEP_SetParm_DESIRED_SLAVE_LATENCY:
+              if(U8(PValL) && QM) PS.DESIRED_SLAVE_LATENCY = PValL;
+              break;
+            case BLEP_SetParm_DESIRED_CONN_TIMEOUT:
+              if(PU16(PValL) && QM) PS.DESIRED_CONN_TIMEOUT = PValL;
+              break;
+            case BLEP_SetParm_CONN_PAUSE_PERIPHERAL:
+              if(PU16(PValL) && QM) PS.CONN_PAUSE_PERIPHERAL = PValL;
+              break;
+            case BLEP_SetParm_POWER_LEVEL:
+              if(Sm(PValL, LL_EXT_TX_POWER_NUM) && QM) 
+                PS.POWER_LEVEL = (BLE_Type_PairMode)PValL;
+              break;
+            case BLEP_SetParm_END_ALL_SCAN_CONN_REQ_TIME:
+              if(PU16(PValL) && QM) PS.END_ALL_SCAN_CONN_REQ_TIME = PValL;
+              break;
+            case BLEP_SetParm_PAIR_MODE:
+              if(Sm(PValL, BLE_PairMode_Num) && QM) PS.PAIR_MODE = (BLE_Type_PairMode)PValL;
+              break;
+            case BLEP_SetParm_PASSCODE:
+              if(SE(PValL, 999999) && QM) PS.PASSCODE = PValL;
+              break;  
+            case BLEP_SetParm_AUTO_ADVERT:
+              if(Bool(PValL) && QM) PS.AUTO_ADVERT = PValL;
+              break;
+            case BLEP_SetParm_SEND_DONE_DELAY:
+              if(Bool(PValL) && QM) PS.SEND_DONE_DELAY = PValL;
+              break;
+            case BLEP_SetParm_ENABLE_TRANSMIT_ENCRYPT:
+              if(Bool(PValL) && QM) PS.ENABLE_TRANSMIT_ENCRYPT = PValL;
+              break;
+            case BLEP_SetParm_WATCHDOG:
+              if(SE(PValL, HAL_SYSTEM_WD_MODE_NUM) && QM) PS.WATCHDOG_MODE = PValL;
+              break;
+            case BLEP_SetParm_ENABLE_CMD_CHECK_BIT:
+              if(Bool(PValL) && QM) PS.ENABLE_CMD_CHECK_BIT = PValL;
+              break;
           }
-          break;
-        case BLE_MsgType_RoleStatus_Get:
-          if(ExtLen == 0){
-            BLEP_SerialReturnRoleStatus(BLE_PowerStatus_Awake);
-            Msg_Executed = true;
-          }
-          break;
-        case BLE_MsgType_ConnStatus_Get:        //Check Connection
-          if(ExtLen == 0){
-            BLEP_SerialReturnConnStatus();
-            Msg_Executed = true;
-          }
-          break;
-        case BLE_MsgType_Parms_Set:       //Change Parms
-          {
-            if(ExtLen > 2 ){
-              if(BLEP_GVar->EParms_Save.INTER_VERSION == BLE_Parm_INTER_VERSION){
-                uint8 ParmType = Msg[BLE_CMD_Msg_ExtHeadIdx];
-                uint8* ParmVal = &Msg[BLE_CMD_Msg_ExtHeadIdx + 1];
-                uint8 ParmValLen = ExtLen - 1;
-                
-                if(Msg[BLE_CMD_Msg_ExtHeadIdx] == BLEP_SetParm_NAME){
-                  //Check Parms
-                  if(BLE_Parm_Name_Len >= ParmValLen){
-                    osal_memcpy(BLEP_GVar->EParms_Save.NAME, ParmVal, ParmValLen);
-                    BLEP_GVar->EParms_Save.NAME_LEN = ParmValLen;
-                    Msg_Executed = true;
-                  }
-                } else if(ParmType == BLEC_SetParm_TRANSMIT_ENCRYPT_KEY) {
-                  //Check Parms
-                  if(ParmValLen == sizeof(BLEP_GVar->EParms_Save.TRANSMIT_ENCRYPT_KEY)){
-                    osal_memcpy(BLEP_GVar->EParms_Save.TRANSMIT_ENCRYPT_KEY, ParmVal, ParmValLen);
-                    Msg_Executed = true;
-                  }
-                } else {
-                 if(ParmValLen <= 4){
-                  uint32 NewData = 0;
-                  BLEP_U8Array_To_U32(ParmVal, ParmValLen, &NewData);
-                  switch(ParmType){
-                    case BLEP_SetParm_RESET:
-                      BLEP_Reset_EParms(&BLEP_GVar->EParms_Save);
-                      Msg_Executed = true;
-                      break;
-                    case BLEP_SetParm_VERSION:
-                      BLEP_GVar->EParms_Save.VERSION = NewData;
-                      Msg_Executed = true;
-                      break;
-                    case BLEP_SetParm_ADVERTISING_INTERVAL:
-                      if(NewData > 0){
-                        BLEP_GVar->EParms_Save.ADVERTISING_INTERVAL = NewData;
-                        Msg_Executed = true;
-                      }
-                      break;
-                    case BLEP_SetParm_ENABLE_DESIRED_REQUEST:
-                      if(NewData == true || NewData == false){
-                        BLEP_GVar->EParms_Save.ENABLE_DESIRED_REQUEST = NewData;
-                        Msg_Executed = true;
-                      }
-                      break;
-                    case BLEP_SetParm_DESIRED_MIN_CONN_INTERVAL:
-                      if(NewData > 0){
-                        BLEP_GVar->EParms_Save.DESIRED_MIN_CONN_INTERVAL = NewData;
-                        Msg_Executed = true;
-                      }
-                      break;
-                    case BLEP_SetParm_DESIRED_MAX_CONN_INTERVAL:
-                      if(NewData > 0){
-                        BLEP_GVar->EParms_Save.DESIRED_MAX_CONN_INTERVAL = NewData;
-                        Msg_Executed = true;
-                      }
-                      break;
-                    case BLEP_SetParm_DESIRED_SLAVE_LATENCY:
-                      BLEP_GVar->EParms_Save.DESIRED_SLAVE_LATENCY = NewData;
-                      Msg_Executed = true;
-                      break;
-                    case BLEP_SetParm_DESIRED_CONN_TIMEOUT:
-                      if(NewData > 0){
-                        BLEP_GVar->EParms_Save.DESIRED_CONN_TIMEOUT = NewData;
-                        Msg_Executed = true;
-                      }
-                      break;
-                    case BLEP_SetParm_CONN_PAUSE_PERIPHERAL:
-                      if(NewData > 0){
-                        BLEP_GVar->EParms_Save.CONN_PAUSE_PERIPHERAL = NewData;
-                        Msg_Executed = true;
-                      }
-                      break;
-                    case BLEP_SetParm_POWER_LEVEL:
-                      if(NewData == LL_EXT_TX_POWER_MINUS_23_DBM || NewData == LL_EXT_TX_POWER_MINUS_6_DBM || 
-                         NewData == LL_EXT_TX_POWER_0_DBM || NewData == LL_EXT_TX_POWER_4_DBM){
-                        BLEP_GVar->EParms_Save.POWER_LEVEL = NewData;
-                        Msg_Executed = true;
-                      }
-                      break;
-                    case BLEP_SetParm_END_ALL_SCAN_CONN_REQ_TIME:
-                      if(NewData > 0){
-                        BLEP_GVar->EParms_Save.END_ALL_SCAN_CONN_REQ_TIME = NewData;
-                        Msg_Executed = true;
-                      }
-                      break;
-                    case BLEP_SetParm_PAIR_MODE:
-                      if(NewData == BLE_PairMode_Initiate || NewData == BLE_PairMode_WaitForReq || 
-                         NewData == BLE_PairMode_Passcode_Initiate || NewData == BLE_PairMode_Passcode_WaitForReq){
-                        BLEP_GVar->EParms_Save.PAIR_MODE = (BLE_Type_PairMode)NewData;
-                        Msg_Executed = true;
-                      }
-                      break;
-                    case BLEP_SetParm_PASSCODE:
-                      if(NewData <= 999999){
-                        BLEP_GVar->EParms_Save.PASSCODE = NewData;
-                        Msg_Executed = true;
-                      }
-                      break;  
-                    case BLEP_SetParm_AUTO_ADVERT:
-                      if(Is_Bool(NewData)){
-                        BLEP_GVar->EParms_Save.AUTO_ADVERT = NewData;
-                        Msg_Executed = true;
-                      }
-                      break;
-                    case BLEP_SetParm_SEND_DONE_DELAY:
-                      if(Is_Bool(NewData)){
-                        BLEP_GVar->EParms_Save.SEND_DONE_DELAY = NewData;
-                        Msg_Executed = true;
-                      }
-                      break;
-                    case BLEP_SetParm_ENABLE_TRANSMIT_ENCRYPT:
-                      if(Is_Bool(NewData)){
-                        BLEP_GVar->EParms_Save.ENABLE_TRANSMIT_ENCRYPT = NewData;
-                        Msg_Executed = true;
-                      }
-                      break;
-                    case BLEP_SetParm_WATCHDOG:
-                      if(NewData < HAL_SYSTEM_WD_MODE_NUM){
-                        BLEP_GVar->EParms_Save.WATCHDOG_MODE = NewData;
-                        Msg_Executed = true;
-                      }
-                      break;
-                    case BLEP_SetParm_ENABLE_CMD_CHECK_BIT:
-                      if(Is_Bool(NewData)){
-                        BLEP_GVar->EParms_Save.ENABLE_CMD_CHECK_BIT = NewData;
-                        Msg_Executed = true;
-                      }
-                      break;
-                  }
-                }
-              }
-            }
-            }
-            if(Msg_Executed == true){
-              BLEP_GVar->EParms_Save_Updated = true;
-              BLEP_SerialReturnResult(BLE_MsgType_Parms_Setd, 0, 0);
-            }
-          }
-          break;
-        case BLE_MsgType_Hal_Set:
-          {
-            if(ExtLen > 2 && ExtLen <= 6){
-              uint8 ParmType = Msg[BLE_CMD_Msg_ExtHeadIdx];
-              uint8 ParmRelChannel =  Msg[BLE_CMD_Msg_ExtHeadIdx + 1];
-              if(ExtLen == 2){
-                switch(ParmType){
-                  case BLE_SetHal_ReadAdcStatus:
-                    {
-                      uint8 Channel = ParmRelChannel >> 4;
-                      uint8 Resolution = ParmRelChannel & 0x0F;
-                      if((Channel < HAL_ADC_CHANNEL_NUM && Resolution < HAL_ADC_RESOLUTION_NUM)) {
-                        HalAdcSetReference(HAL_ADC_REF_AVDD);
-                        uint8 Ext[] = {BLE_HalInfoReturned_ReadAdcStatus, ParmRelChannel, (uint8)(HalAdcRead(Channel, Resolution) / 2048 * 255) };
-                        BLEP_SerialReturnResult(BLE_MsgType_HalInfo_Returned, Ext, sizeof(Ext) );
-                        Msg_Executed = true;
-                      }
-                    }
-                    break;
-                  case BLE_SetHal_ReadKeyStatus:
-                    if((ParmRelChannel < HAL_KEY_CHANNEL_NUM)) {
-                      uint8 Ext[] = {BLE_HalInfoReturned_ReadKeyStatus, ParmRelChannel, HalKeyGet(ParmRelChannel)};
-                      BLEP_SerialReturnResult(BLE_MsgType_HalInfo_Returned, Ext, sizeof(Ext) );
-                      Msg_Executed = true;
-                    }
-                    break;
-                  case BLE_SetHal_ReadRssiStatus:
-                    if((ParmRelChannel == BLEP_GVar->ConnHandle) && (BLEP_GVar->Connected == true) && (HCI_ReadRssiCmd(GAPRole_GetConnHandle()) == SUCCESS)) {
-                      Msg_Executed = true;
-                    }
-                    break;
-                }
-              } else if(ExtLen <= 6){
-                uint32 ParmVal = 0;
-                BLEP_U8Array_To_U32(&Msg[BLE_CMD_Msg_ExtHeadIdx + 2], ExtLen - 2, &ParmVal);
-                switch(ParmType){
-                  case BLE_SetHal_SetLedStatus:
-                    if((ParmRelChannel < HAL_LED_CHANNEL_NUM) && (Is_Bool(ParmVal))) {
-                      uint8 Ext[] = {BLE_HalInfoReturned_SetLedStatus, ParmRelChannel, HalLedSet(ParmRelChannel, ParmVal)};
-                      BLEP_SerialReturnResult(BLE_MsgType_HalInfo_Returned, Ext, sizeof(Ext) );
-                      Msg_Executed = true;
-                    }
-                    break;
-                }
-              }
-            }
-          }
-          break;
-        case BLE_MsgType_Send:
-          if(ExtLen >= 2){
-            uint8 DeviceToken = Msg[BLE_CMD_Msg_ExtHeadIdx];
-            if((DeviceToken == BLEP_GVar->ConnHandle)) {
-              bStatus_t status = FAILURE;
-              if((BLEP_GVar->Connected == true) && (BLEP_GVar->SendDone == true)){
-                uint8 TransmitDataLen = ExtLen - 1;
-                uint8* TransmitData = &Msg[BLE_CMD_Msg_ExtHeadIdx + 1];
-                if(BLEP_GVar->EParms.ENABLE_TRANSMIT_ENCRYPT == true) {
-                  if(TransmitDataLen < BLE_TRANSMIT_ENCRYPT_DATA_LEN){
-                    osal_memcpy(BLEP_GVar->SendBuffer, TransmitData, TransmitDataLen);
-                    BLEP_GVar->SendBuffer[BLE_TRANSMIT_ENCRYPT_DATA_LEN - 1] = TransmitDataLen;
-                    if(LL_Encrypt( BLEP_GVar->EParms.TRANSMIT_ENCRYPT_KEY,  BLEP_GVar->SendBuffer, BLEP_GVar->SendBuffer ) == SUCCESS){
-                      status = SimpleProfile_SetParameter( SIMPLEPROFILE_CHAR_CS, BLE_TRANSMIT_ENCRYPT_DATA_LEN, BLEP_GVar->SendBuffer ); 
-                    }
-                  }
-                } else {
-                  status = SimpleProfile_SetParameter( SIMPLEPROFILE_CHAR_CS, TransmitDataLen, TransmitData ); 
-                }
-              }
-              if(status == SUCCESS){
-                //Transmit Successfully
-                BLEP_GVar->SendDone = false;
-                osal_start_timerEx( BLEP_GVar->TaskId, BLEP_SEND_DONE_EVT, BLEP_GVar->EParms_Save.SEND_DONE_DELAY);
-              } else {
-                //Transmit Unsuccessfully
-                BLEP_SerialReturnResult(BLE_MsgType_UnSended, &BLEP_GVar->ConnHandle, sizeof(BLEP_GVar->ConnHandle)); //Transmit Unsuccessfully
-              }
-              Msg_Executed = true;
-            }
-          }
-          break;
-      case BLE_MsgType_Reboot: //Reboot
-          if(ExtLen == 0){
-            osal_start_timerEx( BLEP_GVar->TaskId, BLEP_RESET_EVT, BLEP_End_Conn_Advert());
-            Msg_Executed = true;
-          }
-          break;
-        case BLE_MsgType_SwitchRole:
-          if(ExtLen == 0){
-            BLEP_GVar->BLE_CommFunc->SwitchRole();
-            osal_start_timerEx( BLEP_GVar->TaskId, BLEP_RESET_EVT, BLEP_End_Conn_Advert());
-            Msg_Executed = true;
-          }
-          break;
-        case BLE_MsgType_Sleep:
-          if(ExtLen == 0){
-            BLEP_SerialReturnRoleStatus(BLE_PowerStatus_Sleep);
-            HalLedEnterSleep();
-            HalKeyEnterSleep();
-            osal_start_timerEx( BLEP_GVar->TaskId, BLEP_Sleep_EVT, BLEP_End_Conn_Advert());
-            Msg_Executed = true;
-          }
-          break;
+        }
+        if(MT){
+          E->EParms_Save_Updated = true;
+          BLE_CmdRetParmSetd();
+        }
       }
+      break;
+      
+    case BLE_MsgType_Hal_Set:
+      if(BLE_CmdExtParse_8_8(Ext, ExtLen, &PType0, &PType1)) {
+        switch(PType0){
+        case BLE_HalSet_ReadRssi:
+          if(Eq(PType1, E->ConnHandle) && (E->Connected) && Eq(HCI_ReadRssiCmd(GAPRole_GetConnHandle()), SUCCESS) && QM);
+          break;
+        }
+      }
+      break;
+    case BLE_MsgType_Send:
+      if(BLE_CmdExtParse_8_N(Ext, ExtLen, &PType0, &PValArr, &PvalArrLen) && QM) {
+        if(BLE_SendBLE(PType0, PValArr, PvalArrLen)){
+          E->SendDone = false;
+          osal_start_timerEx( E->TaskId, BLEP_SEND_DONE_EVT, PS.SEND_DONE_DELAY);
+        } else {
+          BLE_CmdRetTransmitDone(PType0, false);
+        }
+      }
+      break;
+    case BLE_MsgType_Reboot:
+      if(BLE_CmdExtParse(Ext, ExtLen) && QM) osal_start_timerEx(E->TaskId, BLEP_RESET_EVT, BLEP_End_Conn(false));
+      break;
+    case BLE_MsgType_SwitchRole:
+      if(BLE_CmdExtParse(Ext, ExtLen) && QM) {
+        E->BLE_CommFunc->SwitchRole();
+        osal_start_timerEx( E->TaskId, BLEP_RESET_EVT, BLEP_End_Conn(false));
+      }
+      break;
+    case BLE_MsgType_Sleep:
+      if(BLE_CmdExtParse(Ext, ExtLen) && QM) osal_start_timerEx( E->TaskId, BLEP_Sleep_EVT, BLEP_End_Conn(E->AdverEnable));
+      break;
   }
   if(Msg_Executed == false) {
-    BLEP_SerialReturnResult(BLE_MsgType_CMD_Invalid, 0, 0); //CMD Invalid
+    BLE_CmdRetCmdInvalid();
   }
 }
 
-
 /*********************************************************************
- * @fn      BLEP_MsgRead
+ * @fn      BLEP_Cmd_RECEIVE
  *
- * @brief   Handle disconnected msg
+ * @brief   Uart Cakkback
  *
  * @param   ......
  *
  * @return  none
  */
-void BLEP_MsgRead(uint8* RecData, uint8 RecLen, uint8* CurrBuffer, uint8* CurrLen, uint32* LastTime, void (*Method)(uint8*, uint8)){
-   for(uint8 i = 0; i < RecLen; i++){
-     // Data Exceed Max Length
-     if((*CurrLen) == 0 && RecData[i] > BLE_CMD_Msg_Max_Len){
-       continue;
-     }
-     CurrBuffer[(*CurrLen)++] = RecData[i];
-     if(CurrBuffer[0] == (*CurrLen)){
-        Method(CurrBuffer, (*CurrLen));
-        (*CurrLen) = 0;
-     }
-   }
-   *LastTime = osal_GetSystemClock();
-}
-
-/*********************************************************************
- * @fn      BLEP_UART_RECEIVE
- *
- * @brief   UART Cakkback
- *
- * @param   ......
- *
- * @return  none
- */
-void BLEP_UART_RECEIVE( uint8* Data, uint8 DataLen )
+void BLEP_Cmd_RECEIVE( uint8* Data, uint8 DataLen )
 {
-  osal_stop_timerEx( BLEP_GVar->TaskId, BLEP_UART_TIMEOUT_EVT);
-  BLEP_MsgRead(
-    Data,
-    DataLen,
-    BLEP_GVar->UARTReceiveBuffer,
-    &BLEP_GVar->UARTReceiveBufferLen,
-    &BLEP_GVar->UARTReceiveBuffer_LastTime,
-    BLEP_UARTMsgHandle
-  );
-  osal_start_timerEx( BLEP_GVar->TaskId, BLEP_UART_TIMEOUT_EVT, BLE_ReceiveBufferTimeout);
+  osal_stop_timerEx( E->TaskId, BLEP_Uart_TIMEOUT_EVT);
+  BLE_CmdGetFromUart(Data, DataLen);
+  osal_start_timerEx( E->TaskId, BLEP_Uart_TIMEOUT_EVT, BLE_ReceiveBufferTimeout);
 }
 
 /*********************************************************************
@@ -1276,3 +948,5 @@ void BLEP_Main_Loop()
 
 /*********************************************************************
 *********************************************************************/
+
+#endif

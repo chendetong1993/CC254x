@@ -324,6 +324,7 @@ extern "C"
 #define LL_EXT_TX_POWER_MINUS_6_DBM                    1
 #define LL_EXT_TX_POWER_0_DBM                          2
 #define LL_EXT_TX_POWER_4_DBM                          3
+#define LL_EXT_TX_POWER_NUM                            4
 
 #if defined( CC2541) || defined( CC2541S )
 

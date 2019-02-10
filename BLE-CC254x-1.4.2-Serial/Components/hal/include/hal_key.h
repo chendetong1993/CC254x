@@ -98,19 +98,9 @@ extern "C"
  */
 
 /*
- * Put LEDs in sleep state - store current values
- */
-extern void HalKeyEnterSleep( void );
-
-/*
- * Retore LEDs from sleep state
- */
-extern void HalKeyExitSleep( void );
-
-/*
  * Return LED state
  */
-extern bool HalKeyGet( uint8 key );
+extern bool HalKeyGet( uint8 , bool* );
 
 /*********************************************************************
 *********************************************************************/

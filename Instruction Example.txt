@@ -1,0 +1,15 @@
+1. Check the Role of Module (Wether Master or Slave)
+
+04 00 02 06		Master 
+04 01 02 07		Slave
+
+
+2. Connect
+
+04 00 00 04		Master 
+
+2. Disconnect
+
+04 00 01 05		Master 
+
+

@@ -295,7 +295,7 @@ bStatus_t SimpleProfile_RegisterAppCBs( simpleProfileCBs_t *appCallbacks )
  * @param   taskId
  * @return  bStatus_t
  */
-bStatus_t SimpleProfile_WriteCharValue(uint8 taskId, uint16 connHandle, uint16 handle, uint8 len, void *value )
+bStatus_t SimpleProfile_WriteCharValue(uint8 taskId, uint16 connHandle, uint16 handle, void *value, uint8 len )
 {
   bStatus_t ret = bleInvalidRange;
   if(len <= SIMPLEPROFILE_CHAR_SC_CS_LEN){
@@ -335,7 +335,7 @@ bStatus_t SimpleProfile_WriteCharValue(uint8 taskId, uint16 connHandle, uint16 h
  *
  * @return  bStatus_t
  */
-bStatus_t SimpleProfile_SetParameter( uint8 param, uint8 len, void *value )
+bStatus_t SimpleProfile_SetParameter( uint8 param, void *value, uint8 len )
 {
   bStatus_t ret = SUCCESS;
   switch ( param )
@@ -388,18 +388,18 @@ bStatus_t SimpleProfile_SetParameter( uint8 param, uint8 len, void *value )
  *
  * @return  bStatus_t
  */
-bStatus_t SimpleProfile_GetParameter( uint8 param, uint8* len, void *value )
+bStatus_t SimpleProfile_GetParameter( uint8 param, uint8 **value, uint8** len )
 {
   bStatus_t ret = SUCCESS;
   switch ( param )
   {
     case SIMPLEPROFILE_CHAR_SC:
-      (*len) = simpleProfileCharSCWriteLen;
-      VOID osal_memcpy( value, simpleProfileCharSC, (*len) );
+      (*len) = &simpleProfileCharSCWriteLen;
+      (*value) = simpleProfileCharSC;
       break;   
     case SIMPLEPROFILE_CHAR_CS:
-      (*len) = simpleProfileCharCSWriteLen;
-      VOID osal_memcpy( value, simpleProfileCharCS, (*len) );
+      (*len) = &simpleProfileCharCSWriteLen;
+      (*value) = simpleProfileCharCS;
       break;
     default:
       ret = INVALIDPARAMETER;

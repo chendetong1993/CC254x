@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <settings>
     <DebugChecksum>
-        <Checksum>4175249352</Checksum>
+        <Checksum>1093322224</Checksum>
     </DebugChecksum>
     <DisAssemblyWindow>
         <NumStates>_ 1</NumStates>
@@ -46,6 +46,19 @@
         <LogFile>_ ""</LogFile>
         <Category>_ 0</Category>
     </Log_file>
+    <Breakpoints>
+        <Bp0>_ "STD_CODE" "{C:\Windows\system32}.572.3" 0 0 0 0 "" 0 ""</Bp0>
+        <Bp1>_ "STD_CODE" "{C:\Windows\system32}.690.3" 0 0 0 0 "" 0 ""</Bp1>
+        <Bp2>_ "STD_CODE" "{C:\Windows\system32}.715.3" 0 0 0 0 "" 0 ""</Bp2>
+        <Bp3>_ "STD_CODE" "{C:\Windows\system32}.1131.20" 0 0 0 0 "" 0 ""</Bp3>
+        <Bp4>_ "STD_CODE" "{$PROJ_DIR$\..\..\Profiles\GATT\gattservapp_util.c}.1.1" 0 0 0 0 "" 0 ""</Bp4>
+        <Bp5>_ "STD_CODE" "{$PROJ_DIR$\..\Source\simpleBLEP.c}.714.7" 1 0 0 0 "" 0 ""</Bp5>
+        <Count>6</Count>
+    </Breakpoints>
+    <ChipconEmu>
+        <StopTimersOnHalt>0</StopTimersOnHalt>
+        <LeaveTargetRunning>1</LeaveTargetRunning>
+    </ChipconEmu>
     <LogFile>
         <LoggingEnabled>_ 0</LoggingEnabled>
         <LogFile>_ ""</LogFile>
@@ -55,18 +68,6 @@
         <LoggingEnabled>_ 0</LoggingEnabled>
         <LogFile>_ ""</LogFile>
     </TermIOLog>
-    <Breakpoints>
-        <Bp0>_ "STD_CODE" "{C:\Windows\system32}.572.3" 0 0 0 0 "" 0 ""</Bp0>
-        <Bp1>_ "STD_CODE" "{C:\Windows\system32}.690.3" 0 0 0 0 "" 0 ""</Bp1>
-        <Bp2>_ "STD_CODE" "{C:\Windows\system32}.715.3" 0 0 0 0 "" 0 ""</Bp2>
-        <Bp3>_ "STD_CODE" "{C:\Windows\system32}.1131.20" 0 0 0 0 "" 0 ""</Bp3>
-        <Bp4>_ "STD_CODE" "{$PROJ_DIR$\..\..\Profiles\GATT\gattservapp_util.c}.1.1" 0 0 0 0 "" 0 ""</Bp4>
-        <Count>5</Count>
-    </Breakpoints>
-    <ChipconEmu>
-        <StopTimersOnHalt>1</StopTimersOnHalt>
-        <LeaveTargetRunning>1</LeaveTargetRunning>
-    </ChipconEmu>
     <Aliases>
         <A0>_ "D:\Documents\Sync\Dropbox\蓝牙\代码_蓝牙主从一体_12_25 - 副本\BLE\BLE-CC254x-1.3.2-Serial\Components\hal\common\hal_drivers.c" ""</A0>
         <A1>_ "D:\Documents\Sync\Dropbox\蓝牙\代码_蓝牙主从一体_12_25 - 副本\BLE\BLE-CC254x-1.3.2-Serial\Components\hal\target\CC2540EB\hal_startup.c" ""</A1>

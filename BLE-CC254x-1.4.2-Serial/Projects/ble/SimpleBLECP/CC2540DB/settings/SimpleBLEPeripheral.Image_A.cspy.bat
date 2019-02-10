@@ -25,7 +25,7 @@ if not "%~1" == "" goto debugFile
 
 @echo on 
 
-"D:\Program Files\Programming Solution\IAR 8051\common\bin\cspybat" -f "D:\Documents\Sync\Dropbox\蓝牙\代码_蓝牙主从一体_12_25 - 副本\BLE\BLE-CC254x-1.3.2-Serial\Projects\ble\SimpleBLECP\CC2540DB\settings\SimpleBLEPeripheral.Image_A.general.xcl" --backend -f "D:\Documents\Sync\Dropbox\蓝牙\代码_蓝牙主从一体_12_25 - 副本\BLE\BLE-CC254x-1.3.2-Serial\Projects\ble\SimpleBLECP\CC2540DB\settings\SimpleBLEPeripheral.Image_A.driver.xcl" 
+"D:\Program Files\Programming Solution\IAR 8051\common\bin\cspybat" -f "D:\Documents\Sync\Dropbox\蓝牙\代码_蓝牙主从一体_1.4.2\BLE\CC254x\BLE-CC254x-1.4.2-Serial\Projects\ble\SimpleBLECP\CC2540DB\settings\SimpleBLEPeripheral.Image_A.general.xcl" --backend -f "D:\Documents\Sync\Dropbox\蓝牙\代码_蓝牙主从一体_1.4.2\BLE\CC254x\BLE-CC254x-1.4.2-Serial\Projects\ble\SimpleBLECP\CC2540DB\settings\SimpleBLEPeripheral.Image_A.driver.xcl" 
 
 @echo off 
 goto end 
@@ -34,7 +34,7 @@ goto end
 
 @echo on 
 
-"D:\Program Files\Programming Solution\IAR 8051\common\bin\cspybat" -f "D:\Documents\Sync\Dropbox\蓝牙\代码_蓝牙主从一体_12_25 - 副本\BLE\BLE-CC254x-1.3.2-Serial\Projects\ble\SimpleBLECP\CC2540DB\settings\SimpleBLEPeripheral.Image_A.general.xcl" "--debug_file=%~1" --backend -f "D:\Documents\Sync\Dropbox\蓝牙\代码_蓝牙主从一体_12_25 - 副本\BLE\BLE-CC254x-1.3.2-Serial\Projects\ble\SimpleBLECP\CC2540DB\settings\SimpleBLEPeripheral.Image_A.driver.xcl" 
+"D:\Program Files\Programming Solution\IAR 8051\common\bin\cspybat" -f "D:\Documents\Sync\Dropbox\蓝牙\代码_蓝牙主从一体_1.4.2\BLE\CC254x\BLE-CC254x-1.4.2-Serial\Projects\ble\SimpleBLECP\CC2540DB\settings\SimpleBLEPeripheral.Image_A.general.xcl" "--debug_file=%~1" --backend -f "D:\Documents\Sync\Dropbox\蓝牙\代码_蓝牙主从一体_1.4.2\BLE\CC254x\BLE-CC254x-1.4.2-Serial\Projects\ble\SimpleBLECP\CC2540DB\settings\SimpleBLEPeripheral.Image_A.driver.xcl" 
 
 @echo off 
 :end

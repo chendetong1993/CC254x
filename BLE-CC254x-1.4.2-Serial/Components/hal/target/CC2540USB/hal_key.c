@@ -2,14 +2,14 @@
 
  @file  hal_key.c
 
- @brief This file contains the interface to the H/W Key driver.
+ @brief This file contains the interface to the HAL KEY Service.
 
  Group: WCS, BTS
  Target Device: CC2540, CC2541
 
  ******************************************************************************
  
- Copyright (c) 2009-2016, Texas Instruments Incorporated
+ Copyright (c) 2006-2016, Texas Instruments Incorporated
  All rights reserved.
 
  IMPORTANT: Your use of this Software is limited to those specific rights
@@ -44,273 +44,142 @@
  Release Name: ble_sdk_1.4.2.2
  Release Date: 2016-06-09 06:57:09
  *****************************************************************************/
+/*********************************************************************
+ NOTE: If polling is used, the hal_driver task schedules the KeyRead()
+       to occur every 100ms.  This should be long enough to naturally
+       debounce the keys.  The KeyRead() function remembers the key
+       state of the previous poll and will only return a non-zero
+       value if the key state changes.
 
-/* ------------------------------------------------------------------------------------------------
- *                                          Includes
- * ------------------------------------------------------------------------------------------------
- */
+ NOTE: If interrupts are used, the KeyRead() function is scheduled
+       25ms after the interrupt occurs by the ISR.  This delay is used
+       for key debouncing.  The ISR disables any further Key interrupt
+       until KeyRead() is executed.  KeyRead() will re-enable Key
+       interrupts after executing.  Unlike polling, when interrupts
+       are enabled, the previous key state is not remembered.  This
+       means that KeyRead() will return the current state of the keys
+       (not a change in state of the keys).
 
-#include "hal_board.h"
-#include "hal_drivers.h"
-#include "hal_key.h"
+ NOTE: If interrupts are used, the KeyRead() fucntion is scheduled by
+       the ISR.  Therefore, the joystick movements will only be detected
+       during a pushbutton interrupt caused by S1 or the center joystick
+       pushbutton.
+
+ NOTE: When a switch like S1 is pushed, the S1 signal goes from a normally
+       high state to a low state.  This transition is typically clean.  The
+       duration of the low state is around 200ms.  When the signal returns
+       to the high state, there is a high likelihood of signal bounce, which
+       causes a unwanted interrupts.  Normally, we would set the interrupt
+       edge to falling edge to generate an interrupt when S1 is pushed, but
+       because of the signal bounce, it is better to set the edge to rising
+       edge to generate an interrupt when S1 is released.  The debounce logic
+       can then filter out the signal bounce.  The result is that we typically
+       get only 1 interrupt per button push.  This mechanism is not totally
+       foolproof because occasionally, signal bound occurs during the falling
+       edge as well.  A similar mechanism is used to handle the joystick
+       pushbutton on the DB.  For the EB, we do not have independent control
+       of the interrupt edge for the S1 and center joystick pushbutton.  As
+       a result, only one or the other pushbuttons work reasonably well with
+       interrupts.  The default is the make the S1 switch on the EB work more
+       reliably.
+
+*********************************************************************/
+
+/**************************************************************************************************
+ *                                            INCLUDES
+ **************************************************************************************************/
+
 #include "hal_types.h"
+#include "hal_key.h"
 #include "osal.h"
-#include "usb_interrupt.h"
 
-#if (defined HAL_KEY) && (HAL_KEY == TRUE)
+/***************************************************************************************************
+ *                                              TYPEDEFS
+ ***************************************************************************************************/
 
-/* ------------------------------------------------------------------------------------------------
- *                                           Macros
- * ------------------------------------------------------------------------------------------------
- */
+typedef struct {
+  bool Inited;
+  uint8 Port;
+} HAL_TYPE_KEY_CONFIG;
 
-#define HAL_KEY_CLR_INT() \
-st ( \
-  /* PxIFG has to be cleared before PxIF. */\
-  P1IFG = 0; \
-  P1IF = 0; \
-)
+#define HAL_KEY_P0_INIT(__Idx__) st(P0SEL &= ~BV(__Idx__);P0DIR &= ~BV(__Idx__); P0INP &= ~BV(__Idx__);)
+#define HAL_KEY_P1_INIT(__Idx__) st(P1SEL &= ~BV(__Idx__);P1DIR &= ~BV(__Idx__); P1INP &= ~BV(__Idx__);)
 
-/* ------------------------------------------------------------------------------------------------
- *                                          Constants
- * ------------------------------------------------------------------------------------------------
- */
 
-/* ------------------------------------------------------------------------------------------------
- *                                          Typedefs
- * ------------------------------------------------------------------------------------------------
- */
+#define HAL_KEY_P0_SET(__Idx__, __STATUS__) st(if(__STATUS__) { P0 |= BV(__Idx__); } else { P0 &= ~BV(__Idx__); })
+#define HAL_KEY_P1_SET(__Idx__,__STATUS__) st(if(__STATUS__) { P1 |= BV(__Idx__); } else { P1 &= ~BV(__Idx__); })
 
-/* ------------------------------------------------------------------------------------------------
- *                                       Global Variables
- * ------------------------------------------------------------------------------------------------
- */
+#define HAL_KEY_P0_GET(__Idx__) ((P0 >> __Idx__) & 0x01 == 0x01)
+#define HAL_KEY_P1_GET(__Idx__) ((P1 >> __Idx__) & 0x01 == 0x01)
 
-uint8 Hal_KeyIntEnable;
+/***************************************************************************************************
+ *                                           GLOBAL VARIABLES
+ ***************************************************************************************************/
 
-/* ------------------------------------------------------------------------------------------------
- *                                       Global Functions
- * ------------------------------------------------------------------------------------------------
- */
+HAL_TYPE_KEY_CONFIG HAL_KEY_CONFIG[HAL_KEY_CHANNEL_NUM]  = {
+  {.Inited = false, .Port = 0x00 },
+  {.Inited = false, .Port = 0x01 },
+  {.Inited = false, .Port = 0x02 },
+  {.Inited = false, .Port = 0x03 },
+  {.Inited = false, .Port = 0x04 },
+  {.Inited = false, .Port = 0x05 },
+  {.Inited = false, .Port = 0x06 },
+  {.Inited = false, .Port = 0x07 },
+  {.Inited = false, .Port = 0x10 },
+  {.Inited = false, .Port = 0x11 },
+  {.Inited = false, .Port = 0x12 },
+  {.Inited = false, .Port = 0x13 },
+  {.Inited = false, .Port = 0x14 },
+  {.Inited = false, .Port = 0x15 },
+  {.Inited = false, .Port = 0x16 },
+  {.Inited = false, .Port = 0x17 }
+};
+/***************************************************************************************************
+ *                                            LOCAL FUNCTION
+ ***************************************************************************************************/
 
-/* ------------------------------------------------------------------------------------------------
- *                                       Local Variables
- * ------------------------------------------------------------------------------------------------
- */
 
-static halKeyCBack_t pHalKeyProcessFunction;
-static volatile uint8 isrKeys;
-static uint8 halKeys;
+/***************************************************************************************************
+ *                                            FUNCTIONS - API
+ ***************************************************************************************************/
 
-/* ------------------------------------------------------------------------------------------------
- *                                       Local Functions
- * ------------------------------------------------------------------------------------------------
- */
-
-/**************************************************************************************************
- * @fn          HalKeyInit
+/***************************************************************************************************
+ * @fn      HalKeyGet
  *
- * @brief       This function is called by HalDriverInit to initialize the H/W keys.
+ * @brief   
  *
- * input parameters
- *
- * None.
- *
- * output parameters
- *
- * None.
- *
- * @return      None.
- **************************************************************************************************
- */
-void HalKeyInit(void)
+ * @param   
+ * @return  
+ ***************************************************************************************************/
+bool HalKeyGet (uint8 Idx, bool* Status)
 {
+  if(Idx >= HAL_KEY_CHANNEL_NUM) return false;
+  uint8 Port = HAL_KEY_CONFIG[Idx].Port;
+  uint8 Portx = Port >> 4;
+  uint8 Portx_x = Port & 0x0F;
+  uint8 s = BV(Portx_x);
+  switch(Portx){
+    case 0:
+      if(HAL_KEY_CONFIG[Idx].Inited == false){
+        P0DIR &= ~s; 
+        P0INP &= ~s;
+        P0 |= s;
+        HAL_KEY_CONFIG[Idx].Inited = true;
+      }
+      *Status = ((P0 >> Portx_x) & 0x01);
+      break;
+    case 1:
+      if(HAL_KEY_CONFIG[Idx].Inited == false){
+        P1DIR &= ~s; 
+        P1INP &= ~s;
+        P1 |= s;
+        HAL_KEY_CONFIG[Idx].Inited = true;
+      }
+      *Status = ((P1 >> Portx_x) & 0x01);
+      break;
+  }
+  return true;
 }
 
-/**************************************************************************************************
- * @fn          HalKeyConfig
- *
- * @brief       This function is called by HalDriverInit to initialize the H/W keys.
- *
- * input parameters
- *
- * @param       interruptEnable - TRUE/FALSE to enable the key interrupt.
- * @param       cback - The callback function for the key change event.
- *
- * output parameters
- *
- * None.
- *
- * @return      None.
- **************************************************************************************************
- */
-void HalKeyConfig(bool interruptEnable, halKeyCBack_t cback)
-{
-  if ((Hal_KeyIntEnable = interruptEnable))
-  {
-    HAL_KEY_CLR_INT();             // Clear spurious ints.
-    PICTL |= 0x01;                 // P1ICONL: Falling edge ints on pins 0-3.
-    P1IEN |= PUSH1_BV | PUSH2_BV;  // Enable specific P1 bits for ints by bit mask.
-    IEN2  |= 0x10;                 // Enable general P1 interrupts.
-  }
-  else
-  {
-    (void)osal_set_event(Hal_TaskID, HAL_KEY_EVENT);
-  }
-
-  pHalKeyProcessFunction = cback;
-}
-
-/**************************************************************************************************
- * @fn          HalKeyPoll
- *
- * @brief       This function is called by Hal_ProcessEvent() on a HAL_KEY_EVENT.
- *
- * input parameters
- *
- * None.
- *
- * output parameters
- *
- * None.
- *
- * @return      None.
- **************************************************************************************************
- */
-void HalKeyPoll(void)
-{
-  uint8 newKeys;
-
-  if (Hal_KeyIntEnable)
-  {
-    halIntState_t intState;
-    HAL_ENTER_CRITICAL_SECTION(intState);
-    newKeys = isrKeys;
-    isrKeys = 0;
-    HAL_EXIT_CRITICAL_SECTION(intState);
-  }
-  else
-  {
-    uint8 keys = HalKeyRead();
-    newKeys = (halKeys ^ keys) & keys;
-    halKeys = keys;
-  }
-
-  if (newKeys && pHalKeyProcessFunction)
-  {
-    (pHalKeyProcessFunction)(newKeys, HAL_KEY_STATE_NORMAL);
-  }
-}
-
-/**************************************************************************************************
- * @fn          HalKeyRead
- *
- * @brief       This function is called anywhere.
- *
- * input parameters
- *
- * None.
- *
- * output parameters
- *
- * None.
- *
- * @return      The bit mask of all keys pressed.
- **************************************************************************************************
- */
-uint8 HalKeyRead(void)
-{
-  uint8 keys = 0;
-
-  if (HAL_PUSH_BUTTON1())
-  {
-    keys |= HAL_KEY_SW_1;
-  }
-
-  if (HAL_PUSH_BUTTON2())
-  {
-    keys |= HAL_KEY_SW_2;
-  }
-
-  return keys;
-}
-
-/**************************************************************************************************
- * @fn      HalKeyEnterSleep
- *
- * @brief  - Get called to enter sleep mode
- *
- * @param
- *
- * @return
- **************************************************************************************************/
-void HalKeyEnterSleep ( void )
-{
-}
-
-/**************************************************************************************************
- * @fn      HalKeyExitSleep
- *
- * @brief   - Get called when sleep is over
- *
- * @param
- *
- * @return  - return saved keys
- **************************************************************************************************/
-uint8 HalKeyExitSleep ( void )
-{
-  /* Wake up and read keys */
-  return ( HalKeyRead () );
-}
-
-/**************************************************************************************************
- * @fn          usbKeyISR
- *
- * @brief       This function is the ISR for the Port2 USB/Key interrupt.
- *
- * input parameters
- *
- * None.
- *
- * output parameters
- *
- * None.
- *
- * @return      None.
- **************************************************************************************************
- */
-HAL_ISR_FUNCTION( usbKeyISR, P1INT_VECTOR )
-{
-  HAL_ENTER_ISR();
-
-  if (P1IFG & PUSH1_BV)
-  {
-    isrKeys |= HAL_KEY_SW_1;
-  }
-
-  if (P1IFG & PUSH2_BV)
-  {
-    isrKeys |= HAL_KEY_SW_2;
-  }
-
-  HAL_KEY_CLR_INT();
-  (void)osal_set_event(Hal_TaskID, HAL_KEY_EVENT);
-
-  CLEAR_SLEEP_MODE();
-
-  HAL_EXIT_ISR();
-
-  return;
-}
-
-#else
-
-void HalKeyInit(void){}
-void HalKeyConfig(bool interruptEnable, halKeyCBack_t cback){}
-uint8 HalKeyRead(void){ return 0;}
-void HalKeyPoll(void){}
-
-#endif /* HAL_KEY */
-
-/**************************************************************************************************
-*/
+/***************************************************************************************************
+***************************************************************************************************/
