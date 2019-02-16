@@ -3,6 +3,8 @@
 -ferror-limit=0
 -fbracket-depth=512
 -I
+D:\Documents\Sync\Dropbox\蓝牙\代码_蓝牙主从一体_1.4.2\BLE\CC254x\BLE-CC254x-1.4.2-Serial\Projects\ble\common\npi\npi_np
+-I
 D:\Documents\Sync\Dropbox\蓝牙\代码_蓝牙主从一体_1.4.2\BLE\CC254x\BLE-CC254x-1.4.2-Serial\Projects\ble\SimpleBLECP\CC2540DB\..\..\common
 -I
 D:\Documents\Sync\Dropbox\蓝牙\代码_蓝牙主从一体_1.4.2\BLE\CC254x\BLE-CC254x-1.4.2-Serial\Projects\ble\SimpleBLECP\CC2540DB\..\..\include
@@ -202,9 +204,9 @@ D:\Documents\Sync\Dropbox\蓝牙\代码_蓝牙主从一体_1.4.2\BLE\CC254x\BLE-
 -D__JMP_BUF_ELEMENT_TYPE__=signed char
 -D__JMP_BUF_NUM_ELEMENTS__=49
 -D__TID__=0x2000
--D__VER__=1020
+-D__VER__=1030
 -D__SUBVERSION__=1
--D__BUILD_NUMBER__=5333
+-D__BUILD_NUMBER__=6000
 -D__IAR_SYSTEMS_ICC__=8
 -D__VA_STACK_DECREASING__=1
 -D__VA_STACK_ALIGN__=1
@@ -380,7 +382,7 @@ D:\Documents\Sync\Dropbox\蓝牙\代码_蓝牙主从一体_1.4.2\BLE\CC254x\BLE-
 -D__XOR_DPSEL_SELECT__=1
 -D__PLAIN_INT_BITFIELD_IS_SIGNED__=1
 -D__HAS_LOCATED_DECLARATION__=1
--D__IAR_COMPILERBASE__=595715
+-D__IAR_COMPILERBASE__=595716
 -D__RO_PLACEMENT_MUST_BE_SAME__=1
 -D__STDC__=1
 -D__STDC_VERSION__=199901L
@@ -409,7 +411,7 @@ D:\Documents\Sync\Dropbox\蓝牙\代码_蓝牙主从一体_1.4.2\BLE\CC254x\BLE-
 -D__EDG_SYSV=0
 -D__EDG_ANSIC=1
 -D__EDG_CPP11_IL_EXTENSIONS_SUPPORTED=1
--DINT_HEAP_LEN=2048
+-DINT_HEAP_LEN=2432
 -DHALNODEBUG=1
 -DOSAL_CBTIMER_NUM_TASKS=1
 -DHAL_AES_DMA=TRUE
@@ -420,9 +422,8 @@ D:\Documents\Sync\Dropbox\蓝牙\代码_蓝牙主从一体_1.4.2\BLE\CC254x\BLE-
 -DHAL_UART=TRUE
 -DBLE_CENTRAL=1
 -DBLE_PERIPHERAL=1
--DxAPP_UART_MODULE=1
--DAPP_RSSI_CHECK=1
--DxAPP_KEY=1
+-DAPP_UART_MODULE=1
+-DxAPP_RSSI_CHECK=1
 -DBROADCASTER_CFG=0x01
 -DOBSERVER_CFG=0x02
 -DPERIPHERAL_CFG=0x04
@@ -442,7 +443,7 @@ D:\Documents\Sync\Dropbox\蓝牙\代码_蓝牙主从一体_1.4.2\BLE\CC254x\BLE-
 -DFRAG_CFG=0x20
 -DHOST_CONFIG=PERIPHERAL_CFG+CENTRAL_CFG
 -DGAP_PRIVACY_RECONNECT=1
--D__VERSION__="IAR C/C++ Compiler V10.20.1.5333 for 8051"
+-D__VERSION__="IAR C/C++ Compiler V10.30.1.6000 for 8051"
 -D__CODE_MEMORY_LIST1__()=__CODE_MEM_HELPER1__(__code, 0 )
 -D__CODE_MEMORY_LIST2__(_P1)=__CODE_MEM_HELPER2__(__code, 0 ,  _P1 )
 -D__CODE_MEMORY_LIST3__(_P1,_P2)=__CODE_MEM_HELPER3__(__code, 0 ,  _P1 ,  _P2 )

@@ -72,7 +72,7 @@ int main(void)
   HAL_BOARD_INIT();
 
   // Initialize board I/O
-  InitBoard( OB_COLD );
+  InitBoard(OB_COLD);
 
   /* Initialze the HAL driver */
   HalDriverInit();
@@ -91,7 +91,6 @@ int main(void)
   // Final board initialization
   InitBoard( OB_READY );
 
-    
   /* Start OSAL */
   osal_start_system(); // No Return from here
 

@@ -56,7 +56,7 @@ extern "C"
  */
 
 #define BLEP_Parms_Flash_Idx            (BLE_NVID_CUST_START + 2)
-  
+   
 typedef enum{
   BLEP_SetParm_INFO = 0x00,
   BLEP_SetParm_ADVERTISING_INTERVAL = 0x01,
@@ -69,14 +69,15 @@ typedef enum{
   BLEP_SetParm_POWER_LEVEL = 0x08,
   BLEP_SetParm_END_ALL_SCAN_CONN_REQ_TIME = 0x09,
   BLEP_SetParm_NAME = 0x0a,
-  BLEP_SetParm_PAIR_MODE = 0x0b,
-  BLEP_SetParm_PASSCODE = 0x0c,
-  BLEP_SetParm_AUTO_ADVERT = 0x0d,
-  BLEP_SetParm_SEND_DONE_DELAY = 0x0e,
-  BLEP_SetParm_ENABLE_TRANSMIT_ENCRYPT = 0x0f,
-  BLEP_SetParm_TRANSMIT_ENCRYPT_KEY = 0x10,
-  BLEP_SetParm_WATCHDOG = 0x11,
-  BLEP_SetParm_ENABLE_CMD_CHECK_BIT = 0x12,
+  BLEP_SetParm_SCAN_RSP_DATA = 0x0b,
+  BLEP_SetParm_PAIR_MODE = 0x0c,
+  BLEP_SetParm_PASSCODE = 0x0d,
+  BLEP_SetParm_AUTO_ADVERT = 0x0e,
+  BLEP_SetParm_SEND_DONE_DELAY = 0x0f,
+  BLEP_SetParm_ENABLE_TRANSMIT_ENCRYPT = 0x10,
+  BLEP_SetParm_TRANSMIT_ENCRYPT_KEY = 0x11,
+  BLEP_SetParm_WATCHDOG = 0x12,
+  BLEP_SetParm_ENABLE_CMD_CHECK_BIT = 0x13,
   BLEP_SetParm_RESET = 0xFF
 } BLEP_Type_SetParm;
 
@@ -87,15 +88,17 @@ typedef struct {
   bool ENABLE_DESIRED_REQUEST;                  //Enable Desired_Request
   uint16 DESIRED_MIN_CONN_INTERVAL;             //400      Minimum connection interval (units of 1.25ms) if automatic parameter update request is enabled
   uint16 DESIRED_MAX_CONN_INTERVAL;             //800       Maximum connection interval (units of 1.25ms) if automatic parameter update request is enabled
-  uint8 DESIRED_SLAVE_LATENCY;
+  uint16 DESIRED_SLAVE_LATENCY;
   uint16 DESIRED_CONN_TIMEOUT;
   uint8 CONN_PAUSE_PERIPHERAL;
   uint8 POWER_LEVEL;
   uint16 END_ALL_SCAN_CONN_REQ_TIME;
-  uint8 NAME[BLE_Parm_Dev_Name_Len];
+  uint8 NAME[BLE_Parm_Dev_Name_Max_Len];
   uint8 NAME_LEN;
-  uint8 INFO[BLE_Parm_Dev_Info_Len];
+  uint8 INFO[BLE_Parm_Dev_Info_Max_Len];
   uint8 INFO_LEN;
+  uint8 SCAN_RSP_DATA[BLE_SCAN_RSP_DATA_Max_Len];
+  uint8 SCAN_RSP_DATA_LEN;
   BLE_Type_PairMode PAIR_MODE;
   uint32 PASSCODE;
   bool AUTO_ADVERT;

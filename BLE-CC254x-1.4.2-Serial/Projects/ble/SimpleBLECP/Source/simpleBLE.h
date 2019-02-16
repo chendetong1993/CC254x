@@ -1,40 +1,9 @@
 /**************************************************************************************************
-  Filename:       simpleBLECentral.h
+  Filename:       simpleBLE.h
   Revised:        $Date: 2011-03-03 15:46:41 -0800 (Thu, 03 Mar 2011) $
   Revision:       $Revision: 12 $
 
-  Description:    This file contains the Simple BLE Central sample application
-                  definitions and prototypes.
-
-  Copyright 2011 Texas Instruments Incorporated. All rights reserved.
-
-  IMPORTANT: Your use of this Software is limited to those specific rights
-  granted under the terms of a software license agreement between the user
-  who downloaded the software, his/her employer (which must be your employer)
-  and Texas Instruments Incorporated (the "License").  You may not use this
-  Software unless you agree to abide by the terms of the License. The License
-  limits your use, and you acknowledge, that the Software may not be modified,
-  copied or distributed unless embedded on a Texas Instruments microcontroller
-  or used solely and exclusively in conjunction with a Texas Instruments radio
-  frequency transceiver, which is integrated into your product.  Other than for
-  the foregoing purpose, you may not use, reproduce, copy, prepare derivative
-  works of, modify, distribute, perform, display or sell this Software and/or
-  its documentation for any purpose.
-
-  YOU FURTHER ACKNOWLEDGE AND AGREE THAT THE SOFTWARE AND DOCUMENTATION ARE
-  PROVIDED “AS IS” WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESS OR IMPLIED,
-  INCLUDING WITHOUT LIMITATION, ANY WARRANTY OF MERCHANTABILITY, TITLE,
-  NON-INFRINGEMENT AND FITNESS FOR A PARTICULAR PURPOSE. IN NO EVENT SHALL
-  TEXAS INSTRUMENTS OR ITS LICENSORS BE LIABLE OR OBLIGATED UNDER CONTRACT,
-  NEGLIGENCE, STRICT LIABILITY, CONTRIBUTION, BREACH OF WARRANTY, OR OTHER
-  LEGAL EQUITABLE THEORY ANY DIRECT OR INDIRECT DAMAGES OR EXPENSES
-  INCLUDING BUT NOT LIMITED TO ANY INCIDENTAL, SPECIAL, INDIRECT, PUNITIVE
-  OR CONSEQUENTIAL DAMAGES, LOST PROFITS OR LOST DATA, COST OF PROCUREMENT
-  OF SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
-  (INCLUDING BUT NOT LIMITED TO ANY DEFENSE THEREOF), OR OTHER SIMILAR COSTS.
-
-  Should you have any questions regarding your right to use this Software,
-  contact Texas Instruments Incorporated at www.TI.com.
+  Description:    
 **************************************************************************************************/
 
 #ifndef SIMPLEBLE_H
@@ -52,17 +21,104 @@ extern "C"
  * CONSTANTS
  */
   
-  
-
-//****************************************************** method *****************************************************//
+ 
+//****************************************************** Array Method *****************************************************//
 #define BLE_Array_Len(_A) (sizeof(_A) / sizeof(_A[0]))
-#define BLE_Copy_Array(_D, _DL, _S, _SL) osal_memcpy(_D, _S, _SL);_DL = _SL;
-#define BLE_Compare_Array(_D, _DL, _S, _SL) ((_DL == _SL) && osal_memcmp(_D, _S, _DL))
-   
+  
+#define BLE_Array_SetStr(_D, _DL, _S) {\
+    uint8 Str[] = _S;\
+     _DL = sizeof(Str) - 1;\
+    osal_memcpy(_D, Str, _DL);\
+  }
+  
+#define BLE_Array_CopyFL(_D, _S) osal_memcpy(_D, _S, sizeof(_D));
+  
+#define BLE_Array_Copy(_D, _DL, _S, _SL) {\
+    osal_memcpy(_D, _S, (_SL));\
+    _DL = (_SL);\
+  }
+
+#define BLE_Array_Append(_D, _DL, _S, _SL) {\
+    osal_memcpy(&_D[_DL], _S, (_SL));\
+    _DL += (_SL);\
+  }
+  
+#define BLE_Array_Compare(_D, _DL, _S, _SL) (((_DL) == (_SL)) && osal_memcmp(_D, _S, (_DL)))
+    
+#define BLE_Array_CompareFL(_D, _S) ((sizeof(_D) == sizeof(_S)) && osal_memcmp(_D, _S, sizeof(_D)))
+    
+#define BLE_Value_Swap(_A, _B, _T) {\
+    _T SwapVal = _A;\
+    _A = _B;\
+    _B = SwapVal;\
+  }
+  
+#define BLE_Array_SwapFL(_A, _B, _T) {\
+    _T SwapVal;\
+    uint8 SwapI = 0, SwapLen = sizeof(_A);\
+    for(; SwapI <= SwapLen; SwapI++) {\
+      SwapVal = _A[SwapI];\
+      _A[SwapI] = _B[SwapI];\
+      _B[SwapI] = SwapVal;\
+    }\
+  }
+  
+#define BLE_Array_Swap(_A, _AL, _B, _BL, _T) {\
+    _T SwapVal;\
+    uint8 SwapI = 0;\
+    for(; SwapI <= _AL || SwapI <= _BL; SwapI++) {\
+      SwapVal = _A[SwapI];\
+      _A[SwapI] = _B[SwapI];\
+      _B[SwapI] = SwapVal;\
+    }\
+    SwapI = _AL;\
+    _AL = _BL;\
+    _BL = SwapI;\
+  }
+
+#define BLE_Array_ItemExist_Array(_A, _AK, _V, _R) {\
+    _R = false;\
+    for(uint8 ItemIdx = 0, ItemLen = BLE_Array_Len(_A); ItemIdx < ItemLen; ItemIdx++){\
+      if(BLE_Array_CompareFL(_A[ItemIdx]._AK, _V)){\
+        _R = true;\
+        break;\
+      }\
+    }\
+  }
+    
+#define BLE_Array_ItemExist_Value(_A, _AK, _V, _R) {\
+    _R = false;\
+    for(uint8 ItemIdx = 0, ItemLen = BLE_Array_Len(_A); ItemIdx < ItemLen; ItemIdx++){\
+      if(_A[i]._AK == (_V)){\
+        _R = true;\
+        break;\
+      }\
+    }\
+  }
+  
+#define BLE_Array_ItemFind_Array(_A, _AK, _V, _I) {\
+    _I = 0;\
+    for(uint8 ItemIdx = 0, ItemLen = BLE_Array_Len(_A); ItemIdx < ItemLen; ItemIdx++){\
+      if(BLE_Array_CompareFL(_A[ItemIdx]._AK, _V)){\
+        _I = &_A[ItemIdx];\
+        break;\
+      }\
+    }\
+  }
+  
+#define BLE_Array_ItemFind_Value(_A, _AK, _V, _I) {\
+    _I = 0;\
+    for(uint8 ItemIdx = 0, ItemLen = BLE_Array_Len(_A); ItemIdx < ItemLen; ItemIdx++){\
+      if(_A[ItemIdx]._AK == (_V)){\
+        _I = &_A[ItemIdx];\
+        break;\
+      }\
+    }\
+  }
 //****************************************************** Const *****************************************************//
 //User Definition
 
-#define BLE_CMD_Msg_Max_Len                             6 + 20
+#define BLE_CMD_Msg_Max_Len                             6 + 31
 #define BLE_CMD_Msg_RelDev_C     	                0x00
 #define BLE_CMD_Msg_RelDev_P    	   	        0x01
    
@@ -81,18 +137,34 @@ extern "C"
 #define BLE_CMD_Msg_CheckSumIdx(__ExtLen__)             (3 + __ExtLen__)
    
 #define BLE_Parm_INTER_VERSION                          0xD4000001
-#define BLE_Parm_Dev_Name_Len                           20
+#define BLE_Parm_Dev_Name_Max_Len                       20
   
-#define BLE_Parm_Dev_Info_Len                           20
+#define BLE_Parm_Dev_Info_Max_Len                       16
   
-#define BLEC_Dev_Limit_Num                              3               // Number Limit of stored Connected/Scanned Devices information
+#define BLEC_Dev_Max_Num                                3               // Number Limit of stored Connected/Scanned Devices information
   
-#define BLE_ReceiveBufferTimeout                        30
-
 #define BLE_TRANSMIT_ENCRYPT_DATA_LEN                   16
 
+#define BLE_Queue_Max_Len                               80
+
+#define BLE_Info_Max_Len                                16
+
+#define BLE_SCAN_RSP_DATA_Max_Len                       31
+
+#define BLE_OWN_CONN_HANDLE                            0xFF
+
+#define BLE_TI_COMPANY_ID                         0x000D
+
 typedef struct{
+  uint8 Queue[BLE_Queue_Max_Len];
+  uint8 Idx;
+  uint8 Len;
+} BLE_Type_Queue;
+
+typedef struct{
+#if defined(BLE_PERIPHERAL) && defined(BLE_CENTRAL)
   void (*SwitchRole)();
+#endif
   void (*ForceWakeup)();
   void (*WakeupNotify)();
   void (*ForceSleep)();
@@ -121,12 +193,23 @@ typedef enum{
 } BLE_Type_PairMode;
 
 typedef enum{
-  BLE_HalSet_ReadRssi = 0x00
-} BLE_Type_HalSet;
+  BLE_AddOper_ReadRssi = 0x00,
+  BLE_AddOper_ReadMac = 0x01,
+} BLE_Type_AddOper;
 
 typedef enum{
-  BLE_HalRet_ReadRssi = 0x00,
-} BLE_Type_HalRet;
+  BLE_AddRet_ReadRssi = 0x00,
+  BLE_AddRet_ReadMac = 0x01,
+} BLE_Type_AddRet;
+
+typedef enum{
+  BLE_Error_Hci = 0x00,
+  BLE_Error_ATT = 0x01,
+  BLE_Error_General = 0x02,
+  BLE_Error_BleStatus = 0x03,
+  BLE_Error_BleTerminate = 0x04,
+  BLE_Error_CmdParse = 0x05
+} BLE_Type_Error;
 
 typedef enum {
   BLE_MsgType_Connect_EnAdvert = 0x00,
@@ -136,19 +219,23 @@ typedef enum {
   BLE_MsgType_Parms_Set = 0x04,
   BLE_MsgType_Send = 0x05,
   BLE_MsgType_Reboot = 0x06,
+#if defined(BLE_PERIPHERAL) && defined(BLE_CENTRAL)
   BLE_MsgType_SwitchRole = 0x07,
+#endif
   BLE_MsgType_Sleep = 0x08,
   BLE_MsgType_Hal_Set = 0x09,
+  BLE_MsgType_Customized_Get = 0x0a,
   
-  BLE_MsgType_Device_Inited = 0x70,
-  BLE_MsgType_ConnStatus_Returned = 0x71,
-  BLE_MsgType_CMD_Invalid = 0x72,
-  BLE_MsgType_Parms_Setd = 0x73,
-  BLE_MsgType_Sended = 0x74,
-  BLE_MsgType_UnSended = 0x75,
-  BLE_MsgType_Received = 0x76,
-  BLE_MsgType_UnReceived = 0x77,
-  BLE_MsgType_Hal_Ret = 0x78,
+  BLE_MsgType_Cmd_Parsed = 0x78,
+  BLE_MsgType_Error_Happened = 0x79,
+  BLE_MsgType_Device_Inited = 0x80,
+  BLE_MsgType_ConnStatus_Returned = 0x81,
+  BLE_MsgType_Sended = 0x82,
+  BLE_MsgType_UnSended = 0x83,
+  BLE_MsgType_Received = 0x84,
+  BLE_MsgType_UnReceived = 0x85,
+  BLE_MsgType_Hal_Ret = 0x86,
+  BLE_MsgType_Customized_Ret = 0x87,
 } BLE_Type_MsgType;
 
 
@@ -160,33 +247,42 @@ typedef enum{
 typedef struct {
   uint32 INTER_VERSION;
   BLE_Type_BLEMode CP;
+  uint8 Info[BLE_Info_Max_Len];
+  uint8 InfoLen;
 } BLE_Type_Editable_CP;
+
+typedef struct {
+  uint8 DataType;
+  uint8* Data;
+  uint8 DataLen;
+} BLE_Type_ScanAdvertData;
 
 #define BLE_CP_Flash_Idx                (BLE_NVID_CUST_START)   // 0x00 ~ 0x0F Space
 
 
 extern void BLE_Init(BLE_Type_Argv*);
-extern void BLE_CmdGetFromUart(uint8*, uint8);
-extern void BLE_BleRetToUart(uint8, uint8*, uint8);
+extern bool BLE_QueueEn(BLE_Type_Queue*, uint8*, uint8);
+extern bool BLE_QueueDe(BLE_Type_Queue*, uint8**, uint8*);
+extern void BLE_CmdGetFromExter(uint8*, uint8);
+extern void BLE_BleRetToExter(uint8, uint8*, uint8);
 extern bool BLE_SendBLE(uint8, uint8*, uint8);
 extern void BLE_UartRecTimeout();
 extern void BLE_CmdRetTransmitDone(uint8, bool);
 extern void BLE_CmdRetConnStatus(uint8*, uint8);
 extern void BLE_CmdRetRoleStatus();
-extern void BLE_CmdRetCmdInvalid();
-extern void BLE_CmdRetParmSetd();
-extern void BLE_CmdRetHal(uint8, uint8, uint8);
+extern uint8 BLE_CmdRetError(BLE_Type_Error, uint8);
+extern void BLE_CmdRetCmdParsed();
+extern void BLE_CmdRetAddInfo(uint8, uint8, uint8*, uint8);
 
-
-extern bool BLE_CmdExtParse_8_32(uint8*, uint8, uint8*, uint32*);
-extern bool BLE_CmdExtParse_N(uint8*, uint8, uint8**, uint8*);
-extern bool BLE_CmdExtParse_8(uint8*, uint8, uint8*);
-extern bool BLE_CmdExtParse_8_8_N(uint8*, uint8, uint8*, uint8*, uint8**, uint8*);
-extern bool BLE_CmdExtParse_8_8(uint8*, uint8, uint8*, uint8*);
-extern bool BLE_CmdExtParse_8_8_32(uint8*, uint8, uint8*, uint8*, uint32*);
-extern bool BLE_CmdExtParse_8_N(uint8*, uint8, uint8*, uint8**, uint8*);
-extern bool BLE_CmdExtParse(uint8*, uint8);
-extern bool BLE_CmdParse(uint8*, uint8, uint8*, uint8*, uint8**, uint8*);
+extern bool BLE_CmdExtParse_8_32(uint8*, uint8, uint8*, uint32*, bool);
+extern bool BLE_CmdExtParse_N(uint8*, uint8, uint8**, uint8*, bool);
+extern bool BLE_CmdExtParse_8(uint8*, uint8, uint8*, bool);
+extern bool BLE_CmdExtParse_8_8_N(uint8*, uint8, uint8*, uint8*, uint8**, uint8*, bool);
+extern bool BLE_CmdExtParse_8_8(uint8*, uint8, uint8*, uint8*, bool);
+extern bool BLE_CmdExtParse_8_8_32(uint8*, uint8, uint8*, uint8*, uint32*, bool);
+extern bool BLE_CmdExtParse_8_N(uint8*, uint8, uint8*, uint8**, uint8*, bool);
+extern bool BLE_CmdExtParse(uint8*, uint8, bool);
+extern bool BLE_CmdParse(uint8*, uint8, uint8*, uint8*, uint8**, uint8*, bool);
 
 extern bool BLE_CmdStringify_Type_8_32(uint8**, uint8*, BLE_Type_MsgType, uint8, uint32);
 extern bool BLE_CmdStringify_Type_8_N(uint8**, uint8*, BLE_Type_MsgType, uint8, uint8*, uint8);
@@ -196,6 +292,7 @@ extern bool BLE_CmdStringify_Type_8_8(uint8**, uint8*, BLE_Type_MsgType, uint8, 
 extern bool BLE_CmdStringify_Type_8_8_32(uint8**, uint8*, BLE_Type_MsgType, uint8, uint8, uint32);
 extern bool BLE_CmdStringify_Type_8(uint8**, uint8*, BLE_Type_MsgType, uint8);
 extern bool BLE_CmdStringify_Type(uint8** , uint8*, BLE_Type_MsgType);
+extern void BLE_ScanAdvertData_Construct(BLE_Type_ScanAdvertData*, uint8 DataLen, uint8*, uint8*);
 /*********************************************************************
  * MACROS
  */

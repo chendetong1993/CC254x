@@ -296,7 +296,7 @@
                 </option>
                 <option>
                     <name>CCDefines</name>
-                    <state>INT_HEAP_LEN=2048</state>
+                    <state>INT_HEAP_LEN=2432</state>
                     <state>HALNODEBUG</state>
                     <state>OSAL_CBTIMER_NUM_TASKS=1</state>
                     <state>HAL_AES_DMA=TRUE</state>
@@ -307,9 +307,8 @@
                     <state>HAL_UART=TRUE</state>
                     <state>BLE_CENTRAL</state>
                     <state>BLE_PERIPHERAL</state>
-                    <state>xAPP_UART_MODULE</state>
-                    <state>APP_RSSI_CHECK</state>
-                    <state>xAPP_KEY</state>
+                    <state>APP_UART_MODULE</state>
+                    <state>xAPP_RSSI_CHECK</state>
                 </option>
                 <option>
                     <name>CCPreprocFile</name>
@@ -522,7 +521,7 @@
                 </option>
                 <option>
                     <name>CCOptLevel</name>
-                    <state>3</state>
+                    <state>0</state>
                 </option>
                 <option>
                     <name>CCOptStrategy</name>
@@ -531,7 +530,7 @@
                 </option>
                 <option>
                     <name>CCOptLevelSlave</name>
-                    <state>3</state>
+                    <state>0</state>
                 </option>
                 <option>
                     <name>CompilerMisraRules04</name>
@@ -577,7 +576,7 @@
                 <option>
                     <name>CCAllowList2</name>
                     <version>0</version>
-                    <state>1111110</state>
+                    <state>0000000</state>
                 </option>
                 <option>
                     <name>CCOptStrategySlave</name>
@@ -2283,12 +2282,6 @@
     <group>
         <name>APP</name>
         <file>
-            <name>$PROJ_DIR$\..\Source\app_key.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\Source\app_key.h</name>
-        </file>
-        <file>
             <name>$PROJ_DIR$\..\Source\app_RssiCheck.c</name>
         </file>
         <file>
@@ -2464,20 +2457,6 @@
         </file>
         <file>
             <name>$PROJ_DIR$\..\..\common\npi\npi_np\npi.h</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\..\common\npi\npi_np\npi_spi.c</name>
-            <excluded>
-                <configuration>CC2540</configuration>
-                <configuration>Image_A</configuration>
-            </excluded>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\..\common\npi\npi_np\npi_uart.c</name>
-            <excluded>
-                <configuration>CC2540</configuration>
-                <configuration>Image_A</configuration>
-            </excluded>
         </file>
     </group>
     <group>

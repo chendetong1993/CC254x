@@ -65,7 +65,7 @@ typedef enum{
   BLEC_SetParm_UPDATE_SLAVE_LATENCY = 0x04,
   BLEC_SetParm_UPDATE_CONN_TIMEOUT = 0x05,
   BLEC_SetParm_SCAN_RSSI_THRESHOLD = 0x06,
-  BLEC_SetParm_SCAN_DEV_NAME = 0x07,
+  BLEC_SetParm_SCAN_RSP_DATA = 0x07,
   BLEC_SetParm_SCAN_DURATION = 0x08,
   BLEC_SetParm_SCAN_TOTAL_DURATION = 0x09,
   BLEC_SetParm_PERIOD_SCAN_DEVICE_MAX_NUM = 0x0a,
@@ -87,20 +87,20 @@ typedef struct {
   bool ENABLE_UPDATE_REQUEST;
   uint16 UPDATE_MIN_CONN_INTERVAL;              //400   Minimum connection interval (units of 1.25ms) if automatic parameter update request is enabled
   uint16 UPDATE_MAX_CONN_INTERVAL;              //800   Maximum connection interval (units of 1.25ms) if automatic parameter update request is enabled
-  uint8 UPDATE_SLAVE_LATENCY;                   //Slave latency to use if automatic parameter update request is enabled    
+  uint16 UPDATE_SLAVE_LATENCY;                   //Slave latency to use if automatic parameter update request is enabled    
   uint16 UPDATE_CONN_TIMEOUT;                   //Supervision timeout value (units of 10ms) if automatic parameter update request is enabled
   int8 SCAN_RSSI_THRESHOLD;                     // Scan RSSI
-  uint8 SCAN_DEV_NAME[BLEC_Dev_Limit_Num][BLE_Parm_Dev_Name_Len];
-  uint8 SCAN_DEV_NAME_LEN[BLEC_Dev_Limit_Num];
+  uint8 SCAN_RSP_DATA[BLEC_Dev_Max_Num][BLE_SCAN_RSP_DATA_Max_Len];
+  uint8 SCAN_RSP_DATA_LEN[BLEC_Dev_Max_Num];
   uint16 SCAN_DURATION;                         // Scan duration in ms
   uint16 SCAN_TOTAL_DURATION;
   uint16 MULTI_CONNECT_INTERVAL;                      // Default Connect Timer interval in ms
   uint8 PERIOD_SCAN_DEVICE_MAX_NUM;             // Max Device Scan Number in a period
   uint8 PERIOD_SCAN_DEVICE_OVERFLOW_COUNT;      // Scan overflow
   uint16 END_ALL_SCAN_CONN_REQ_TIME;
-  uint8 NAME[BLE_Parm_Dev_Name_Len];
+  uint8 NAME[BLE_Parm_Dev_Name_Max_Len];
   uint8 NAME_LEN;
-  uint8 INFO[BLE_Parm_Dev_Info_Len];
+  uint8 INFO[BLE_Parm_Dev_Info_Max_Len];
   uint8 INFO_LEN;
   BLE_Type_PairMode PAIR_MODE;
   uint32 PASSCODE;

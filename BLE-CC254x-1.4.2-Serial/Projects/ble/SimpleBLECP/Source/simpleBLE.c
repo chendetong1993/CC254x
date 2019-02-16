@@ -3,38 +3,7 @@
   Revised:        $Date: 2010-08-06 08:56:11 -0700 (Fri, 06 Aug 2010) $
   Revision:       $Revision: 23333 $
 
-  Description:    This file contains the Simple BLE Peripheral sample application
-                  for use with the CC2540 Bluetooth Low Energy Protocol Stack.
-
-  Copyright 2010 - 2013 Texas Instruments Incorporated. All rights reserved.
-
-  IMPORTANT: Your use of this Software is limited to those specific rights
-  granted under the terms of a software license agreement between the user
-  who downloaded the software, his/her employer (which must be your employer)
-  and Texas Instruments Incorporated (the "License").  You may not use this
-  Software unless you agree to abide by the terms of the License. The License
-  limits your use, and you acknowledge, that the Software may not be modified,
-  copied or distributed unless embedded on a Texas Instruments microcontroller
-  or used solely and exclusively in conjunction with a Texas Instruments radio
-  frequency transceiver, which is integrated into your product.  Other than for
-  the foregoing purpose, you may not use, reproduce, copy, prepare derivative
-  works of, modify, distribute, perform, display or sell this Software and/or
-  its documentation for any purpose.
-
-  YOU FURTHER ACKNOWLEDGE AND AGREE THAT THE SOFTWARE AND DOCUMENTATION ARE
-  PROVIDED “AS IS?WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESS OR IMPLIED,
-  INCLUDING WITHOUT LIMITATION, ANY WARRANTY OF MERCHANTABILITY, TITLE,
-  NON-INFRINGEMENT AND FITNESS FOR A PARTICULAR PURPOSE. IN NO EVENT SHALL
-  TEXAS INSTRUMENTS OR ITS LICENSORS BE LIABLE OR OBLIGATED UNDER CONTRACT,
-  NEGLIGENCE, STRICT LIABILITY, CONTRIBUTION, BREACH OF WARRANTY, OR OTHER
-  LEGAL EQUITABLE THEORY ANY DIRECT OR INDIRECT DAMAGES OR EXPENSES
-  INCLUDING BUT NOT LIMITED TO ANY INCIDENTAL, SPECIAL, INDIRECT, PUNITIVE
-  OR CONSEQUENTIAL DAMAGES, LOST PROFITS OR LOST DATA, COST OF PROCUREMENT
-  OF SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
-  (INCLUDING BUT NOT LIMITED TO ANY DEFENSE THEREOF), OR OTHER SIMILAR COSTS.
-
-  Should you have any questions regarding your right to use this Software,
-  contact Texas Instruments Incorporated at www.TI.com.
+  Description:    
 **************************************************************************************************/
 
 /*********************************************************************
@@ -50,9 +19,8 @@
  * CONSTANTS
  */
 
-uint8 BLE_CmdRecBuffer[BLE_CMD_Msg_Max_Len];
-uint8 BLE_CmdRecBufferLen = 0;
-uint8 BLE_CmdSendBuffer[BLE_CMD_Msg_Max_Len];
+uint8 BLE_CmdSendBuf[BLE_CMD_Msg_Max_Len];
+uint8 BLE_QueueDeBuf[BLE_CMD_Msg_Max_Len];
 
 BLE_Type_Argv BLE_Argv;
 /*********************************************************************
@@ -63,34 +31,33 @@ BLE_Type_Argv BLE_Argv;
  * LOCAL FUNCTIONS
  */
 void BLE_Init(BLE_Type_Argv*);
+
+bool BLE_QueueEn(BLE_Type_Queue*, uint8*, uint8);
+bool BLE_QueueDe(BLE_Type_Queue*, uint8**, uint8*);
 void BLE_U32ToU8Array(uint32, uint8*, uint8*);
 void BLE_U8ArrayToU32(uint8*, uint8, uint32*);
 
-void BLE_CmdGetFromUart(uint8*, uint8);
-void BLE_CmdRetToUart(BLE_Type_MsgType, uint8*, uint8);
+void BLE_CmdGetFromExter(uint8*, uint8);
+void BLE_CmdRetToExter(BLE_Type_MsgType, uint8*, uint8);
 
-void BLE_BleRetToUart(uint8, uint8*, uint8);
+void BLE_BleRetToExter(uint8, uint8*, uint8);
 bool BLE_UartRetToBLE(uint8*, uint8, uint8**, uint8*);
-
-void BLE_UartRecTimeout();
-
-void BLE_CmdRetTransmitDone(uint8, bool);
+void BLE_CmdRetTransmitDone(uint8, uint8);
 void BLE_CmdRetConnStatus(uint8*, uint8);
 void BLE_CmdRetRoleStatus();
-void BLE_CmdRetCmdInvalid();
-void BLE_CmdRetParmSetd();
-void BLE_CmdRetHal(uint8, uint8, uint8);
-
+uint8 BLE_CmdRetError(BLE_Type_Error, uint8);
+void BLE_CmdRetCmdParsed();
+void BLE_CmdRetAddInfo(uint8, uint8, uint8*, uint8);
 bool BLE_CmdCheckValid(uint8*, uint8);
 
-bool BLE_CmdExtParse_8_32(uint8*, uint8, uint8*, uint32*);
-bool BLE_CmdExtParse_8_N(uint8*, uint8, uint8*, uint8**, uint8*);
-bool BLE_CmdExtParse_8_8_N(uint8*, uint8, uint8*, uint8*, uint8**, uint8*);
-bool BLE_CmdExtParse_8_8(uint8*, uint8, uint8*, uint8*);
-bool BLE_CmdExtParse_8_8_32(uint8*, uint8, uint8*, uint8*, uint32*);
-bool BLE_CmdExtParse_8(uint8*, uint8, uint8*);
-bool BLE_CmdExtParse(uint8*, uint8);
-bool BLE_CmdParse(uint8*, uint8, uint8*, uint8*, uint8**, uint8*);
+bool BLE_CmdExtParse_8_32(uint8*, uint8, uint8*, uint32*, bool);
+bool BLE_CmdExtParse_8_N(uint8*, uint8, uint8*, uint8**, uint8*, bool);
+bool BLE_CmdExtParse_8_8_N(uint8*, uint8, uint8*, uint8*, uint8**, uint8*, bool);
+bool BLE_CmdExtParse_8_8(uint8*, uint8, uint8*, uint8*, bool);
+bool BLE_CmdExtParse_8_8_32(uint8*, uint8, uint8*, uint8*, uint32*, bool);
+bool BLE_CmdExtParse_8(uint8*, uint8, uint8*, bool);
+bool BLE_CmdExtParse(uint8*, uint8, bool);
+bool BLE_CmdParse(uint8*, uint8, uint8*, uint8*, uint8**, uint8*, bool);
 
 void BLE_CmdStringify(uint8*, BLE_Type_MsgType, uint8*, uint8);
 bool BLE_CmdStringify_Type_N(uint8**, uint8*, BLE_Type_MsgType, uint8*, uint8);
@@ -101,6 +68,7 @@ bool BLE_CmdStringify_Type_8_8(uint8**, uint8*, BLE_Type_MsgType, uint8, uint8);
 bool BLE_CmdStringify_Type_8_8_32(uint8**, uint8*, BLE_Type_MsgType, uint8, uint8, uint32);
 bool BLE_CmdStringify_Type_8(uint8**, uint8*, BLE_Type_MsgType, uint8);
 bool BLE_CmdStringify_Type(uint8**Cmd , uint8* CmdLen, BLE_Type_MsgType);
+void BLE_ScanAdvertData_Construct(BLE_Type_ScanAdvertData*, uint8 DataLen, uint8*, uint8*);
 /*********************************************************************
  * LOCAL Variables
  */
@@ -113,6 +81,41 @@ void BLE_Init(BLE_Type_Argv* Argv){
   osal_memcpy(&BLE_Argv, Argv, sizeof(BLE_Type_Argv));
 }
    
+bool BLE_QueueEn(BLE_Type_Queue* Queue, uint8* Data, uint8 Len){
+  if((Queue->Len + (Len + 1)) <= BLE_Queue_Max_Len){
+    uint8 Idx = Queue->Idx + Queue->Len;
+    if(Idx >= BLE_Queue_Max_Len) Idx -= BLE_Queue_Max_Len;
+    Queue->Queue[Idx++] = Len;
+    for(uint8 i = 0; i < Len; i++){
+      if(Idx >= BLE_Queue_Max_Len) Idx -= BLE_Queue_Max_Len;
+      Queue->Queue[Idx++] = Data[i];
+    }
+    Queue->Len += (Len + 1);
+    return true;
+  } else {
+    return false;
+  }
+}
+
+bool BLE_QueueDe(BLE_Type_Queue* Queue, uint8** Data, uint8* DataLen){
+  if(Queue->Len != 0){
+    *Data = BLE_QueueDeBuf;
+    *DataLen = Queue->Queue[Queue->Idx];
+    uint8 Idx = Queue->Idx + 1;
+    uint8 Len = *DataLen;
+    for(uint8 i = 0; i < Len; i++){
+      if(Idx >= BLE_Queue_Max_Len) Idx -= BLE_Queue_Max_Len;
+      (*Data)[i] = Queue->Queue[Idx++];
+    }
+    Queue->Len -= (Len + 1);
+    Queue->Idx += (Len + 1);
+    if(Queue->Idx >= BLE_Queue_Max_Len) Queue->Idx -= BLE_Queue_Max_Len;
+    return true;
+  } else {
+    return false;
+  }
+}
+
 /*********************************************************************
  * @fn      BLE_U32_To_U8Array
  *
@@ -161,8 +164,8 @@ void BLE_U8ArrayToU32(uint8* source, uint8 sourceLen, uint32* dest){
  *
  * @return  none
  */
-bool BLE_CmdParse(uint8* RecData, uint8 RecLen, uint8* Role, uint8* Type, uint8** Ext, uint8* ExtLen){
-  if(BLE_CmdCheckValid(RecData, RecLen)){
+bool BLE_CmdParse(uint8* RecData, uint8 RecLen, uint8* Role, uint8* Type, uint8** Ext, uint8* ExtLen, bool CheckValid){
+  if((CheckValid == false) || BLE_CmdCheckValid(RecData, RecLen)){
     *Role = RecData[BLE_CMD_Msg_RelDevIdx];
     *Type = RecData[BLE_CMD_Msg_TypeIdx];
     *Ext = &RecData[BLE_CMD_Msg_ExtHeadIdx];
@@ -174,24 +177,7 @@ bool BLE_CmdParse(uint8* RecData, uint8 RecLen, uint8* Role, uint8* Type, uint8*
 }
 
 /*********************************************************************
- * @fn      BLE_CmdGetFromUart
- *
- * @brief   Handle disconnected msg
- *
- * @param   ......
- *
- * @return  none
- */
-void BLE_UartRecTimeout(){
-  if(BLE_CmdRecBufferLen != 0){
-     BLE_CmdRecBufferLen = 0;
-     BLE_CmdRetToUart(BLE_MsgType_CMD_Invalid, 0, 0);
-  }
-}
-     
-
-/*********************************************************************
- * @fn      BLE_CmdGetFromUart
+ * @fn      BLE_CmdGetFromExter
  *
  * @brief   
  *
@@ -199,17 +185,8 @@ void BLE_UartRecTimeout(){
  *
  * @return  none
  */
-void BLE_CmdGetFromUart(uint8* RecData, uint8 RecLen){
-   for(uint8 i = 0; i < RecLen; i++){
-     // Data does not exceed Max Length
-     if(BLE_CmdRecBufferLen < BLE_CMD_Msg_Max_Len){
-      BLE_CmdRecBuffer[BLE_CmdRecBufferLen++] = RecData[i];
-     }
-     if(BLE_CmdRecBuffer[0] == BLE_CmdRecBufferLen){
-       BLE_Argv.CmdRec(BLE_CmdRecBuffer, BLE_CmdRecBufferLen);
-       BLE_CmdRecBufferLen = 0;
-     }
-   }
+void BLE_CmdGetFromExter(uint8* RecData, uint8 RecLen){
+  BLE_Argv.CmdRec(RecData, RecLen);
 }
         
 /*********************************************************************
@@ -223,7 +200,7 @@ void BLE_CmdGetFromUart(uint8* RecData, uint8 RecLen){
  */
 bool BLE_CmdCheckValid(uint8* msg, uint8 Len){
   //Check Length
-  if(msg[BLE_CMD_Msg_LenIdx] != Len || Len < BLE_CMD_Msg_Len(0)){
+  if(Len < BLE_CMD_Msg_Len(0) || msg[BLE_CMD_Msg_LenIdx] != Len){
     return false;
   }
 
@@ -249,9 +226,8 @@ bool BLE_CmdCheckValid(uint8* msg, uint8 Len){
   return true;
 }
 
-
 /*********************************************************************
- * @fn      BLE_CmdRetToUart
+ * @fn      BLE_CmdRetToExter
  *
  * @brief   Send Result
  *
@@ -259,25 +235,25 @@ bool BLE_CmdCheckValid(uint8* msg, uint8 Len){
  *
  * @return  none
  */
-void BLE_CmdStringify(uint8* Buffer, BLE_Type_MsgType MsgType, uint8* ExtData, uint8 ExtDataLen){
+void BLE_CmdStringify(uint8* Buf, BLE_Type_MsgType MsgType, uint8* ExtData, uint8 ExtDataLen){
   //
-  Buffer[BLE_CMD_Msg_LenIdx] = BLE_CMD_Msg_Len(ExtDataLen);
-  Buffer[BLE_CMD_Msg_RelDevIdx] = BLE_Argv.Role;
-  Buffer[BLE_CMD_Msg_TypeIdx] = MsgType;
-  if(ExtData != (&Buffer[BLE_CMD_Msg_ExtHeadIdx])){
-    osal_memcpy(&Buffer[BLE_CMD_Msg_ExtHeadIdx], ExtData, ExtDataLen);
+  Buf[BLE_CMD_Msg_LenIdx] = BLE_CMD_Msg_Len(ExtDataLen);
+  Buf[BLE_CMD_Msg_RelDevIdx] = BLE_Argv.Role;
+  Buf[BLE_CMD_Msg_TypeIdx] = MsgType;
+  if(ExtData != (&Buf[BLE_CMD_Msg_ExtHeadIdx])){
+    osal_memcpy(&Buf[BLE_CMD_Msg_ExtHeadIdx], ExtData, ExtDataLen);
   }
   //Calculate Sum
-  Buffer[BLE_CMD_Msg_CheckSumIdx(ExtDataLen)] = 0;
+  Buf[BLE_CMD_Msg_CheckSumIdx(ExtDataLen)] = 0;
   if(BLE_Argv.EnCmdCheckBit){
     for(uint8 i = BLE_CMD_Msg_CheckSumHeadIdx, end = BLE_CMD_Msg_CheckSumEndIdx(ExtDataLen); i <= end; i++){
-      Buffer[BLE_CMD_Msg_CheckSumIdx(ExtDataLen)] += Buffer[i];
+      Buf[BLE_CMD_Msg_CheckSumIdx(ExtDataLen)] += Buf[i];
     }
   }
 }
 
 /*********************************************************************
- * @fn      BLE_CmdRetToUart
+ * @fn      BLE_CmdRetToExter
  *
  * @brief   Send Result
  *
@@ -285,18 +261,18 @@ void BLE_CmdStringify(uint8* Buffer, BLE_Type_MsgType MsgType, uint8* ExtData, u
  *
  * @return  none
  */
-void BLE_CmdRetToUart(BLE_Type_MsgType MsgType, uint8* ExtData, uint8 ExtDataLen){
-  BLE_CmdStringify(BLE_CmdSendBuffer, MsgType, ExtData, ExtDataLen);
-  BLE_Argv.CmdSend(BLE_CmdSendBuffer, BLE_CmdSendBuffer[BLE_CMD_Msg_LenIdx]);
+void BLE_CmdRetToExter(BLE_Type_MsgType MsgType, uint8* ExtData, uint8 ExtDataLen){
+  BLE_CmdStringify(BLE_CmdSendBuf, MsgType, ExtData, ExtDataLen);
+  BLE_Argv.CmdSend(BLE_CmdSendBuf, BLE_CmdSendBuf[BLE_CMD_Msg_LenIdx]);
 }
 
 bool BLE_SendBLE(uint8 connHandle, uint8* TransmitData, uint8 TransmitDataLen){
   if(BLE_Argv.EnTranEncry == true) {
     if(TransmitDataLen < BLE_TRANSMIT_ENCRYPT_DATA_LEN){
-      osal_memcpy(BLE_CmdSendBuffer, TransmitData, TransmitDataLen);
-      BLE_CmdSendBuffer[BLE_TRANSMIT_ENCRYPT_DATA_LEN - 1] = TransmitDataLen;
-      if(LL_Encrypt(BLE_Argv.TranEncryKey,  BLE_CmdSendBuffer, BLE_CmdSendBuffer) == SUCCESS){
-        return BLE_Argv.BleSend(connHandle, BLE_CmdSendBuffer, BLE_TRANSMIT_ENCRYPT_DATA_LEN);
+      osal_memcpy(BLE_CmdSendBuf, TransmitData, TransmitDataLen);
+      BLE_CmdSendBuf[BLE_TRANSMIT_ENCRYPT_DATA_LEN - 1] = TransmitDataLen;
+      if(LL_Encrypt(BLE_Argv.TranEncryKey,  BLE_CmdSendBuf, BLE_CmdSendBuf) == SUCCESS){
+        return BLE_Argv.BleSend(connHandle, BLE_CmdSendBuf, BLE_TRANSMIT_ENCRYPT_DATA_LEN);
       }
     }
   } else {
@@ -314,18 +290,19 @@ bool BLE_SendBLE(uint8 connHandle, uint8* TransmitData, uint8 TransmitDataLen){
  *
  * @return  none
  */
-void BLE_BleRetToUart(uint8 ConnHandle, uint8* RecData, uint8 RecDataLen){
+void BLE_BleRetToExter(uint8 ConnHandle, uint8* RecData, uint8 RecDataLen){
   bStatus_t status = FAILURE;
   uint8 ContentLen = RecDataLen;
   
-  uint8 *Msg = &BLE_CmdSendBuffer[BLE_CMD_Msg_ExtHeadIdx];
+  uint8 *Msg = &BLE_CmdSendBuf[BLE_CMD_Msg_ExtHeadIdx];
   uint8 *MsgFrom = &Msg[0];
   uint8 *MsgContent = &Msg[1];
   (*MsgFrom) = ConnHandle;
   osal_memcpy(MsgContent, RecData, RecDataLen);
 
   if(BLE_Argv.EnTranEncry == true) {
-    if(RecDataLen == BLE_TRANSMIT_ENCRYPT_DATA_LEN && LL_EXT_Decrypt(BLE_Argv.TranEncryKey, MsgContent, MsgContent) == SUCCESS) {
+    if((BLE_CmdRetError(BLE_Error_Hci, (RecDataLen == BLE_TRANSMIT_ENCRYPT_DATA_LEN) ? SUCCESS : LL_STATUS_ERROR_LL_TIMEOUT) == SUCCESS) && 
+       (BLE_CmdRetError(BLE_Error_Hci, LL_EXT_Decrypt(BLE_Argv.TranEncryKey, MsgContent, MsgContent)) == SUCCESS)) {
       ContentLen = MsgContent[BLE_TRANSMIT_ENCRYPT_DATA_LEN - 1];
       if(ContentLen < BLE_TRANSMIT_ENCRYPT_DATA_LEN){
         status = SUCCESS;
@@ -335,9 +312,9 @@ void BLE_BleRetToUart(uint8 ConnHandle, uint8* RecData, uint8 RecDataLen){
     status = SUCCESS;
   }
   if(status == SUCCESS){
-    BLE_CmdRetToUart(BLE_MsgType_Received, MsgFrom, ContentLen + 1);
+    BLE_CmdRetToExter(BLE_MsgType_Received, MsgFrom, ContentLen + 1);
   } else {
-    BLE_CmdRetToUart(BLE_MsgType_UnReceived, MsgFrom, 1);
+    BLE_CmdRetToExter(BLE_MsgType_UnReceived, MsgFrom, 1);
   }
 }
 
@@ -351,7 +328,11 @@ void BLE_BleRetToUart(uint8 ConnHandle, uint8* RecData, uint8 RecDataLen){
  * @return  none
  */
 void BLE_CmdRetTransmitDone(uint8 ConnHandle, bool Success){
-  BLE_CmdRetToUart(Success ? BLE_MsgType_Sended : BLE_MsgType_UnSended, &ConnHandle, 1);
+  if(Success){
+    BLE_CmdRetToExter(BLE_MsgType_Sended, &ConnHandle, 1);
+  } else {
+    BLE_CmdRetToExter(BLE_MsgType_UnSended, &ConnHandle, 1);
+  }
 }
 
 /*********************************************************************
@@ -365,7 +346,7 @@ void BLE_CmdRetTransmitDone(uint8 ConnHandle, bool Success){
  */
 void BLE_CmdRetConnStatus(uint8* ConnHandles, uint8 ConnHandleNum)
 {
-  BLE_CmdRetToUart(BLE_MsgType_ConnStatus_Returned, ConnHandles, ConnHandleNum);
+  BLE_CmdRetToExter(BLE_MsgType_ConnStatus_Returned, ConnHandles, ConnHandleNum);
 }
 
 /*********************************************************************
@@ -379,7 +360,7 @@ void BLE_CmdRetConnStatus(uint8* ConnHandles, uint8 ConnHandleNum)
  */
 void BLE_CmdRetRoleStatus()
 {
-  BLE_CmdRetToUart(BLE_MsgType_Device_Inited, BLE_Argv.Info, BLE_Argv.InfoLen);
+  BLE_CmdRetToExter(BLE_MsgType_Device_Inited, BLE_Argv.Info, BLE_Argv.InfoLen);
 }
 
 /*********************************************************************
@@ -391,13 +372,16 @@ void BLE_CmdRetRoleStatus()
  *
  * @return  none
  */
-void BLE_CmdRetCmdInvalid()
-{
-  BLE_CmdRetToUart(BLE_MsgType_CMD_Invalid, 0, 0); 
+uint8 BLE_CmdRetError(BLE_Type_Error Type, uint8 ErrorCode){
+  if(ErrorCode != SUCCESS){
+    uint8 Ext[] = {Type, ErrorCode};
+    BLE_CmdRetToExter(BLE_MsgType_Error_Happened, Ext, sizeof(Ext)); 
+  }
+  return ErrorCode;
 }
 
 /*********************************************************************
- * @fn      BLE_CmdRetCmdInvalid
+ * @fn      BLE_CmdRetCmdParsed
  *
  * @brief   
  *
@@ -405,13 +389,12 @@ void BLE_CmdRetCmdInvalid()
  *
  * @return  none
  */
-void BLE_CmdRetParmSetd()
-{
-  BLE_CmdRetToUart(BLE_MsgType_Parms_Setd, 0, 0);
+void BLE_CmdRetCmdParsed(){
+  BLE_CmdRetToExter(BLE_MsgType_Cmd_Parsed, 0, 0);
 }
 
 /*********************************************************************
- * @fn      BLE_CmdRetHal
+ * @fn      BLE_CmdRetAddInfo
  *
  * @brief   
  *
@@ -419,14 +402,16 @@ void BLE_CmdRetParmSetd()
  *
  * @return  none
  */
-void BLE_CmdRetHal(uint8 Type, uint8 Chann, uint8 Content)
-{
-  uint8 Ext[] = {Type, Chann, Content };
-  BLE_CmdRetToUart(BLE_MsgType_Hal_Ret, Ext, sizeof(Ext) );
+void BLE_CmdRetAddInfo(uint8 Type, uint8 Chann, uint8* Content, uint8 ContentLen){
+  uint8 Len = BLE_CMD_Msg_ExtHeadIdx;
+  BLE_Array_Append(BLE_CmdSendBuf, Len, &Type, 1);
+  BLE_Array_Append(BLE_CmdSendBuf, Len, &Chann, 1);
+  BLE_Array_Append(BLE_CmdSendBuf, Len, Content, ContentLen);
+  BLE_CmdRetToExter(BLE_MsgType_Hal_Ret, &BLE_CmdSendBuf[BLE_CMD_Msg_ExtHeadIdx], Len - BLE_CMD_Msg_ExtHeadIdx);
 }
 
-bool BLE_CmdExtParse_8_32(uint8* Ext, uint8 ExtLen, uint8* V0, uint32* V1){
-  if(ExtLen >= 2 && ExtLen <= 5) {
+bool BLE_CmdExtParse_8_32(uint8* Ext, uint8 ExtLen, uint8* V0, uint32* V1, bool CheckValid){
+  if(CheckValid == false || (ExtLen >= 2 && ExtLen <= 5)) {
     *V0 = Ext[0];
     BLE_U8ArrayToU32(&Ext[1], ExtLen - 1, V1);
     return true;
@@ -434,8 +419,8 @@ bool BLE_CmdExtParse_8_32(uint8* Ext, uint8 ExtLen, uint8* V0, uint32* V1){
   return false;
 }
 
-bool BLE_CmdExtParse_8_N(uint8* Ext, uint8 ExtLen, uint8* V0, uint8** V1, uint8* V1Len){
-  if(ExtLen >= 1) {
+bool BLE_CmdExtParse_8_N(uint8* Ext, uint8 ExtLen, uint8* V0, uint8** V1, uint8* V1Len, bool CheckValid){
+  if(CheckValid == false || ExtLen >= 1) {
     *V0 = Ext[0];
     *V1 = &Ext[1];
     *V1Len = ExtLen - 1;
@@ -444,8 +429,8 @@ bool BLE_CmdExtParse_8_N(uint8* Ext, uint8 ExtLen, uint8* V0, uint8** V1, uint8*
   return false;
 }
 
-bool BLE_CmdExtParse_8_8_N(uint8* Ext, uint8 ExtLen, uint8* V0, uint8* V1, uint8** V2, uint8* V2Len){
-  if(ExtLen >= 2) {
+bool BLE_CmdExtParse_8_8_N(uint8* Ext, uint8 ExtLen, uint8* V0, uint8* V1, uint8** V2, uint8* V2Len, bool CheckValid){
+  if(CheckValid == false || ExtLen >= 2) {
     *V0 = Ext[0];
     *V1 = Ext[1];
     *V2 = &Ext[2];
@@ -455,8 +440,8 @@ bool BLE_CmdExtParse_8_8_N(uint8* Ext, uint8 ExtLen, uint8* V0, uint8* V1, uint8
   return false;
 }
 
-bool BLE_CmdExtParse_8_8(uint8* Ext, uint8 ExtLen, uint8* V0, uint8* V1){
-  if(ExtLen == 2) {
+bool BLE_CmdExtParse_8_8(uint8* Ext, uint8 ExtLen, uint8* V0, uint8* V1, bool CheckValid){
+  if(CheckValid == false || ExtLen == 2) {
     *V0 = Ext[0];
     *V1 = Ext[1];
     return true;
@@ -464,8 +449,8 @@ bool BLE_CmdExtParse_8_8(uint8* Ext, uint8 ExtLen, uint8* V0, uint8* V1){
   return false;
 }
 
-bool BLE_CmdExtParse_8_8_32(uint8* Ext, uint8 ExtLen, uint8* V0, uint8* V1, uint32* V2){
-  if(ExtLen >= 3 && ExtLen <= 6) {
+bool BLE_CmdExtParse_8_8_32(uint8* Ext, uint8 ExtLen, uint8* V0, uint8* V1, uint32* V2, bool CheckValid){
+  if(CheckValid == false || (ExtLen >= 3 && ExtLen <= 6)) {
     *V0 = Ext[0];
     *V1 = Ext[1];
     BLE_U8ArrayToU32(&Ext[2], ExtLen - 2, V2);
@@ -474,10 +459,13 @@ bool BLE_CmdExtParse_8_8_32(uint8* Ext, uint8 ExtLen, uint8* V0, uint8* V1, uint
   return false;
 }
 
-bool BLE_CmdExtParse_N(uint8* Ext, uint8 ExtLen, uint8** V0, uint8* V0Len){
-  *V0 = &Ext[0];
-  *V0Len = ExtLen;
-  return true;
+bool BLE_CmdExtParse_N(uint8* Ext, uint8 ExtLen, uint8** V0, uint8* V0Len, bool CheckValid){
+  if(CheckValid == false || true) {
+    *V0 = &Ext[0];
+    *V0Len = ExtLen;
+    return true;
+  }
+  return false;
   /*
   if(ExtLen >= 0) {
     *V0 = &Ext[0];
@@ -487,16 +475,16 @@ bool BLE_CmdExtParse_N(uint8* Ext, uint8 ExtLen, uint8** V0, uint8* V0Len){
   return false;
   */
 }
-bool BLE_CmdExtParse_8(uint8* Ext, uint8 ExtLen, uint8* V0){
-  if(ExtLen == 1) {
+bool BLE_CmdExtParse_8(uint8* Ext, uint8 ExtLen, uint8* V0, bool CheckValid){
+  if(CheckValid == false || ExtLen == 1) {
     *V0 = Ext[0];
     return true;
   }
   return false;
 }
 
-bool BLE_CmdExtParse(uint8* Ext, uint8 ExtLen){
-  if(ExtLen == 0) {
+bool BLE_CmdExtParse(uint8* Ext, uint8 ExtLen, bool CheckValid){
+  if(CheckValid == false || ExtLen == 0) {
     return true;
   }
   return false;
@@ -506,104 +494,126 @@ bool BLE_CmdExtParse(uint8* Ext, uint8 ExtLen){
 bool BLE_CmdStringify_Type_8_32(uint8** Cmd, uint8* CmdLen, BLE_Type_MsgType Type, uint8 U8_0, uint32 U32_0){
   if(BLE_CMD_Msg_Len(1 + 4) > BLE_CMD_Msg_Max_Len) return false;
   uint8 ExtLen = 0;
-  uint8 *Ext = &BLE_CmdSendBuffer[BLE_CMD_Msg_ExtHeadIdx];
+  uint8 *Ext = &BLE_CmdSendBuf[BLE_CMD_Msg_ExtHeadIdx];
   Ext[ExtLen++] = U8_0;
   BLE_U32ToU8Array(U32_0, Ext, &ExtLen);
 
 
-  BLE_CmdStringify(BLE_CmdSendBuffer, Type, Ext, ExtLen);
-  *Cmd = BLE_CmdSendBuffer;
-  *CmdLen = BLE_CmdSendBuffer[BLE_CMD_Msg_LenIdx];
+  BLE_CmdStringify(BLE_CmdSendBuf, Type, Ext, ExtLen);
+  *Cmd = BLE_CmdSendBuf;
+  *CmdLen = BLE_CmdSendBuf[BLE_CMD_Msg_LenIdx];
   return true;
 }
 
 bool BLE_CmdStringify_Type_N(uint8** Cmd, uint8* CmdLen, BLE_Type_MsgType Type, uint8* UA_0, uint8 UL_0){
   if(BLE_CMD_Msg_Len(UL_0) > BLE_CMD_Msg_Max_Len) return false;
   uint8 ExtLen = 0;
-  uint8 *Ext = &BLE_CmdSendBuffer[BLE_CMD_Msg_ExtHeadIdx];
+  uint8 *Ext = &BLE_CmdSendBuf[BLE_CMD_Msg_ExtHeadIdx];
   osal_memcpy(&Ext[ExtLen], UA_0, UL_0);
   ExtLen += UL_0;
 
-  BLE_CmdStringify(BLE_CmdSendBuffer, Type, Ext, ExtLen);
-  *Cmd = BLE_CmdSendBuffer;
-  *CmdLen = BLE_CmdSendBuffer[BLE_CMD_Msg_LenIdx];
+  BLE_CmdStringify(BLE_CmdSendBuf, Type, Ext, ExtLen);
+  *Cmd = BLE_CmdSendBuf;
+  *CmdLen = BLE_CmdSendBuf[BLE_CMD_Msg_LenIdx];
   return true;
 }
 
 bool BLE_CmdStringify_Type_8_N(uint8** Cmd, uint8* CmdLen, BLE_Type_MsgType Type, uint8 U8_0, uint8* UA_0, uint8 UL_0){
   if(BLE_CMD_Msg_Len(1 + UL_0) > BLE_CMD_Msg_Max_Len) return false;
   uint8 ExtLen = 0;
-  uint8 *Ext = &BLE_CmdSendBuffer[BLE_CMD_Msg_ExtHeadIdx];
+  uint8 *Ext = &BLE_CmdSendBuf[BLE_CMD_Msg_ExtHeadIdx];
   Ext[ExtLen++] = U8_0;
   osal_memcpy(&Ext[ExtLen], UA_0, UL_0);
   ExtLen += UL_0;
 
-  BLE_CmdStringify(BLE_CmdSendBuffer, Type, Ext, ExtLen);
-  *Cmd = BLE_CmdSendBuffer;
-  *CmdLen = BLE_CmdSendBuffer[BLE_CMD_Msg_LenIdx];
+  BLE_CmdStringify(BLE_CmdSendBuf, Type, Ext, ExtLen);
+  *Cmd = BLE_CmdSendBuf;
+  *CmdLen = BLE_CmdSendBuf[BLE_CMD_Msg_LenIdx];
   return true;
 }
 
 bool BLE_CmdStringify_Type_8_8_N(uint8** Cmd, uint8* CmdLen, BLE_Type_MsgType Type, uint8 U8_0, uint8 U8_1, uint8* UA_0, uint8 UL_0){
   if(BLE_CMD_Msg_Len(1 + 1 + UL_0) > BLE_CMD_Msg_Max_Len) return false;
   uint8 ExtLen = 0;
-  uint8 *Ext = &BLE_CmdSendBuffer[BLE_CMD_Msg_ExtHeadIdx];
+  uint8 *Ext = &BLE_CmdSendBuf[BLE_CMD_Msg_ExtHeadIdx];
   Ext[ExtLen++] = U8_0;
   Ext[ExtLen++] = U8_1;
   osal_memcpy(&Ext[ExtLen], UA_0, UL_0);
   ExtLen += UL_0;
 
-  BLE_CmdStringify(BLE_CmdSendBuffer, Type, Ext, ExtLen);
-  *Cmd = BLE_CmdSendBuffer;
-  *CmdLen = BLE_CmdSendBuffer[BLE_CMD_Msg_LenIdx];
+  BLE_CmdStringify(BLE_CmdSendBuf, Type, Ext, ExtLen);
+  *Cmd = BLE_CmdSendBuf;
+  *CmdLen = BLE_CmdSendBuf[BLE_CMD_Msg_LenIdx];
   return true;
 }
 
 bool BLE_CmdStringify_Type_8_8(uint8** Cmd, uint8* CmdLen, BLE_Type_MsgType Type, uint8 U8_0, uint8 U8_1){
   if(BLE_CMD_Msg_Len(1 + 1) > BLE_CMD_Msg_Max_Len) return false;
   uint8 ExtLen = 0;
-  uint8 *Ext = &BLE_CmdSendBuffer[BLE_CMD_Msg_ExtHeadIdx];
+  uint8 *Ext = &BLE_CmdSendBuf[BLE_CMD_Msg_ExtHeadIdx];
   Ext[ExtLen++] = U8_0;
   Ext[ExtLen++] = U8_1;
   
-  BLE_CmdStringify(BLE_CmdSendBuffer, Type, Ext, ExtLen);
-  *Cmd = BLE_CmdSendBuffer;
-  *CmdLen = BLE_CmdSendBuffer[BLE_CMD_Msg_LenIdx];
+  BLE_CmdStringify(BLE_CmdSendBuf, Type, Ext, ExtLen);
+  *Cmd = BLE_CmdSendBuf;
+  *CmdLen = BLE_CmdSendBuf[BLE_CMD_Msg_LenIdx];
   return true;
 }
 
 bool BLE_CmdStringify_Type_8_8_32(uint8** Cmd, uint8* CmdLen, BLE_Type_MsgType Type, uint8 U8_0, uint8 U8_1, uint32 U32_){
   if(BLE_CMD_Msg_Len(1 + 1 + 4) > BLE_CMD_Msg_Max_Len) return false;
   uint8 ExtLen = 0;
-  uint8 *Ext = &BLE_CmdSendBuffer[BLE_CMD_Msg_ExtHeadIdx];
+  uint8 *Ext = &BLE_CmdSendBuf[BLE_CMD_Msg_ExtHeadIdx];
   Ext[ExtLen++] = U8_0;
   Ext[ExtLen++] = U8_1;
   BLE_U32ToU8Array(U32_, Ext, &ExtLen);
   
-  BLE_CmdStringify(BLE_CmdSendBuffer, Type, Ext, ExtLen);
-  *Cmd = BLE_CmdSendBuffer;
-  *CmdLen = BLE_CmdSendBuffer[BLE_CMD_Msg_LenIdx];
+  BLE_CmdStringify(BLE_CmdSendBuf, Type, Ext, ExtLen);
+  *Cmd = BLE_CmdSendBuf;
+  *CmdLen = BLE_CmdSendBuf[BLE_CMD_Msg_LenIdx];
   return true;
 }
 
 bool BLE_CmdStringify_Type_8(uint8**Cmd , uint8* CmdLen, BLE_Type_MsgType Type, uint8 U8_0){
   if(BLE_CMD_Msg_Len(1) > BLE_CMD_Msg_Max_Len) return false;
   uint8 ExtLen = 0;
-  uint8 *Ext = &BLE_CmdSendBuffer[BLE_CMD_Msg_ExtHeadIdx];
+  uint8 *Ext = &BLE_CmdSendBuf[BLE_CMD_Msg_ExtHeadIdx];
   Ext[ExtLen++] = U8_0;
   
-  BLE_CmdStringify(BLE_CmdSendBuffer, Type, Ext, ExtLen);
-  *Cmd = BLE_CmdSendBuffer;
-  *CmdLen = BLE_CmdSendBuffer[BLE_CMD_Msg_LenIdx];
+  BLE_CmdStringify(BLE_CmdSendBuf, Type, Ext, ExtLen);
+  *Cmd = BLE_CmdSendBuf;
+  *CmdLen = BLE_CmdSendBuf[BLE_CMD_Msg_LenIdx];
   return true;
 }
 
 bool BLE_CmdStringify_Type(uint8**Cmd , uint8* CmdLen, BLE_Type_MsgType Type){
   if(BLE_CMD_Msg_Len(0) > BLE_CMD_Msg_Max_Len) return false;
-  BLE_CmdStringify(BLE_CmdSendBuffer, Type, 0, 0);
-  *Cmd = BLE_CmdSendBuffer;
-  *CmdLen = BLE_CmdSendBuffer[BLE_CMD_Msg_LenIdx];
+  BLE_CmdStringify(BLE_CmdSendBuf, Type, 0, 0);
+  *Cmd = BLE_CmdSendBuf;
+  *CmdLen = BLE_CmdSendBuf[BLE_CMD_Msg_LenIdx];
   return true;
 }
+
+
+/*********************************************************************
+ * @fn      BLE_ScanAdvertData_Construct
+ *
+ * @brief   
+ *
+ * @param   
+ *
+ * @return  none
+ */
+void BLE_ScanAdvertData_Construct(BLE_Type_ScanAdvertData* Data, uint8 DataLen, uint8* Dest, uint8 *DestLen)
+{
+ (*DestLen) = 0;
+  for(uint8 i = 0; i < DataLen; i++){
+   (Dest)[(*DestLen)++] = 1 + Data[i].DataLen;        //Data Length
+   (Dest)[(*DestLen)++] = Data[i].DataType;   //Data Type
+    osal_memcpy(&(Dest)[(*DestLen)], Data[i].Data, Data[i].DataLen); //Data Content
+   (*DestLen) += Data[i].DataLen;
+  }
+}
+
 /*********************************************************************
 *********************************************************************/

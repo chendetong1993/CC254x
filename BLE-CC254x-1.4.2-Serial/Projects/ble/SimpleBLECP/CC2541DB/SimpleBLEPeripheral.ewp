@@ -305,6 +305,8 @@
                     <state>xPLUS_BROADCASTER</state>
                     <state>HAL_UART=TRUE</state>
                     <state>DMA_PM=0</state>
+                    <state>BLE_PERIPHERAL</state>
+                    <state>APP_UART_MODULE</state>
                 </option>
                 <option>
                     <name>CCPreprocFile</name>
@@ -1142,10 +1144,22 @@
     <group>
         <name>APP</name>
         <file>
-            <name>$PROJ_DIR$\..\Source\app.c</name>
+            <name>$PROJ_DIR$\..\Source\app_key.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\Source\app.h</name>
+            <name>$PROJ_DIR$\..\Source\app_key.h</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\Source\app_RssiCheck.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\Source\app_RssiCheck.h</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\Source\app_UartModule.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\Source\app_UartModule.h</name>
         </file>
         <file>
             <name>$PROJ_DIR$\..\Source\OSAL_simpleBLE.c</name>
@@ -1163,7 +1177,7 @@
             <name>$PROJ_DIR$\..\Source\simpleBLEC.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\Source\SimpleBLEC.h</name>
+            <name>$PROJ_DIR$\..\Source\simpleBLEC.h</name>
         </file>
         <file>
             <name>$PROJ_DIR$\..\Source\simpleBLEP.c</name>

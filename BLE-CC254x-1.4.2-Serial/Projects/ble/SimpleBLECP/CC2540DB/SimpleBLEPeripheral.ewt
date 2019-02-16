@@ -2156,12 +2156,6 @@
     <group>
         <name>APP</name>
         <file>
-            <name>$PROJ_DIR$\..\Source\app_key.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\Source\app_key.h</name>
-        </file>
-        <file>
             <name>$PROJ_DIR$\..\Source\app_RssiCheck.c</name>
         </file>
         <file>
@@ -2337,12 +2331,6 @@
         </file>
         <file>
             <name>$PROJ_DIR$\..\..\common\npi\npi_np\npi.h</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\..\common\npi\npi_np\npi_spi.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\..\common\npi\npi_np\npi_uart.c</name>
         </file>
     </group>
     <group>

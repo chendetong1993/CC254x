@@ -31,7 +31,9 @@ extern "C"
 extern void APP_Init( uint8 );
 extern uint16 APP_ProcessEvent( uint8, uint16 );
 extern void APP_BleCmd_Send( uint8*, uint8 );
-extern void APP_BleCmd_Receive(void (*)(uint8*, uint8));
+extern void (*APP_BleCmd_Receive)(uint8*, uint8);
+extern bool (*APP_Info_Set)(uint8*, uint8);
+extern void (*APP_Info_Get)(uint8**, uint8*);
 extern void APP_Enter_Sleep();
 extern void APP_Enter_Wakeup();
 /*********************************************************************

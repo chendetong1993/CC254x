@@ -35,7 +35,7 @@
  * LOCAL FUNCTIONS
  */
 void APP_BleCmd_Send( uint8*, uint8 );
-void APP_BleCmd_Receive(void (*)(uint8*, uint8));
+void (*APP_BleCmd_Receive)(uint8*, uint8);
 void APP_Init( uint8 );
 uint16 APP_ProcessEvent( uint8, uint16 );
 void APP_Enter_Sleep();
@@ -46,8 +46,6 @@ void APP_KEY2_Down();
 /*********************************************************************
  * LOCAL Variables
  */
-
-void (*APP_BleCmd_Rec_Callback)(uint8*, uint8) = 0;
 
 
 uint8 APP_CurrInfo[] = {0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09};
@@ -86,7 +84,7 @@ void APP_BleCmd_Send( uint8* Data, uint8 DataLen )
   if(BLE_CmdParse(Data, DataLen, &Role, &Type, &Ext, &ExtLen)){
     if(Role != BLE_CMD_Msg_RelDev_P){
       if(BLE_CmdStringify_Type(&APP_USEBLE_Cmd, &APP_USEBLE_CmdLen, BLE_MsgType_SwitchRole)){
-        APP_BleCmd_Rec_Callback(APP_USEBLE_Cmd, APP_USEBLE_CmdLen);
+        APP_BleCmd_Receive(APP_USEBLE_Cmd, APP_USEBLE_CmdLen);
       }
       return;
     }
@@ -98,16 +96,19 @@ void APP_BleCmd_Send( uint8* Data, uint8 DataLen )
           if(BLE_CmdExtParse_N(Ext, ExtLen, &PrevInfo, &PrevInfoLen)){
             if(!BLE_Compare_Array(PrevInfo, PrevInfoLen, APP_CurrInfo, APP_CurrInfoLen)){
               if(BLE_CmdStringify_Type_8_32(&APP_USEBLE_Cmd, &APP_USEBLE_CmdLen, BLE_MsgType_Parms_Set, BLEP_SetParm_ENABLE_TRANSMIT_ENCRYPT, false)){
-                APP_BleCmd_Rec_Callback(APP_USEBLE_Cmd, APP_USEBLE_CmdLen);
+                APP_BleCmd_Receive(APP_USEBLE_Cmd, APP_USEBLE_CmdLen);
               }
               if(BLE_CmdStringify_Type_8_N(&APP_USEBLE_Cmd, &APP_USEBLE_CmdLen, BLE_MsgType_Parms_Set, BLEP_SetParm_NAME, APP_Name, APP_NameLen)){
-                APP_BleCmd_Rec_Callback(APP_USEBLE_Cmd, APP_USEBLE_CmdLen);
+                APP_BleCmd_Receive(APP_USEBLE_Cmd, APP_USEBLE_CmdLen);
+              }
+              if(BLE_CmdStringify_Type_8_32(&APP_USEBLE_Cmd, &APP_USEBLE_CmdLen, BLE_MsgType_Parms_Set, BLEP_SetParm_ENABLE_CMD_CHECK_BIT, false)){
+                APP_BleCmd_Receive(APP_USEBLE_Cmd, APP_USEBLE_CmdLen);
               }
               if(BLE_CmdStringify_Type_8_N(&APP_USEBLE_Cmd, &APP_USEBLE_CmdLen, BLE_MsgType_Parms_Set, BLEP_SetParm_INFO, APP_CurrInfo, APP_CurrInfoLen)){
-                APP_BleCmd_Rec_Callback(APP_USEBLE_Cmd, APP_USEBLE_CmdLen);
+                APP_BleCmd_Receive(APP_USEBLE_Cmd, APP_USEBLE_CmdLen);
               }
               if(BLE_CmdStringify_Type(&APP_USEBLE_Cmd, &APP_USEBLE_CmdLen, BLE_MsgType_Reboot)){
-                APP_BleCmd_Rec_Callback(APP_USEBLE_Cmd, APP_USEBLE_CmdLen);
+                APP_BleCmd_Receive(APP_USEBLE_Cmd, APP_USEBLE_CmdLen);
               }
             }
           }
@@ -161,19 +162,6 @@ void APP_BleCmd_Send( uint8* Data, uint8 DataLen )
 }
 
 /*********************************************************************
- * @fn      APP_BleCmd_Receive
- *
- * @brief   
- *
- * @param   ......
- *
- * @return  none
- */
-void APP_BleCmd_Receive(void (*Callback)(uint8*, uint8)){
-  APP_BleCmd_Rec_Callback = Callback;
-}
-
-/*********************************************************************
  * @fn      APP_Enter_Sleep
  *
  * @brief   
@@ -211,14 +199,14 @@ uint16 APP_ProcessEvent(uint8 task_id, uint16 events){
 
 void APP_KEY1_Down(){
   if(BLE_CmdStringify_Type_8_8(&APP_USEBLE_Cmd, &APP_USEBLE_CmdLen, BLE_MsgType_Send, APP_BleConnHandle, 1)){
-    APP_BleCmd_Rec_Callback(APP_USEBLE_Cmd, APP_USEBLE_CmdLen);
+    APP_BleCmd_Receive(APP_USEBLE_Cmd, APP_USEBLE_CmdLen);
     APP_Led1On = true;
   }
 }
 
 void APP_KEY2_Down(){
   if(BLE_CmdStringify_Type_8_8(&APP_USEBLE_Cmd, &APP_USEBLE_CmdLen, BLE_MsgType_Send, APP_BleConnHandle, 2)){
-    APP_BleCmd_Rec_Callback(APP_USEBLE_Cmd, APP_USEBLE_CmdLen);
+    APP_BleCmd_Receive(APP_USEBLE_Cmd, APP_USEBLE_CmdLen);
     APP_Led1On = false;
   }
 }

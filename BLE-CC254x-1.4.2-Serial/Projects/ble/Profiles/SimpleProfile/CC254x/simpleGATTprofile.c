@@ -22,7 +22,7 @@
   its documentation for any purpose.
 
   YOU FURTHER ACKNOWLEDGE AND AGREE THAT THE SOFTWARE AND DOCUMENTATION ARE
-  PROVIDED “AS IS?WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESS OR IMPLIED, 
+  PROVIDED ¡°AS IS?WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESS OR IMPLIED, 
   INCLUDING WITHOUT LIMITATION, ANY WARRANTY OF MERCHANTABILITY, TITLE, 
   NON-INFRINGEMENT AND FITNESS FOR A PARTICULAR PURPOSE. IN NO EVENT SHALL
   TEXAS INSTRUMENTS OR ITS LICENSORS BE LIABLE OR OBLIGATED UNDER CONTRACT,
@@ -312,7 +312,6 @@ bStatus_t SimpleProfile_WriteCharValue(uint8 taskId, uint16 connHandle, uint16 h
     }
     if(ret != SUCCESS){
       GATT_bm_free( (gattMsg_t *)&AttReq, ATT_WRITE_REQ );
-      ret = bleInvalidRange;
     }
   } else {
     ret = bleInvalidRange;
@@ -369,7 +368,7 @@ bStatus_t SimpleProfile_SetParameter( uint8 param, void *value, uint8 len )
       }
       break;
     default:
-      ret = INVALIDPARAMETER;
+      ret = bleNoResources;
       break;
   }
   return ( ret );
@@ -402,7 +401,7 @@ bStatus_t SimpleProfile_GetParameter( uint8 param, uint8 **value, uint8** len )
       (*value) = simpleProfileCharCS;
       break;
     default:
-      ret = INVALIDPARAMETER;
+      ret = bleNoResources;
       break;
   }
   return ( ret );
