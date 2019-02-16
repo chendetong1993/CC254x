@@ -93,7 +93,7 @@ bool APP_BleCmd_Hook(bool ToBle, uint8* Data, uint8 DataLen, bool CheckValid){
         uint8* PInfo;
         uint8 PInfoLen;
         APP_Info_Get(&PInfo, &PInfoLen);
-        if(!BLE_Compare_Array(PInfo, PInfoLen, APP_CInfo, APP_CInfoLen)){
+        if(!BLE_Array_Compare(PInfo, PInfoLen, APP_CInfo, APP_CInfoLen)){
           if(Role != BLE_CMD_Msg_RelDev_P){
             if(BLE_CmdStringify_Type(&APP_SendBuf, &APP_SendBufLen, BLE_MsgType_SwitchRole)){
               APP_BleCmd_Receive(APP_SendBuf, APP_SendBufLen);
@@ -144,13 +144,13 @@ void APP_BleCmd_Send( uint8* Data, uint8 DataLen )
   uint8* Ext;
   if(BLE_CmdParse(Data, DataLen, &Role, &Type, &Ext, &ExtLen, false)){
     switch(Type){
-      case BLE_MsgType_Hal_Ret:
+      case BLE_MsgType_AdditInfo_Ret:
         {
           uint8 Type0, Type1;
           uint32 Val;
           if(BLE_CmdExtParse_8_8_32(Ext, ExtLen, &Type0, &Type1, &Val, false)){
             switch(Type0){
-              case BLE_HalRet_ReadRssi:
+              case BLE_AddRet_ReadRssi:
                 {
                   //if(Type1 == 0)
                   if(BLE_CmdStringify_Type_8_32(&APP_SendBuf, &APP_SendBufLen, BLE_MsgType_Send, APP_BleConnHandle, Val)){
@@ -202,6 +202,7 @@ void APP_Enter_Sleep(){
     APP_BleCmd_Hook_Receive(APP_SendBuf, APP_SendBufLen);
   }
   HalLedSet(HAL_LED_CHANNEL_P1_1, false);
+  HalInterruptSet(HAL_INTERRUPT_CHANNEL_P0_1, 0);
 }
 
 /*********************************************************************
@@ -219,16 +220,16 @@ void APP_Enter_Wakeup(){
   }
   osal_start_reload_timer( APP_TaskId, APP_READ_RSSI_EVT, APP_READ_RSSI_INTERVAL);
   HalLedSet(HAL_LED_CHANNEL_P1_1, true);
+  HalInterruptSet(HAL_INTERRUPT_CHANNEL_P0_1, APP_Sleep);
 }
 
 void APP_Init(uint8 task_id){
   APP_TaskId = task_id;
-  HalInterruptSet(HAL_INTERRUPT_CHANNEL_P0_1, APP_Sleep);
 }
 
 uint16 APP_ProcessEvent(uint8 task_id, uint16 events){
   if(events & APP_READ_RSSI_EVT){
-    if(BLE_CmdStringify_Type_8_8(&APP_SendBuf, &APP_SendBufLen, BLE_MsgType_Hal_Set, BLE_HalRet_ReadRssi, APP_BleConnHandle)){
+    if(BLE_CmdStringify_Type_8_8(&APP_SendBuf, &APP_SendBufLen, BLE_MsgType_AdditOper, BLE_AddRet_ReadRssi, APP_BleConnHandle)){
       APP_BleCmd_Hook_Receive(APP_SendBuf, APP_SendBufLen);
     }
     return ( events ^ APP_READ_RSSI_EVT );

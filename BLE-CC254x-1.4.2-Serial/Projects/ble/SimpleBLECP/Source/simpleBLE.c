@@ -407,7 +407,7 @@ void BLE_CmdRetAddInfo(uint8 Type, uint8 Chann, uint8* Content, uint8 ContentLen
   BLE_Array_Append(BLE_CmdSendBuf, Len, &Type, 1);
   BLE_Array_Append(BLE_CmdSendBuf, Len, &Chann, 1);
   BLE_Array_Append(BLE_CmdSendBuf, Len, Content, ContentLen);
-  BLE_CmdRetToExter(BLE_MsgType_Hal_Ret, &BLE_CmdSendBuf[BLE_CMD_Msg_ExtHeadIdx], Len - BLE_CMD_Msg_ExtHeadIdx);
+  BLE_CmdRetToExter(BLE_MsgType_AdditInfo_Ret, &BLE_CmdSendBuf[BLE_CMD_Msg_ExtHeadIdx], Len - BLE_CMD_Msg_ExtHeadIdx);
 }
 
 bool BLE_CmdExtParse_8_32(uint8* Ext, uint8 ExtLen, uint8* V0, uint32* V1, bool CheckValid){

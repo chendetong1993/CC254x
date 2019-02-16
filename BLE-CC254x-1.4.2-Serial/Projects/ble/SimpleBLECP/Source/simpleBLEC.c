@@ -82,6 +82,19 @@
 #define Eq(_V0_, _V1_)(_V0_ == _V1_)
 #define La(_V0_, _V1_) (_V0_ > _V1_)
 #define LE(_V0_, _V1_) (_V0_ >= _V1_)
+   
+#define TimerIsEnable(_Token)   (osal_get_timeoutEx(E->TaskId, _Token))
+
+#define TimerStop(_Token)\
+  if(osal_get_timeoutEx(E->TaskId, _Token)){\
+    BLE_CmdRetError(BLE_Error_General, osal_stop_timerEx(E->TaskId, _Token));\
+  }
+
+#define TimerStart(_Token, _Interval)\
+  if(!osal_get_timeoutEx(E->TaskId, _Token)) {\
+    BLE_CmdRetError(BLE_Error_General, osal_start_timerEx(E->TaskId, _Token, _Interval));\
+  }
+
 #define BLEC_ADDR_LEN B_ADDR_LEN
 
 #define BLEC_START_DEVICE_EVT                 (0x0001 << 0)
@@ -429,7 +442,7 @@ uint16 BLEC_ProcessEvent(uint8 task_id, uint16 events)
   {
     E->Scanning = true;
     BLE_CmdRetError(BLE_Error_BleStatus, GAPCentralRole_StartDiscovery(BLEC_DISCOVERY_MODE, BLEC_DISCOVERY_ACTIVE_SCAN, BLEC_DISCOVERY_WHITE_LIST));
-    BLE_CmdRetError(BLE_Error_General, osal_start_timerEx(E->TaskId, BLEC_END_SCAN_EVT, P.SCAN_TOTAL_DURATION));
+    TimerStart(BLEC_END_SCAN_EVT, P.SCAN_TOTAL_DURATION);
     return(events ^ BLEC_SCAN_EVT);
   }
   if(events & BLEC_END_SCAN_EVT)
@@ -717,9 +730,7 @@ uint8 BLEC_EventCB(gapCentralRoleEvent_t *pEvent)
             BLE_CmdRetError(BLE_Error_BleStatus, GAPCentralRole_StartDiscovery(BLEC_DISCOVERY_MODE, BLEC_DISCOVERY_ACTIVE_SCAN, BLEC_DISCOVERY_WHITE_LIST));
           } else {
             E->PERIOD_SCAN_DEVICE_COUNT = 0;
-            if(osal_get_timeoutEx(E->TaskId, BLEC_END_SCAN_EVT)){
-              BLE_CmdRetError(BLE_Error_General, osal_stop_timerEx(E->TaskId, BLEC_END_SCAN_EVT));
-            }
+            TimerStop(BLEC_END_SCAN_EVT);
             E->Scanning = FALSE;
             uint8 ScannMatchedCount = 0;
             for(uint8 i = 0; i < BLEC_Dev_Max_Num; i++){
@@ -730,7 +741,7 @@ uint8 BLEC_EventCB(gapCentralRoleEvent_t *pEvent)
             if(ScannMatchedCount == 0){
               BLE_CmdRetError(BLE_Error_BleStatus, bleNoResources);
             } else {
-              BLE_CmdRetError(BLE_Error_General, osal_start_timerEx(E->TaskId, BLEC_CONNECT_EVT, P.MULTI_CONNECT_INTERVAL));
+              TimerStart(BLEC_CONNECT_EVT, P.MULTI_CONNECT_INTERVAL)
             }
           }
         }
@@ -763,7 +774,7 @@ uint8 BLEC_EventCB(gapCentralRoleEvent_t *pEvent)
               }
             }
           }
-          BLE_CmdRetError(BLE_Error_General, osal_start_timerEx(E->TaskId, BLEC_CONNECT_EVT, P.MULTI_CONNECT_INTERVAL));
+          TimerStart(BLEC_CONNECT_EVT, P.MULTI_CONNECT_INTERVAL);
           E->Connecting = FALSE;
         } else {
           if(pEvent->gap.hdr.status == SUCCESS)
@@ -881,15 +892,9 @@ void BLEC_GATTDiscoveryEvent(gattMsgEvent_t *pMsg)
  */
 uint32 BLEC_End_Scan_Conn()
 {
-  if(osal_get_timeoutEx(E->TaskId, BLEC_SCAN_EVT)){
-    BLE_CmdRetError(BLE_Error_General, osal_stop_timerEx(E->TaskId, BLEC_SCAN_EVT));
-  }
-  if(osal_get_timeoutEx(E->TaskId, BLEC_END_SCAN_EVT)){
-    BLE_CmdRetError(BLE_Error_General, osal_stop_timerEx(E->TaskId, BLEC_END_SCAN_EVT));
-  }
-  if(osal_get_timeoutEx(E->TaskId, BLEC_CONNECT_EVT)){
-    BLE_CmdRetError(BLE_Error_General, osal_stop_timerEx(E->TaskId, BLEC_CONNECT_EVT));
-  }
+  TimerStop(BLEC_SCAN_EVT);
+  TimerStop(BLEC_END_SCAN_EVT);
+  TimerStop(BLEC_CONNECT_EVT);
 
   bool NeedDelay = FALSE;
   if(E->Connecting == true){
@@ -910,7 +915,7 @@ uint32 BLEC_End_Scan_Conn()
     E->DevList[i].ConnStatus = BLEC_ConnStatus_Unknown;
   }
   E->PERIOD_SCAN_DEVICE_COUNT = 0;
-  return(NeedDelay == true) ? osal_GetSystemClock() + P.END_ALL_SCAN_CONN_REQ_TIME : 0;
+  return(NeedDelay == true) ? P.END_ALL_SCAN_CONN_REQ_TIME : 0;
 }
 
 /*********************************************************************
@@ -970,7 +975,8 @@ void BLEC_CmdHandle(uint8* Cmd, uint8 CmdLen){
     uint8 PvalArrLen;
     switch(Type){
       case BLE_MsgType_Connect_EnAdvert:
-        if(BLE_CmdExtParse(Ext, ExtLen, true) && QM) osal_start_timerEx(E->TaskId, BLEC_SCAN_EVT, BLEC_End_Scan_Conn());
+        if(BLE_CmdExtParse(Ext, ExtLen, true) && QM) 
+          TimerStart(BLEC_SCAN_EVT, BLEC_End_Scan_Conn());
         break;
       case BLE_MsgType_Disconnect_DisAdvert:
         if(BLE_CmdExtParse(Ext, ExtLen, true) && QM) BLEC_End_Scan_Conn();
@@ -1062,12 +1068,10 @@ void BLEC_CmdHandle(uint8* Cmd, uint8 CmdLen){
         }
         if(MT){
           E->EParms_Save_Updated = true;
-          if(osal_get_timeoutEx(E->TaskId, BLEC_PARM_SAVE_EVT) == 0){
-            BLE_CmdRetError(BLE_Error_General, osal_start_timerEx(E->TaskId, BLEC_PARM_SAVE_EVT, BLEC_PARM_SAVE_DELAY));
-          }
+          TimerStart(BLEC_PARM_SAVE_EVT, BLEC_PARM_SAVE_DELAY);
         }
         break;
-      case BLE_MsgType_Hal_Set:
+      case BLE_MsgType_AdditOper:
         if(BLE_CmdExtParse_8_8(Ext, ExtLen, &PType0, &PType1, true)) {
           switch(PType0){
             case BLE_AddOper_ReadRssi:
@@ -1091,18 +1095,18 @@ void BLEC_CmdHandle(uint8* Cmd, uint8 CmdLen){
         }
         break;
       case BLE_MsgType_Reboot: //Reboot
-        if(BLE_CmdExtParse(Ext, ExtLen, true) && QM) BLE_CmdRetError(BLE_Error_General, osal_start_timerEx(E->TaskId, BLEC_RESET_EVT, BLEC_End_Scan_Conn()));
+        if(BLE_CmdExtParse(Ext, ExtLen, true) && QM) TimerStart(BLEC_RESET_EVT, BLEC_End_Scan_Conn());
         break;
 #if defined(BLE_PERIPHERAL)
       case BLE_MsgType_SwitchRole:
-        if(BLE_CmdExtParse(Ext, ExtLen, true) && QM) {
+        if(BLE_CmdExtParse(Ext, ExtLen, true) && (!osal_get_timeoutEx(E->TaskId, BLEC_RESET_EVT)) && QM) {
           E->BLE_CommFunc->SwitchRole();
-          BLE_CmdRetError(BLE_Error_General, osal_start_timerEx(E->TaskId, BLEC_RESET_EVT, BLEC_End_Scan_Conn()));
+          TimerStart(BLEC_RESET_EVT, BLEC_End_Scan_Conn());
         }
         break;
 #endif
       case BLE_MsgType_Sleep:
-        if(BLE_CmdExtParse(Ext, ExtLen, true) && QM) BLE_CmdRetError(BLE_Error_General, osal_start_timerEx(E->TaskId, BLEC_Sleep_EVT, BLEC_End_Scan_Conn()));
+        if(BLE_CmdExtParse(Ext, ExtLen, true)&& QM) TimerStart(BLEC_Sleep_EVT, BLEC_End_Scan_Conn());
         break;
     }
   }

@@ -11118,16 +11118,16 @@
         "scope": null
       },
       {
-        "ID": "c:@EA@BLE_Type_MsgType@BLE_MsgType_Hal_Set",
+        "ID": "c:@EA@BLE_Type_MsgType@BLE_MsgType_AdditOper",
         "What": "Enumerator",
         "defdec": "Def",
-        "display": "BLE_MsgType_Hal_Set",
+        "display": "BLE_MsgType_AdditOper",
         "location": {
           "column": "3",
           "line": "226",
           "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLE.h"
         },
-        "name": "BLE_MsgType_Hal_Set",
+        "name": "BLE_MsgType_AdditOper",
         "origin": "user_include",
         "scope": null
       },
@@ -11258,16 +11258,16 @@
         "scope": null
       },
       {
-        "ID": "c:@EA@BLE_Type_MsgType@BLE_MsgType_Hal_Ret",
+        "ID": "c:@EA@BLE_Type_MsgType@BLE_MsgType_AdditInfo_Ret",
         "What": "Enumerator",
         "defdec": "Def",
-        "display": "BLE_MsgType_Hal_Ret",
+        "display": "BLE_MsgType_AdditInfo_Ret",
         "location": {
           "column": "3",
           "line": "237",
           "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLE.h"
         },
-        "name": "BLE_MsgType_Hal_Ret",
+        "name": "BLE_MsgType_AdditInfo_Ret",
         "origin": "user_include",
         "scope": null
       },
@@ -11498,7 +11498,7 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLE.h@7375@macro@BLE_CP_Flash_Idx",
+    "ID": "c:simpleBLE.h@7383@macro@BLE_CP_Flash_Idx",
     "What": "MacroDef",
     "defdec": "Def",
     "display": "BLE_CP_Flash_Idx",
@@ -85908,7 +85908,7 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLE.c@14685@F@BLE_CmdStringify_Type_8_32@ExtLen",
+    "ID": "c:simpleBLE.c@14691@F@BLE_CmdStringify_Type_8_32@ExtLen",
     "What": "Variable",
     "defdec": "Def",
     "display": "ExtLen",
@@ -85922,7 +85922,7 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLE.c@14706@F@BLE_CmdStringify_Type_8_32@Ext",
+    "ID": "c:simpleBLE.c@14712@F@BLE_CmdStringify_Type_8_32@Ext",
     "What": "Variable",
     "defdec": "Def",
     "display": "Ext",
@@ -85950,7 +85950,7 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLE.c@15158@F@BLE_CmdStringify_Type_N@ExtLen",
+    "ID": "c:simpleBLE.c@15164@F@BLE_CmdStringify_Type_N@ExtLen",
     "What": "Variable",
     "defdec": "Def",
     "display": "ExtLen",
@@ -85964,7 +85964,7 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLE.c@15179@F@BLE_CmdStringify_Type_N@Ext",
+    "ID": "c:simpleBLE.c@15185@F@BLE_CmdStringify_Type_N@Ext",
     "What": "Variable",
     "defdec": "Def",
     "display": "Ext",
@@ -85992,7 +85992,7 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLE.c@15641@F@BLE_CmdStringify_Type_8_N@ExtLen",
+    "ID": "c:simpleBLE.c@15647@F@BLE_CmdStringify_Type_8_N@ExtLen",
     "What": "Variable",
     "defdec": "Def",
     "display": "ExtLen",
@@ -86006,7 +86006,7 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLE.c@15662@F@BLE_CmdStringify_Type_8_N@Ext",
+    "ID": "c:simpleBLE.c@15668@F@BLE_CmdStringify_Type_8_N@Ext",
     "What": "Variable",
     "defdec": "Def",
     "display": "Ext",
@@ -86034,7 +86034,7 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLE.c@16167@F@BLE_CmdStringify_Type_8_8_N@ExtLen",
+    "ID": "c:simpleBLE.c@16173@F@BLE_CmdStringify_Type_8_8_N@ExtLen",
     "What": "Variable",
     "defdec": "Def",
     "display": "ExtLen",
@@ -86048,7 +86048,7 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLE.c@16188@F@BLE_CmdStringify_Type_8_8_N@Ext",
+    "ID": "c:simpleBLE.c@16194@F@BLE_CmdStringify_Type_8_8_N@Ext",
     "What": "Variable",
     "defdec": "Def",
     "display": "Ext",
@@ -86076,7 +86076,7 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLE.c@16684@F@BLE_CmdStringify_Type_8_8@ExtLen",
+    "ID": "c:simpleBLE.c@16690@F@BLE_CmdStringify_Type_8_8@ExtLen",
     "What": "Variable",
     "defdec": "Def",
     "display": "ExtLen",
@@ -86090,7 +86090,7 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLE.c@16705@F@BLE_CmdStringify_Type_8_8@Ext",
+    "ID": "c:simpleBLE.c@16711@F@BLE_CmdStringify_Type_8_8@Ext",
     "What": "Variable",
     "defdec": "Def",
     "display": "Ext",
@@ -86118,7 +86118,7 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLE.c@17162@F@BLE_CmdStringify_Type_8_8_32@ExtLen",
+    "ID": "c:simpleBLE.c@17168@F@BLE_CmdStringify_Type_8_8_32@ExtLen",
     "What": "Variable",
     "defdec": "Def",
     "display": "ExtLen",
@@ -86132,7 +86132,7 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLE.c@17183@F@BLE_CmdStringify_Type_8_8_32@Ext",
+    "ID": "c:simpleBLE.c@17189@F@BLE_CmdStringify_Type_8_8_32@Ext",
     "What": "Variable",
     "defdec": "Def",
     "display": "Ext",
@@ -86160,7 +86160,7 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLE.c@17643@F@BLE_CmdStringify_Type_8@ExtLen",
+    "ID": "c:simpleBLE.c@17649@F@BLE_CmdStringify_Type_8@ExtLen",
     "What": "Variable",
     "defdec": "Def",
     "display": "ExtLen",
@@ -86174,7 +86174,7 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLE.c@17664@F@BLE_CmdStringify_Type_8@Ext",
+    "ID": "c:simpleBLE.c@17670@F@BLE_CmdStringify_Type_8@Ext",
     "What": "Variable",
     "defdec": "Def",
     "display": "Ext",
@@ -86216,7 +86216,7 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLE.c@18503@F@BLE_ScanAdvertData_Construct@i",
+    "ID": "c:simpleBLE.c@18509@F@BLE_ScanAdvertData_Construct@i",
     "What": "Variable",
     "defdec": "Def",
     "display": "i",
@@ -86454,13 +86454,55 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEC.c@3733@macro@BLEC_ADDR_LEN",
+    "ID": "c:simpleBLEC.c@3738@macro@TimerIsEnable",
+    "What": "MacroDef",
+    "defdec": "Def",
+    "display": "TimerIsEnable",
+    "location": {
+      "column": "9",
+      "line": "86",
+      "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
+    },
+    "name": "TimerIsEnable",
+    "origin": "project_file",
+    "scope": null
+  },
+  {
+    "ID": "c:simpleBLEC.c@3813@macro@TimerStop",
+    "What": "MacroDef",
+    "defdec": "Def",
+    "display": "TimerStop",
+    "location": {
+      "column": "9",
+      "line": "88",
+      "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
+    },
+    "name": "TimerStop",
+    "origin": "project_file",
+    "scope": null
+  },
+  {
+    "ID": "c:simpleBLEC.c@3975@macro@TimerStart",
+    "What": "MacroDef",
+    "defdec": "Def",
+    "display": "TimerStart",
+    "location": {
+      "column": "9",
+      "line": "93",
+      "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
+    },
+    "name": "TimerStart",
+    "origin": "project_file",
+    "scope": null
+  },
+  {
+    "ID": "c:simpleBLEC.c@4163@macro@BLEC_ADDR_LEN",
     "What": "MacroDef",
     "defdec": "Def",
     "display": "BLEC_ADDR_LEN",
     "location": {
       "column": "9",
-      "line": "85",
+      "line": "98",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "BLEC_ADDR_LEN",
@@ -86468,13 +86510,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEC.c@3769@macro@BLEC_START_DEVICE_EVT",
+    "ID": "c:simpleBLEC.c@4199@macro@BLEC_START_DEVICE_EVT",
     "What": "MacroDef",
     "defdec": "Def",
     "display": "BLEC_START_DEVICE_EVT",
     "location": {
       "column": "9",
-      "line": "87",
+      "line": "100",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "BLEC_START_DEVICE_EVT",
@@ -86482,13 +86524,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEC.c@3830@macro@BLEC_RESET_EVT",
+    "ID": "c:simpleBLEC.c@4260@macro@BLEC_RESET_EVT",
     "What": "MacroDef",
     "defdec": "Def",
     "display": "BLEC_RESET_EVT",
     "location": {
       "column": "9",
-      "line": "88",
+      "line": "101",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "BLEC_RESET_EVT",
@@ -86496,13 +86538,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEC.c@3918@macro@BLEC_SCAN_EVT",
+    "ID": "c:simpleBLEC.c@4348@macro@BLEC_SCAN_EVT",
     "What": "MacroDef",
     "defdec": "Def",
     "display": "BLEC_SCAN_EVT",
     "location": {
       "column": "9",
-      "line": "89",
+      "line": "102",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "BLEC_SCAN_EVT",
@@ -86510,13 +86552,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEC.c@4005@macro@BLEC_END_SCAN_EVT",
+    "ID": "c:simpleBLEC.c@4435@macro@BLEC_END_SCAN_EVT",
     "What": "MacroDef",
     "defdec": "Def",
     "display": "BLEC_END_SCAN_EVT",
     "location": {
       "column": "9",
-      "line": "90",
+      "line": "103",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "BLEC_END_SCAN_EVT",
@@ -86524,13 +86566,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEC.c@4096@macro@BLEC_CONNECT_EVT",
+    "ID": "c:simpleBLEC.c@4526@macro@BLEC_CONNECT_EVT",
     "What": "MacroDef",
     "defdec": "Def",
     "display": "BLEC_CONNECT_EVT",
     "location": {
       "column": "9",
-      "line": "91",
+      "line": "104",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "BLEC_CONNECT_EVT",
@@ -86538,13 +86580,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEC.c@4186@macro@BLEC_Sleep_EVT",
+    "ID": "c:simpleBLEC.c@4616@macro@BLEC_Sleep_EVT",
     "What": "MacroDef",
     "defdec": "Def",
     "display": "BLEC_Sleep_EVT",
     "location": {
       "column": "9",
-      "line": "92",
+      "line": "105",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "BLEC_Sleep_EVT",
@@ -86552,13 +86594,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEC.c@4268@macro@BLEC_PARM_SAVE_EVT",
+    "ID": "c:simpleBLEC.c@4698@macro@BLEC_PARM_SAVE_EVT",
     "What": "MacroDef",
     "defdec": "Def",
     "display": "BLEC_PARM_SAVE_EVT",
     "location": {
       "column": "9",
-      "line": "93",
+      "line": "106",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "BLEC_PARM_SAVE_EVT",
@@ -86566,13 +86608,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEC.c@4361@macro@BLEC_DISCOVERY_MODE",
+    "ID": "c:simpleBLEC.c@4791@macro@BLEC_DISCOVERY_MODE",
     "What": "MacroDef",
     "defdec": "Def",
     "display": "BLEC_DISCOVERY_MODE",
     "location": {
       "column": "9",
-      "line": "95",
+      "line": "108",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "BLEC_DISCOVERY_MODE",
@@ -86580,13 +86622,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEC.c@4468@macro@BLEC_DISCOVERY_ACTIVE_SCAN",
+    "ID": "c:simpleBLEC.c@4898@macro@BLEC_DISCOVERY_ACTIVE_SCAN",
     "What": "MacroDef",
     "defdec": "Def",
     "display": "BLEC_DISCOVERY_ACTIVE_SCAN",
     "location": {
       "column": "9",
-      "line": "97",
+      "line": "110",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "BLEC_DISCOVERY_ACTIVE_SCAN",
@@ -86594,13 +86636,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEC.c@4554@macro@BLEC_DISCOVERY_WHITE_LIST",
+    "ID": "c:simpleBLEC.c@4984@macro@BLEC_DISCOVERY_WHITE_LIST",
     "What": "MacroDef",
     "defdec": "Def",
     "display": "BLEC_DISCOVERY_WHITE_LIST",
     "location": {
       "column": "9",
-      "line": "99",
+      "line": "112",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "BLEC_DISCOVERY_WHITE_LIST",
@@ -86608,13 +86650,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEC.c@4656@macro@BLEC_LINK_HIGH_DUTY_CYCLE",
+    "ID": "c:simpleBLEC.c@5086@macro@BLEC_LINK_HIGH_DUTY_CYCLE",
     "What": "MacroDef",
     "defdec": "Def",
     "display": "BLEC_LINK_HIGH_DUTY_CYCLE",
     "location": {
       "column": "9",
-      "line": "101",
+      "line": "114",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "BLEC_LINK_HIGH_DUTY_CYCLE",
@@ -86622,13 +86664,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEC.c@4770@macro@BLEC_LINK_WHITE_LIST",
+    "ID": "c:simpleBLEC.c@5200@macro@BLEC_LINK_WHITE_LIST",
     "What": "MacroDef",
     "defdec": "Def",
     "display": "BLEC_LINK_WHITE_LIST",
     "location": {
       "column": "9",
-      "line": "103",
+      "line": "116",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "BLEC_LINK_WHITE_LIST",
@@ -86636,13 +86678,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEC.c@4874@macro@BLEC_PARM_SAVE_DELAY",
+    "ID": "c:simpleBLEC.c@5304@macro@BLEC_PARM_SAVE_DELAY",
     "What": "MacroDef",
     "defdec": "Def",
     "display": "BLEC_PARM_SAVE_DELAY",
     "location": {
       "column": "9",
-      "line": "105",
+      "line": "118",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "BLEC_PARM_SAVE_DELAY",
@@ -86662,7 +86704,7 @@
         "display": "BLE_DISC_STATE_IDLE",
         "location": {
           "column": "3",
-          "line": "113",
+          "line": "126",
           "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
         },
         "name": "BLE_DISC_STATE_IDLE",
@@ -86676,7 +86718,7 @@
         "display": "BLE_DISC_STATE_SVC",
         "location": {
           "column": "3",
-          "line": "114",
+          "line": "127",
           "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
         },
         "name": "BLE_DISC_STATE_SVC",
@@ -86690,7 +86732,7 @@
         "display": "BLE_DISC_STATE_CHAR_SC",
         "location": {
           "column": "3",
-          "line": "115",
+          "line": "128",
           "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
         },
         "name": "BLE_DISC_STATE_CHAR_SC",
@@ -86700,7 +86742,7 @@
     ],
     "location": {
       "column": "9",
-      "line": "112",
+      "line": "125",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "",
@@ -86720,7 +86762,7 @@
         "display": "BLEC_ConnStatus_Unknown",
         "location": {
           "column": "3",
-          "line": "119",
+          "line": "132",
           "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
         },
         "name": "BLEC_ConnStatus_Unknown",
@@ -86734,7 +86776,7 @@
         "display": "BLEC_ConnStatus_Scanned",
         "location": {
           "column": "3",
-          "line": "120",
+          "line": "133",
           "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
         },
         "name": "BLEC_ConnStatus_Scanned",
@@ -86748,7 +86790,7 @@
         "display": "BLEC_ConnStatus_Connecting",
         "location": {
           "column": "3",
-          "line": "121",
+          "line": "134",
           "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
         },
         "name": "BLEC_ConnStatus_Connecting",
@@ -86762,7 +86804,7 @@
         "display": "BLEC_ConnStatus_Connected",
         "location": {
           "column": "3",
-          "line": "122",
+          "line": "135",
           "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
         },
         "name": "BLEC_ConnStatus_Connected",
@@ -86772,7 +86814,7 @@
     ],
     "location": {
       "column": "9",
-      "line": "118",
+      "line": "131",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "",
@@ -86786,7 +86828,7 @@
     "display": "",
     "location": {
       "column": "9",
-      "line": "126",
+      "line": "139",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "members": [
@@ -86797,12 +86839,12 @@
         "display": "ConnHandle",
         "location": {
           "column": "10",
-          "line": "127",
+          "line": "140",
           "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
         },
         "name": "ConnHandle",
         "origin": "project_file",
-        "scope": "_anonymous_simpleBLEC_c_126_9"
+        "scope": "_anonymous_simpleBLEC_c_139_9"
       },
       {
         "ID": "c:@SA@BLEC_Type_Dev@FI@DiscState",
@@ -86811,12 +86853,12 @@
         "display": "DiscState",
         "location": {
           "column": "24",
-          "line": "128",
+          "line": "141",
           "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
         },
         "name": "DiscState",
         "origin": "project_file",
-        "scope": "_anonymous_simpleBLEC_c_126_9"
+        "scope": "_anonymous_simpleBLEC_c_139_9"
       },
       {
         "ID": "c:@SA@BLEC_Type_Dev@FI@SvcStartHdl",
@@ -86825,12 +86867,12 @@
         "display": "SvcStartHdl",
         "location": {
           "column": "10",
-          "line": "129",
+          "line": "142",
           "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
         },
         "name": "SvcStartHdl",
         "origin": "project_file",
-        "scope": "_anonymous_simpleBLEC_c_126_9"
+        "scope": "_anonymous_simpleBLEC_c_139_9"
       },
       {
         "ID": "c:@SA@BLEC_Type_Dev@FI@SvcEndHdl",
@@ -86839,12 +86881,12 @@
         "display": "SvcEndHdl",
         "location": {
           "column": "10",
-          "line": "130",
+          "line": "143",
           "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
         },
         "name": "SvcEndHdl",
         "origin": "project_file",
-        "scope": "_anonymous_simpleBLEC_c_126_9"
+        "scope": "_anonymous_simpleBLEC_c_139_9"
       },
       {
         "ID": "c:@SA@BLEC_Type_Dev@FI@CharHdSC",
@@ -86853,12 +86895,12 @@
         "display": "CharHdSC",
         "location": {
           "column": "10",
-          "line": "131",
+          "line": "144",
           "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
         },
         "name": "CharHdSC",
         "origin": "project_file",
-        "scope": "_anonymous_simpleBLEC_c_126_9"
+        "scope": "_anonymous_simpleBLEC_c_139_9"
       },
       {
         "ID": "c:@SA@BLEC_Type_Dev@FI@CharSCDoWrite",
@@ -86867,12 +86909,12 @@
         "display": "CharSCDoWrite",
         "location": {
           "column": "8",
-          "line": "132",
+          "line": "145",
           "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
         },
         "name": "CharSCDoWrite",
         "origin": "project_file",
-        "scope": "_anonymous_simpleBLEC_c_126_9"
+        "scope": "_anonymous_simpleBLEC_c_139_9"
       },
       {
         "ID": "c:@SA@BLEC_Type_Dev@FI@ConnStatus",
@@ -86881,12 +86923,12 @@
         "display": "ConnStatus",
         "location": {
           "column": "24",
-          "line": "133",
+          "line": "146",
           "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
         },
         "name": "ConnStatus",
         "origin": "project_file",
-        "scope": "_anonymous_simpleBLEC_c_126_9"
+        "scope": "_anonymous_simpleBLEC_c_139_9"
       },
       {
         "ID": "c:@SA@BLEC_Type_Dev@FI@addrType",
@@ -86895,12 +86937,12 @@
         "display": "addrType",
         "location": {
           "column": "9",
-          "line": "134",
+          "line": "147",
           "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
         },
         "name": "addrType",
         "origin": "project_file",
-        "scope": "_anonymous_simpleBLEC_c_126_9"
+        "scope": "_anonymous_simpleBLEC_c_139_9"
       },
       {
         "ID": "c:@SA@BLEC_Type_Dev@FI@addr",
@@ -86909,12 +86951,12 @@
         "display": "addr",
         "location": {
           "column": "9",
-          "line": "135",
+          "line": "148",
           "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
         },
         "name": "addr",
         "origin": "project_file",
-        "scope": "_anonymous_simpleBLEC_c_126_9"
+        "scope": "_anonymous_simpleBLEC_c_139_9"
       },
       {
         "ID": "c:@SA@BLEC_Type_Dev@FI@ScanRspData",
@@ -86923,12 +86965,12 @@
         "display": "ScanRspData",
         "location": {
           "column": "9",
-          "line": "136",
+          "line": "149",
           "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
         },
         "name": "ScanRspData",
         "origin": "project_file",
-        "scope": "_anonymous_simpleBLEC_c_126_9"
+        "scope": "_anonymous_simpleBLEC_c_139_9"
       },
       {
         "ID": "c:@SA@BLEC_Type_Dev@FI@ScanRspDataLen",
@@ -86937,12 +86979,12 @@
         "display": "ScanRspDataLen",
         "location": {
           "column": "9",
-          "line": "137",
+          "line": "150",
           "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
         },
         "name": "ScanRspDataLen",
         "origin": "project_file",
-        "scope": "_anonymous_simpleBLEC_c_126_9"
+        "scope": "_anonymous_simpleBLEC_c_139_9"
       },
       {
         "ID": "c:@SA@BLEC_Type_Dev@FI@SendQueue",
@@ -86951,12 +86993,12 @@
         "display": "SendQueue",
         "location": {
           "column": "18",
-          "line": "138",
+          "line": "151",
           "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
         },
         "name": "SendQueue",
         "origin": "project_file",
-        "scope": "_anonymous_simpleBLEC_c_126_9"
+        "scope": "_anonymous_simpleBLEC_c_139_9"
       },
       {
         "ID": "c:@SA@BLEC_Type_Dev@FI@ScanRssi",
@@ -86965,12 +87007,12 @@
         "display": "ScanRssi",
         "location": {
           "column": "8",
-          "line": "139",
+          "line": "152",
           "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
         },
         "name": "ScanRssi",
         "origin": "project_file",
-        "scope": "_anonymous_simpleBLEC_c_126_9"
+        "scope": "_anonymous_simpleBLEC_c_139_9"
       },
       {
         "ID": "c:@SA@BLEC_Type_Dev@FI@Token",
@@ -86979,12 +87021,12 @@
         "display": "Token",
         "location": {
           "column": "9",
-          "line": "140",
+          "line": "153",
           "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
         },
         "name": "Token",
         "origin": "project_file",
-        "scope": "_anonymous_simpleBLEC_c_126_9"
+        "scope": "_anonymous_simpleBLEC_c_139_9"
       },
       {
         "ID": "c:simpleBLEC.c@T@BLEC_Type_Dev",
@@ -86993,12 +87035,12 @@
         "display": "struct BLEC_Type_Dev",
         "location": {
           "column": "3",
-          "line": "141",
+          "line": "154",
           "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
         },
         "name": "BLEC_Type_Dev",
         "origin": "project_file",
-        "scope": "_anonymous_simpleBLEC_c_126_9"
+        "scope": "_anonymous_simpleBLEC_c_139_9"
       }
     ],
     "name": "",
@@ -87012,7 +87054,7 @@
     "display": "",
     "location": {
       "column": "9",
-      "line": "143",
+      "line": "156",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "members": [
@@ -87023,12 +87065,12 @@
         "display": "BLE_CommFunc",
         "location": {
           "column": "22",
-          "line": "144",
+          "line": "157",
           "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
         },
         "name": "BLE_CommFunc",
         "origin": "project_file",
-        "scope": "_anonymous_simpleBLEC_c_143_9"
+        "scope": "_anonymous_simpleBLEC_c_156_9"
       },
       {
         "ID": "c:@SA@BLEC_Type_GlobalVar@FI@EParms",
@@ -87037,12 +87079,12 @@
         "display": "EParms",
         "location": {
           "column": "20",
-          "line": "145",
+          "line": "158",
           "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
         },
         "name": "EParms",
         "origin": "project_file",
-        "scope": "_anonymous_simpleBLEC_c_143_9"
+        "scope": "_anonymous_simpleBLEC_c_156_9"
       },
       {
         "ID": "c:@SA@BLEC_Type_GlobalVar@FI@EParms_Save",
@@ -87051,12 +87093,12 @@
         "display": "EParms_Save",
         "location": {
           "column": "20",
-          "line": "146",
+          "line": "159",
           "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
         },
         "name": "EParms_Save",
         "origin": "project_file",
-        "scope": "_anonymous_simpleBLEC_c_143_9"
+        "scope": "_anonymous_simpleBLEC_c_156_9"
       },
       {
         "ID": "c:@SA@BLEC_Type_GlobalVar@FI@EParms_Save_Updated",
@@ -87065,12 +87107,12 @@
         "display": "EParms_Save_Updated",
         "location": {
           "column": "8",
-          "line": "147",
+          "line": "160",
           "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
         },
         "name": "EParms_Save_Updated",
         "origin": "project_file",
-        "scope": "_anonymous_simpleBLEC_c_143_9"
+        "scope": "_anonymous_simpleBLEC_c_156_9"
       },
       {
         "ID": "c:@SA@BLEC_Type_GlobalVar@FI@PERIOD_SCAN_DEVICE_COUNT",
@@ -87079,12 +87121,12 @@
         "display": "PERIOD_SCAN_DEVICE_COUNT",
         "location": {
           "column": "10",
-          "line": "148",
+          "line": "161",
           "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
         },
         "name": "PERIOD_SCAN_DEVICE_COUNT",
         "origin": "project_file",
-        "scope": "_anonymous_simpleBLEC_c_143_9"
+        "scope": "_anonymous_simpleBLEC_c_156_9"
       },
       {
         "ID": "c:@SA@BLEC_Type_GlobalVar@FI@TaskId",
@@ -87093,12 +87135,12 @@
         "display": "TaskId",
         "location": {
           "column": "9",
-          "line": "149",
+          "line": "162",
           "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
         },
         "name": "TaskId",
         "origin": "project_file",
-        "scope": "_anonymous_simpleBLEC_c_143_9"
+        "scope": "_anonymous_simpleBLEC_c_156_9"
       },
       {
         "ID": "c:@SA@BLEC_Type_GlobalVar@FI@Scanning",
@@ -87107,12 +87149,12 @@
         "display": "Scanning",
         "location": {
           "column": "8",
-          "line": "150",
+          "line": "163",
           "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
         },
         "name": "Scanning",
         "origin": "project_file",
-        "scope": "_anonymous_simpleBLEC_c_143_9"
+        "scope": "_anonymous_simpleBLEC_c_156_9"
       },
       {
         "ID": "c:@SA@BLEC_Type_GlobalVar@FI@Connecting",
@@ -87121,12 +87163,12 @@
         "display": "Connecting",
         "location": {
           "column": "8",
-          "line": "151",
+          "line": "164",
           "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
         },
         "name": "Connecting",
         "origin": "project_file",
-        "scope": "_anonymous_simpleBLEC_c_143_9"
+        "scope": "_anonymous_simpleBLEC_c_156_9"
       },
       {
         "ID": "c:@SA@BLEC_Type_GlobalVar@FI@DevList",
@@ -87135,12 +87177,12 @@
         "display": "DevList",
         "location": {
           "column": "17",
-          "line": "152",
+          "line": "165",
           "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
         },
         "name": "DevList",
         "origin": "project_file",
-        "scope": "_anonymous_simpleBLEC_c_143_9"
+        "scope": "_anonymous_simpleBLEC_c_156_9"
       },
       {
         "ID": "c:@SA@BLEC_Type_GlobalVar@FI@DevIsConn",
@@ -87149,12 +87191,12 @@
         "display": "DevIsConn",
         "location": {
           "column": "8",
-          "line": "153",
+          "line": "166",
           "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
         },
         "name": "DevIsConn",
         "origin": "project_file",
-        "scope": "_anonymous_simpleBLEC_c_143_9"
+        "scope": "_anonymous_simpleBLEC_c_156_9"
       },
       {
         "ID": "c:@SA@BLEC_Type_GlobalVar@FI@Addr",
@@ -87163,12 +87205,12 @@
         "display": "Addr",
         "location": {
           "column": "9",
-          "line": "154",
+          "line": "167",
           "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
         },
         "name": "Addr",
         "origin": "project_file",
-        "scope": "_anonymous_simpleBLEC_c_143_9"
+        "scope": "_anonymous_simpleBLEC_c_156_9"
       },
       {
         "ID": "c:@SA@BLEC_Type_GlobalVar@FI@SCANNED_DEV_MEAN_RSSI",
@@ -87177,12 +87219,12 @@
         "display": "SCANNED_DEV_MEAN_RSSI",
         "location": {
           "column": "8",
-          "line": "155",
+          "line": "168",
           "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
         },
         "name": "SCANNED_DEV_MEAN_RSSI",
         "origin": "project_file",
-        "scope": "_anonymous_simpleBLEC_c_143_9"
+        "scope": "_anonymous_simpleBLEC_c_156_9"
       },
       {
         "ID": "c:@SA@BLEC_Type_GlobalVar@FI@RoleCB",
@@ -87191,12 +87233,12 @@
         "display": "RoleCB",
         "location": {
           "column": "22",
-          "line": "156",
+          "line": "169",
           "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
         },
         "name": "RoleCB",
         "origin": "project_file",
-        "scope": "_anonymous_simpleBLEC_c_143_9"
+        "scope": "_anonymous_simpleBLEC_c_156_9"
       },
       {
         "ID": "c:@SA@BLEC_Type_GlobalVar@FI@BondCB",
@@ -87205,12 +87247,12 @@
         "display": "BondCB",
         "location": {
           "column": "16",
-          "line": "157",
+          "line": "170",
           "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
         },
         "name": "BondCB",
         "origin": "project_file",
-        "scope": "_anonymous_simpleBLEC_c_143_9"
+        "scope": "_anonymous_simpleBLEC_c_156_9"
       },
       {
         "ID": "c:simpleBLEC.c@T@BLEC_Type_GlobalVar",
@@ -87219,12 +87261,12 @@
         "display": "struct BLEC_Type_GlobalVar",
         "location": {
           "column": "3",
-          "line": "158",
+          "line": "171",
           "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
         },
         "name": "BLEC_Type_GlobalVar",
         "origin": "project_file",
-        "scope": "_anonymous_simpleBLEC_c_143_9"
+        "scope": "_anonymous_simpleBLEC_c_156_9"
       }
     ],
     "name": "",
@@ -87238,7 +87280,7 @@
     "display": "BLEC_GVar",
     "location": {
       "column": "22",
-      "line": "163",
+      "line": "176",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "BLEC_GVar",
@@ -87252,7 +87294,7 @@
     "display": "void BLEC_WakeupNotify(void)",
     "location": {
       "column": "6",
-      "line": "168",
+      "line": "181",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "BLEC_WakeupNotify",
@@ -87266,7 +87308,7 @@
     "display": "void BLEC_Reset_EParms(BLEC_Type_EParms *)",
     "location": {
       "column": "6",
-      "line": "169",
+      "line": "182",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "BLEC_Reset_EParms",
@@ -87280,7 +87322,7 @@
     "display": "void BLEC_Init_GlobalVar(void)",
     "location": {
       "column": "6",
-      "line": "170",
+      "line": "183",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "BLEC_Init_GlobalVar",
@@ -87294,7 +87336,7 @@
     "display": "void BLEC_ProcessGATTMsg(gattMsgEvent_t *)",
     "location": {
       "column": "6",
-      "line": "171",
+      "line": "184",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "BLEC_ProcessGATTMsg",
@@ -87308,7 +87350,7 @@
     "display": "void BLEC_RssiCB(uint16, int8)",
     "location": {
       "column": "6",
-      "line": "172",
+      "line": "185",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "BLEC_RssiCB",
@@ -87322,7 +87364,7 @@
     "display": "uint8 BLEC_EventCB(gapCentralRoleEvent_t *)",
     "location": {
       "column": "7",
-      "line": "173",
+      "line": "186",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "BLEC_EventCB",
@@ -87336,7 +87378,7 @@
     "display": "void BLEC_ProcessOSALMsg(osal_event_hdr_t *)",
     "location": {
       "column": "6",
-      "line": "174",
+      "line": "187",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "BLEC_ProcessOSALMsg",
@@ -87350,7 +87392,7 @@
     "display": "void BLEC_GATTDiscoveryEvent(gattMsgEvent_t *)",
     "location": {
       "column": "6",
-      "line": "175",
+      "line": "188",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "BLEC_GATTDiscoveryEvent",
@@ -87364,7 +87406,7 @@
     "display": "bool BLEC_ScanAdvertDataSearch(uint8, uint8 *, uint8, uint8 *, uint8 *)",
     "location": {
       "column": "6",
-      "line": "176",
+      "line": "189",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "BLEC_ScanAdvertDataSearch",
@@ -87378,7 +87420,7 @@
     "display": "void BLEC_Connect(void)",
     "location": {
       "column": "6",
-      "line": "177",
+      "line": "190",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "BLEC_Connect",
@@ -87392,7 +87434,7 @@
     "display": "void BLEC_CmdHandle(uint8 *, uint8)",
     "location": {
       "column": "6",
-      "line": "178",
+      "line": "191",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "BLEC_CmdHandle",
@@ -87406,7 +87448,7 @@
     "display": "void BLEC_CentralPasscodeCB(uint8 *, uint16, uint8, uint8)",
     "location": {
       "column": "6",
-      "line": "179",
+      "line": "192",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "BLEC_CentralPasscodeCB",
@@ -87420,7 +87462,7 @@
     "display": "void BLEC_CentralPairStateCB(uint16, uint8, uint8)",
     "location": {
       "column": "6",
-      "line": "180",
+      "line": "193",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "BLEC_CentralPairStateCB",
@@ -87434,7 +87476,7 @@
     "display": "uint32 BLEC_End_Scan_Conn(void)",
     "location": {
       "column": "8",
-      "line": "181",
+      "line": "194",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "BLEC_End_Scan_Conn",
@@ -87448,7 +87490,7 @@
     "display": "bool BLEC_BleSend(uint8, uint8 *, uint8)",
     "location": {
       "column": "6",
-      "line": "182",
+      "line": "195",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "BLEC_BleSend",
@@ -87462,7 +87504,7 @@
     "display": "void BLEC_Main_Loop(void)",
     "location": {
       "column": "6",
-      "line": "183",
+      "line": "196",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "BLEC_Main_Loop",
@@ -87476,7 +87518,7 @@
     "display": "void BLEC_WakeupNotify(void)",
     "location": {
       "column": "6",
-      "line": "196",
+      "line": "209",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "BLEC_WakeupNotify",
@@ -87490,7 +87532,7 @@
     "display": "void BLEC_Reset_EParms(BLEC_Type_EParms *)",
     "location": {
       "column": "6",
-      "line": "207",
+      "line": "220",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "BLEC_Reset_EParms",
@@ -87498,13 +87540,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEC.c@8826@F@BLEC_Reset_EParms@Str",
+    "ID": "c:simpleBLEC.c@9256@F@BLEC_Reset_EParms@Str",
     "What": "Variable",
     "defdec": "Def",
     "display": "Str",
     "location": {
       "column": "3",
-      "line": "221",
+      "line": "234",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "Str",
@@ -87512,13 +87554,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEC.c@9230@F@BLEC_Reset_EParms@COMPANY_ID",
+    "ID": "c:simpleBLEC.c@9660@F@BLEC_Reset_EParms@COMPANY_ID",
     "What": "Variable",
     "defdec": "Def",
     "display": "COMPANY_ID",
     "location": {
       "column": "9",
-      "line": "231",
+      "line": "244",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "COMPANY_ID",
@@ -87526,13 +87568,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEC.c@9321@F@BLEC_Reset_EParms@i",
+    "ID": "c:simpleBLEC.c@9751@F@BLEC_Reset_EParms@i",
     "What": "Variable",
     "defdec": "Def",
     "display": "i",
     "location": {
       "column": "13",
-      "line": "232",
+      "line": "245",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "i",
@@ -87540,13 +87582,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEC.c@9406@F@BLEC_Reset_EParms@SCAN_DATA",
+    "ID": "c:simpleBLEC.c@9836@F@BLEC_Reset_EParms@SCAN_DATA",
     "What": "Variable",
     "defdec": "Def",
     "display": "SCAN_DATA",
     "location": {
       "column": "29",
-      "line": "234",
+      "line": "247",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "SCAN_DATA",
@@ -87560,7 +87602,7 @@
     "display": "void BLEC_Init_GlobalVar(void)",
     "location": {
       "column": "6",
-      "line": "249",
+      "line": "262",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "BLEC_Init_GlobalVar",
@@ -87568,13 +87610,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEC.c@10260@F@BLEC_Init_GlobalVar@T",
+    "ID": "c:simpleBLEC.c@10690@F@BLEC_Init_GlobalVar@T",
     "What": "Variable",
     "defdec": "Def",
     "display": "T",
     "location": {
       "column": "18",
-      "line": "263",
+      "line": "276",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "T",
@@ -87582,13 +87624,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEC.c@10285@F@BLEC_Init_GlobalVar@i",
+    "ID": "c:simpleBLEC.c@10715@F@BLEC_Init_GlobalVar@i",
     "What": "Variable",
     "defdec": "Def",
     "display": "i",
     "location": {
       "column": "13",
-      "line": "264",
+      "line": "277",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "i",
@@ -87602,7 +87644,7 @@
     "display": "void BLEC_Init(uint8, BLE_Type_CommFunc *)",
     "location": {
       "column": "6",
-      "line": "289",
+      "line": "302",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "BLEC_Init",
@@ -87610,13 +87652,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEC.c@11719@F@BLEC_Init@i",
+    "ID": "c:simpleBLEC.c@12149@F@BLEC_Init@i",
     "What": "Variable",
     "defdec": "Def",
     "display": "i",
     "location": {
       "column": "13",
-      "line": "305",
+      "line": "318",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "i",
@@ -87624,13 +87666,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEC.c@11892@F@BLEC_Init@BLE_Argv",
+    "ID": "c:simpleBLEC.c@12322@F@BLEC_Init@BLE_Argv",
     "What": "Variable",
     "defdec": "Def",
     "display": "BLE_Argv",
     "location": {
       "column": "17",
-      "line": "309",
+      "line": "322",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "BLE_Argv",
@@ -87638,13 +87680,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEC.c@12311@F@BLEC_Init@PERIOD_SCAN_DEVICE_MAX_NUM",
+    "ID": "c:simpleBLEC.c@12741@F@BLEC_Init@PERIOD_SCAN_DEVICE_MAX_NUM",
     "What": "Variable",
     "defdec": "Def",
     "display": "PERIOD_SCAN_DEVICE_MAX_NUM",
     "location": {
       "column": "11",
-      "line": "324",
+      "line": "337",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "PERIOD_SCAN_DEVICE_MAX_NUM",
@@ -87652,13 +87694,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEC.c@12892@F@BLEC_Init@passkey",
+    "ID": "c:simpleBLEC.c@13322@F@BLEC_Init@passkey",
     "What": "Variable",
     "defdec": "Def",
     "display": "passkey",
     "location": {
       "column": "12",
-      "line": "335",
+      "line": "348",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "passkey",
@@ -87666,13 +87708,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEC.c@12917@F@BLEC_Init@pairMode",
+    "ID": "c:simpleBLEC.c@13347@F@BLEC_Init@pairMode",
     "What": "Variable",
     "defdec": "Def",
     "display": "pairMode",
     "location": {
       "column": "11",
-      "line": "336",
+      "line": "349",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "pairMode",
@@ -87680,13 +87722,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEC.c@13114@F@BLEC_Init@mitm",
+    "ID": "c:simpleBLEC.c@13544@F@BLEC_Init@mitm",
     "What": "Variable",
     "defdec": "Def",
     "display": "mitm",
     "location": {
       "column": "11",
-      "line": "340",
+      "line": "353",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "mitm",
@@ -87694,13 +87736,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEC.c@13265@F@BLEC_Init@ioCap",
+    "ID": "c:simpleBLEC.c@13695@F@BLEC_Init@ioCap",
     "What": "Variable",
     "defdec": "Def",
     "display": "ioCap",
     "location": {
       "column": "11",
-      "line": "344",
+      "line": "357",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "ioCap",
@@ -87708,13 +87750,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEC.c@13445@F@BLEC_Init@bonding",
+    "ID": "c:simpleBLEC.c@13875@F@BLEC_Init@bonding",
     "What": "Variable",
     "defdec": "Def",
     "display": "bonding",
     "location": {
       "column": "11",
-      "line": "347",
+      "line": "360",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "bonding",
@@ -87728,7 +87770,7 @@
     "display": "uint16 BLEC_ProcessEvent(uint8, uint16)",
     "location": {
       "column": "8",
-      "line": "389",
+      "line": "402",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "BLEC_ProcessEvent",
@@ -87736,13 +87778,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEC.c@15563@F@BLEC_ProcessEvent@pMsg",
+    "ID": "c:simpleBLEC.c@15993@F@BLEC_ProcessEvent@pMsg",
     "What": "Variable",
     "defdec": "Def",
     "display": "pMsg",
     "location": {
       "column": "12",
-      "line": "394",
+      "line": "407",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "pMsg",
@@ -87756,7 +87798,7 @@
     "display": "void BLEC_ProcessOSALMsg(osal_event_hdr_t *)",
     "location": {
       "column": "6",
-      "line": "466",
+      "line": "479",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "BLEC_ProcessOSALMsg",
@@ -87770,7 +87812,7 @@
     "display": "void BLEC_ProcessGATTMsg(gattMsgEvent_t *)",
     "location": {
       "column": "6",
-      "line": "483",
+      "line": "496",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "BLEC_ProcessGATTMsg",
@@ -87778,13 +87820,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEC.c@18269@F@BLEC_ProcessGATTMsg@T",
+    "ID": "c:simpleBLEC.c@18644@F@BLEC_ProcessGATTMsg@T",
     "What": "Variable",
     "defdec": "Def",
     "display": "T",
     "location": {
       "column": "18",
-      "line": "485",
+      "line": "498",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "T",
@@ -87792,13 +87834,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEC.c@18294@F@BLEC_ProcessGATTMsg@ItemIdx",
+    "ID": "c:simpleBLEC.c@18669@F@BLEC_ProcessGATTMsg@ItemIdx",
     "What": "Variable",
     "defdec": "Def",
     "display": "ItemIdx",
     "location": {
       "column": "3",
-      "line": "486",
+      "line": "499",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "ItemIdx",
@@ -87806,13 +87848,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEC.c@18294@F@BLEC_ProcessGATTMsg@ItemLen",
+    "ID": "c:simpleBLEC.c@18669@F@BLEC_ProcessGATTMsg@ItemLen",
     "What": "Variable",
     "defdec": "Dec",
     "display": "ItemLen",
     "location": {
       "column": "3",
-      "line": "486",
+      "line": "499",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "ItemLen",
@@ -87820,13 +87862,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEC.c@19178@F@BLEC_ProcessGATTMsg@Sended",
+    "ID": "c:simpleBLEC.c@19553@F@BLEC_ProcessGATTMsg@Sended",
     "What": "Variable",
     "defdec": "Def",
     "display": "Sended",
     "location": {
       "column": "14",
-      "line": "504",
+      "line": "517",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "Sended",
@@ -87834,13 +87876,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEC.c@19532@F@BLEC_ProcessGATTMsg@NewSend",
+    "ID": "c:simpleBLEC.c@19907@F@BLEC_ProcessGATTMsg@NewSend",
     "What": "Variable",
     "defdec": "Def",
     "display": "NewSend",
     "location": {
       "column": "16",
-      "line": "509",
+      "line": "522",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "NewSend",
@@ -87848,13 +87890,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEC.c@19557@F@BLEC_ProcessGATTMsg@NewSendLen",
+    "ID": "c:simpleBLEC.c@19932@F@BLEC_ProcessGATTMsg@NewSendLen",
     "What": "Variable",
     "defdec": "Def",
     "display": "NewSendLen",
     "location": {
       "column": "15",
-      "line": "510",
+      "line": "523",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "NewSendLen",
@@ -87868,7 +87910,7 @@
     "display": "void BLEC_RssiCB(uint16, int8)",
     "location": {
       "column": "6",
-      "line": "540",
+      "line": "553",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "BLEC_RssiCB",
@@ -87876,13 +87918,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEC.c@20576@F@BLEC_RssiCB@T",
+    "ID": "c:simpleBLEC.c@20951@F@BLEC_RssiCB@T",
     "What": "Variable",
     "defdec": "Def",
     "display": "T",
     "location": {
       "column": "18",
-      "line": "542",
+      "line": "555",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "T",
@@ -87890,13 +87932,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEC.c@20597@F@BLEC_RssiCB@ItemIdx",
+    "ID": "c:simpleBLEC.c@20972@F@BLEC_RssiCB@ItemIdx",
     "What": "Variable",
     "defdec": "Def",
     "display": "ItemIdx",
     "location": {
       "column": "3",
-      "line": "543",
+      "line": "556",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "ItemIdx",
@@ -87904,13 +87946,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEC.c@20597@F@BLEC_RssiCB@ItemLen",
+    "ID": "c:simpleBLEC.c@20972@F@BLEC_RssiCB@ItemLen",
     "What": "Variable",
     "defdec": "Dec",
     "display": "ItemLen",
     "location": {
       "column": "3",
-      "line": "543",
+      "line": "556",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "ItemLen",
@@ -87918,13 +87960,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEC.c@20682@F@BLEC_RssiCB@rssiPos",
+    "ID": "c:simpleBLEC.c@21057@F@BLEC_RssiCB@rssiPos",
     "What": "Variable",
     "defdec": "Def",
     "display": "rssiPos",
     "location": {
       "column": "11",
-      "line": "545",
+      "line": "558",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "rssiPos",
@@ -87938,7 +87980,7 @@
     "display": "void BLEC_CentralPairStateCB(uint16, uint8, uint8)",
     "location": {
       "column": "6",
-      "line": "557",
+      "line": "570",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "BLEC_CentralPairStateCB",
@@ -87952,7 +87994,7 @@
     "display": "void BLEC_CentralPasscodeCB(uint8 *, uint16, uint8, uint8)",
     "location": {
       "column": "6",
-      "line": "580",
+      "line": "593",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "BLEC_CentralPasscodeCB",
@@ -87966,7 +88008,7 @@
     "display": "bool BLEC_ScanAdvertDataPair(uint8 *, uint8, uint8 *, uint8)",
     "location": {
       "column": "6",
-      "line": "592",
+      "line": "605",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "BLEC_ScanAdvertDataPair",
@@ -87974,13 +88016,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEC.c@22232@F@BLEC_ScanAdvertDataPair@pKLen",
+    "ID": "c:simpleBLEC.c@22607@F@BLEC_ScanAdvertDataPair@pKLen",
     "What": "Variable",
     "defdec": "Def",
     "display": "pKLen",
     "location": {
       "column": "9",
-      "line": "594",
+      "line": "607",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "pKLen",
@@ -87988,13 +88030,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEC.c@22232@F@BLEC_ScanAdvertDataPair@pDLen",
+    "ID": "c:simpleBLEC.c@22607@F@BLEC_ScanAdvertDataPair@pDLen",
     "What": "Variable",
     "defdec": "Dec",
     "display": "pDLen",
     "location": {
       "column": "16",
-      "line": "594",
+      "line": "607",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "pDLen",
@@ -88002,13 +88044,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEC.c@22255@F@BLEC_ScanAdvertDataPair@pKType",
+    "ID": "c:simpleBLEC.c@22630@F@BLEC_ScanAdvertDataPair@pKType",
     "What": "Variable",
     "defdec": "Def",
     "display": "pKType",
     "location": {
       "column": "9",
-      "line": "595",
+      "line": "608",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "pKType",
@@ -88016,13 +88058,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEC.c@22255@F@BLEC_ScanAdvertDataPair@pDType",
+    "ID": "c:simpleBLEC.c@22630@F@BLEC_ScanAdvertDataPair@pDType",
     "What": "Variable",
     "defdec": "Dec",
     "display": "pDType",
     "location": {
       "column": "17",
-      "line": "595",
+      "line": "608",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "pDType",
@@ -88030,13 +88072,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEC.c@22280@F@BLEC_ScanAdvertDataPair@pKIdx",
+    "ID": "c:simpleBLEC.c@22655@F@BLEC_ScanAdvertDataPair@pKIdx",
     "What": "Variable",
     "defdec": "Def",
     "display": "pKIdx",
     "location": {
       "column": "9",
-      "line": "596",
+      "line": "609",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "pKIdx",
@@ -88044,13 +88086,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEC.c@22280@F@BLEC_ScanAdvertDataPair@pDIdx",
+    "ID": "c:simpleBLEC.c@22655@F@BLEC_ScanAdvertDataPair@pDIdx",
     "What": "Variable",
     "defdec": "Dec",
     "display": "pDIdx",
     "location": {
       "column": "20",
-      "line": "596",
+      "line": "609",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "pDIdx",
@@ -88058,13 +88100,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEC.c@22311@F@BLEC_ScanAdvertDataPair@Match",
+    "ID": "c:simpleBLEC.c@22686@F@BLEC_ScanAdvertDataPair@Match",
     "What": "Variable",
     "defdec": "Def",
     "display": "Match",
     "location": {
       "column": "8",
-      "line": "597",
+      "line": "610",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "Match",
@@ -88078,7 +88120,7 @@
     "display": "uint8 BLEC_EventCB(gapCentralRoleEvent_t *)",
     "location": {
       "column": "7",
-      "line": "630",
+      "line": "643",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "BLEC_EventCB",
@@ -88086,13 +88128,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEC.c@23533@F@BLEC_EventCB@ScanMatched",
+    "ID": "c:simpleBLEC.c@23908@F@BLEC_EventCB@ScanMatched",
     "What": "Variable",
     "defdec": "Def",
     "display": "ScanMatched",
     "location": {
       "column": "20",
-      "line": "644",
+      "line": "657",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "ScanMatched",
@@ -88100,13 +88142,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEC.c@23566@F@BLEC_EventCB@ItemIdx",
+    "ID": "c:simpleBLEC.c@23941@F@BLEC_EventCB@ItemIdx",
     "What": "Variable",
     "defdec": "Def",
     "display": "ItemIdx",
     "location": {
       "column": "15",
-      "line": "645",
+      "line": "658",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "ItemIdx",
@@ -88114,13 +88156,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEC.c@23566@F@BLEC_EventCB@ItemLen",
+    "ID": "c:simpleBLEC.c@23941@F@BLEC_EventCB@ItemLen",
     "What": "Variable",
     "defdec": "Dec",
     "display": "ItemLen",
     "location": {
       "column": "15",
-      "line": "645",
+      "line": "658",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "ItemLen",
@@ -88128,13 +88170,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEC.c@23739@F@BLEC_EventCB@_16BIT",
+    "ID": "c:simpleBLEC.c@24114@F@BLEC_EventCB@_16BIT",
     "What": "Variable",
     "defdec": "Def",
     "display": "_16BIT",
     "location": {
       "column": "23",
-      "line": "648",
+      "line": "661",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "_16BIT",
@@ -88142,13 +88184,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEC.c@23848@F@BLEC_EventCB@ADVERT_DATA",
+    "ID": "c:simpleBLEC.c@24223@F@BLEC_EventCB@ADVERT_DATA",
     "What": "Variable",
     "defdec": "Def",
     "display": "ADVERT_DATA",
     "location": {
       "column": "41",
-      "line": "649",
+      "line": "662",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "ADVERT_DATA",
@@ -88156,13 +88198,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEC.c@23967@F@BLEC_EventCB@TA",
+    "ID": "c:simpleBLEC.c@24342@F@BLEC_EventCB@TA",
     "What": "Variable",
     "defdec": "Def",
     "display": "TA",
     "location": {
       "column": "23",
-      "line": "650",
+      "line": "663",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "TA",
@@ -88170,13 +88212,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEC.c@24005@F@BLEC_EventCB@TAL",
+    "ID": "c:simpleBLEC.c@24380@F@BLEC_EventCB@TAL",
     "What": "Variable",
     "defdec": "Def",
     "display": "TAL",
     "location": {
       "column": "23",
-      "line": "651",
+      "line": "664",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "TAL",
@@ -88184,13 +88226,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEC.c@24725@F@BLEC_EventCB@Rssi",
+    "ID": "c:simpleBLEC.c@25100@F@BLEC_EventCB@Rssi",
     "What": "Variable",
     "defdec": "Def",
     "display": "Rssi",
     "location": {
       "column": "24",
-      "line": "664",
+      "line": "677",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "Rssi",
@@ -88198,13 +88240,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEC.c@24782@F@BLEC_EventCB@Addr",
+    "ID": "c:simpleBLEC.c@25157@F@BLEC_EventCB@Addr",
     "What": "Variable",
     "defdec": "Def",
     "display": "Addr",
     "location": {
       "column": "25",
-      "line": "665",
+      "line": "678",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "Addr",
@@ -88212,13 +88254,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEC.c@24828@F@BLEC_EventCB@AddrType",
+    "ID": "c:simpleBLEC.c@25203@F@BLEC_EventCB@AddrType",
     "What": "Variable",
     "defdec": "Def",
     "display": "AddrType",
     "location": {
       "column": "25",
-      "line": "666",
+      "line": "679",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "AddrType",
@@ -88226,13 +88268,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEC.c@24893@F@BLEC_EventCB@ScanRspData",
+    "ID": "c:simpleBLEC.c@25268@F@BLEC_EventCB@ScanRspData",
     "What": "Variable",
     "defdec": "Def",
     "display": "ScanRspData",
     "location": {
       "column": "25",
-      "line": "667",
+      "line": "680",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "ScanRspData",
@@ -88240,13 +88282,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEC.c@24958@F@BLEC_EventCB@ScanRspDataLen",
+    "ID": "c:simpleBLEC.c@25333@F@BLEC_EventCB@ScanRspDataLen",
     "What": "Variable",
     "defdec": "Def",
     "display": "ScanRspDataLen",
     "location": {
       "column": "25",
-      "line": "668",
+      "line": "681",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "ScanRspDataLen",
@@ -88254,13 +88296,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEC.c@25321@F@BLEC_EventCB@ReInsert",
+    "ID": "c:simpleBLEC.c@25696@F@BLEC_EventCB@ReInsert",
     "What": "Variable",
     "defdec": "Def",
     "display": "ReInsert",
     "location": {
       "column": "24",
-      "line": "675",
+      "line": "688",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "ReInsert",
@@ -88268,13 +88310,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEC.c@25433@F@BLEC_EventCB@i",
+    "ID": "c:simpleBLEC.c@25808@F@BLEC_EventCB@i",
     "What": "Variable",
     "defdec": "Def",
     "display": "i",
     "location": {
       "column": "31",
-      "line": "678",
+      "line": "691",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "i",
@@ -88282,13 +88324,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEC.c@26390@F@BLEC_EventCB@SwapVal",
+    "ID": "c:simpleBLEC.c@26765@F@BLEC_EventCB@SwapVal",
     "What": "Variable",
     "defdec": "Def",
     "display": "SwapVal",
     "location": {
       "column": "27",
-      "line": "690",
+      "line": "703",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "SwapVal",
@@ -88296,13 +88338,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEC.c@26468@F@BLEC_EventCB@SwapVal",
+    "ID": "c:simpleBLEC.c@26843@F@BLEC_EventCB@SwapVal",
     "What": "Variable",
     "defdec": "Def",
     "display": "SwapVal",
     "location": {
       "column": "27",
-      "line": "691",
+      "line": "704",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "SwapVal",
@@ -88310,13 +88352,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEC.c@26552@F@BLEC_EventCB@SwapVal",
+    "ID": "c:simpleBLEC.c@26927@F@BLEC_EventCB@SwapVal",
     "What": "Variable",
     "defdec": "Def",
     "display": "SwapVal",
     "location": {
       "column": "27",
-      "line": "692",
+      "line": "705",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "SwapVal",
@@ -88324,13 +88366,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEC.c@26552@F@BLEC_EventCB@SwapI",
+    "ID": "c:simpleBLEC.c@26927@F@BLEC_EventCB@SwapI",
     "What": "Variable",
     "defdec": "Def",
     "display": "SwapI",
     "location": {
       "column": "27",
-      "line": "692",
+      "line": "705",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "SwapI",
@@ -88338,13 +88380,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEC.c@26552@F@BLEC_EventCB@SwapLen",
+    "ID": "c:simpleBLEC.c@26927@F@BLEC_EventCB@SwapLen",
     "What": "Variable",
     "defdec": "Dec",
     "display": "SwapLen",
     "location": {
       "column": "27",
-      "line": "692",
+      "line": "705",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "SwapLen",
@@ -88352,13 +88394,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEC.c@26630@F@BLEC_EventCB@SwapVal",
+    "ID": "c:simpleBLEC.c@27005@F@BLEC_EventCB@SwapVal",
     "What": "Variable",
     "defdec": "Def",
     "display": "SwapVal",
     "location": {
       "column": "27",
-      "line": "693",
+      "line": "706",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "SwapVal",
@@ -88366,13 +88408,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEC.c@26630@F@BLEC_EventCB@SwapI",
+    "ID": "c:simpleBLEC.c@27005@F@BLEC_EventCB@SwapI",
     "What": "Variable",
     "defdec": "Def",
     "display": "SwapI",
     "location": {
       "column": "27",
-      "line": "693",
+      "line": "706",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "SwapI",
@@ -88380,13 +88422,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEC.c@27340@F@BLEC_EventCB@CurrentTime",
+    "ID": "c:simpleBLEC.c@27715@F@BLEC_EventCB@CurrentTime",
     "What": "Variable",
     "defdec": "Def",
     "display": "CurrentTime",
     "location": {
       "column": "18",
-      "line": "713",
+      "line": "726",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "CurrentTime",
@@ -88394,13 +88436,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEC.c@27990@F@BLEC_EventCB@ScannMatchedCount",
+    "ID": "c:simpleBLEC.c@28226@F@BLEC_EventCB@ScannMatchedCount",
     "What": "Variable",
     "defdec": "Def",
     "display": "ScannMatchedCount",
     "location": {
       "column": "19",
-      "line": "724",
+      "line": "735",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "ScannMatchedCount",
@@ -88408,13 +88450,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEC.c@28036@F@BLEC_EventCB@i",
+    "ID": "c:simpleBLEC.c@28272@F@BLEC_EventCB@i",
     "What": "Variable",
     "defdec": "Def",
     "display": "i",
     "location": {
       "column": "23",
-      "line": "725",
+      "line": "736",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "i",
@@ -88422,13 +88464,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEC.c@28634@F@BLEC_EventCB@CurrentTime",
+    "ID": "c:simpleBLEC.c@28814@F@BLEC_EventCB@CurrentTime",
     "What": "Variable",
     "defdec": "Def",
     "display": "CurrentTime",
     "location": {
       "column": "18",
-      "line": "742",
+      "line": "753",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "CurrentTime",
@@ -88436,13 +88478,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEC.c@28763@F@BLEC_EventCB@T",
+    "ID": "c:simpleBLEC.c@28943@F@BLEC_EventCB@T",
     "What": "Variable",
     "defdec": "Def",
     "display": "T",
     "location": {
       "column": "28",
-      "line": "745",
+      "line": "756",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "T",
@@ -88450,13 +88492,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEC.c@28798@F@BLEC_EventCB@i",
+    "ID": "c:simpleBLEC.c@28978@F@BLEC_EventCB@i",
     "What": "Variable",
     "defdec": "Def",
     "display": "i",
     "location": {
       "column": "23",
-      "line": "746",
+      "line": "757",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "i",
@@ -88464,13 +88506,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEC.c@29395@F@BLEC_EventCB@uuid",
+    "ID": "c:simpleBLEC.c@29575@F@BLEC_EventCB@uuid",
     "What": "Variable",
     "defdec": "Def",
     "display": "uuid",
     "location": {
       "column": "23",
-      "line": "757",
+      "line": "768",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "uuid",
@@ -88478,13 +88520,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEC.c@30323@F@BLEC_EventCB@T",
+    "ID": "c:simpleBLEC.c@30448@F@BLEC_EventCB@T",
     "What": "Variable",
     "defdec": "Def",
     "display": "T",
     "location": {
       "column": "24",
-      "line": "778",
+      "line": "789",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "T",
@@ -88492,13 +88534,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEC.c@30350@F@BLEC_EventCB@ItemIdx",
+    "ID": "c:simpleBLEC.c@30475@F@BLEC_EventCB@ItemIdx",
     "What": "Variable",
     "defdec": "Def",
     "display": "ItemIdx",
     "location": {
       "column": "9",
-      "line": "779",
+      "line": "790",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "ItemIdx",
@@ -88506,13 +88548,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEC.c@30350@F@BLEC_EventCB@ItemLen",
+    "ID": "c:simpleBLEC.c@30475@F@BLEC_EventCB@ItemLen",
     "What": "Variable",
     "defdec": "Dec",
     "display": "ItemLen",
     "location": {
       "column": "9",
-      "line": "779",
+      "line": "790",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "ItemLen",
@@ -88520,13 +88562,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEC.c@30847@F@BLEC_EventCB@Send",
+    "ID": "c:simpleBLEC.c@30972@F@BLEC_EventCB@Send",
     "What": "Variable",
     "defdec": "Def",
     "display": "Send",
     "location": {
       "column": "15",
-      "line": "792",
+      "line": "803",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "Send",
@@ -88540,7 +88582,7 @@
     "display": "void BLEC_Connect(void)",
     "location": {
       "column": "6",
-      "line": "814",
+      "line": "825",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "BLEC_Connect",
@@ -88548,13 +88590,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEC.c@31374@F@BLEC_Connect@i",
+    "ID": "c:simpleBLEC.c@31499@F@BLEC_Connect@i",
     "What": "Variable",
     "defdec": "Def",
     "display": "i",
     "location": {
       "column": "13",
-      "line": "816",
+      "line": "827",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "i",
@@ -88568,7 +88610,7 @@
     "display": "void BLEC_GATTDiscoveryEvent(gattMsgEvent_t *)",
     "location": {
       "column": "6",
-      "line": "833",
+      "line": "844",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "BLEC_GATTDiscoveryEvent",
@@ -88576,13 +88618,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEC.c@32008@F@BLEC_GATTDiscoveryEvent@T",
+    "ID": "c:simpleBLEC.c@32133@F@BLEC_GATTDiscoveryEvent@T",
     "What": "Variable",
     "defdec": "Def",
     "display": "T",
     "location": {
       "column": "18",
-      "line": "835",
+      "line": "846",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "T",
@@ -88590,13 +88632,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEC.c@32029@F@BLEC_GATTDiscoveryEvent@ItemIdx",
+    "ID": "c:simpleBLEC.c@32154@F@BLEC_GATTDiscoveryEvent@ItemIdx",
     "What": "Variable",
     "defdec": "Def",
     "display": "ItemIdx",
     "location": {
       "column": "3",
-      "line": "836",
+      "line": "847",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "ItemIdx",
@@ -88604,13 +88646,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEC.c@32029@F@BLEC_GATTDiscoveryEvent@ItemLen",
+    "ID": "c:simpleBLEC.c@32154@F@BLEC_GATTDiscoveryEvent@ItemLen",
     "What": "Variable",
     "defdec": "Dec",
     "display": "ItemLen",
     "location": {
       "column": "3",
-      "line": "836",
+      "line": "847",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "ItemLen",
@@ -88618,13 +88660,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEC.c@32744@F@BLEC_GATTDiscoveryEvent@req",
+    "ID": "c:simpleBLEC.c@32869@F@BLEC_GATTDiscoveryEvent@req",
     "What": "Variable",
     "defdec": "Def",
     "display": "req",
     "location": {
       "column": "30",
-      "line": "849",
+      "line": "860",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "req",
@@ -88638,7 +88680,7 @@
     "display": "uint32 BLEC_End_Scan_Conn(void)",
     "location": {
       "column": "8",
-      "line": "882",
+      "line": "893",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "BLEC_End_Scan_Conn",
@@ -88646,13 +88688,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEC.c@34603@F@BLEC_End_Scan_Conn@NeedDelay",
+    "ID": "c:simpleBLEC.c@34376@F@BLEC_End_Scan_Conn@NeedDelay",
     "What": "Variable",
     "defdec": "Def",
     "display": "NeedDelay",
     "location": {
       "column": "8",
-      "line": "894",
+      "line": "899",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "NeedDelay",
@@ -88660,13 +88702,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEC.c@34907@F@BLEC_End_Scan_Conn@i",
+    "ID": "c:simpleBLEC.c@34680@F@BLEC_End_Scan_Conn@i",
     "What": "Variable",
     "defdec": "Def",
     "display": "i",
     "location": {
       "column": "13",
-      "line": "905",
+      "line": "910",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "i",
@@ -88680,7 +88722,7 @@
     "display": "bool BLEC_BleSend(uint8, uint8 *, uint8)",
     "location": {
       "column": "6",
-      "line": "923",
+      "line": "928",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "BLEC_BleSend",
@@ -88688,13 +88730,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEC.c@35697@F@BLEC_BleSend@T",
+    "ID": "c:simpleBLEC.c@35446@F@BLEC_BleSend@T",
     "What": "Variable",
     "defdec": "Def",
     "display": "T",
     "location": {
       "column": "20",
-      "line": "925",
+      "line": "930",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "T",
@@ -88708,7 +88750,7 @@
     "display": "void BLEC_CmdHandle(uint8 *, uint8)",
     "location": {
       "column": "6",
-      "line": "957",
+      "line": "962",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "BLEC_CmdHandle",
@@ -88716,13 +88758,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEC.c@36611@macro@QM",
+    "ID": "c:simpleBLEC.c@36360@macro@QM",
     "What": "MacroDef",
     "defdec": "Def",
     "display": "QM",
     "location": {
       "column": "9",
-      "line": "958",
+      "line": "963",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "QM",
@@ -88730,13 +88772,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEC.c@36656@macro@MF",
+    "ID": "c:simpleBLEC.c@36405@macro@MF",
     "What": "MacroDef",
     "defdec": "Def",
     "display": "MF",
     "location": {
       "column": "9",
-      "line": "959",
+      "line": "964",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "MF",
@@ -88744,13 +88786,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEC.c@36693@macro@MT",
+    "ID": "c:simpleBLEC.c@36442@macro@MT",
     "What": "MacroDef",
     "defdec": "Def",
     "display": "MT",
     "location": {
       "column": "9",
-      "line": "960",
+      "line": "965",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "MT",
@@ -88758,13 +88800,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEC.c@36723@F@BLEC_CmdHandle@Role",
+    "ID": "c:simpleBLEC.c@36472@F@BLEC_CmdHandle@Role",
     "What": "Variable",
     "defdec": "Def",
     "display": "Role",
     "location": {
       "column": "9",
-      "line": "961",
+      "line": "966",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "Role",
@@ -88772,13 +88814,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEC.c@36738@F@BLEC_CmdHandle@Type",
+    "ID": "c:simpleBLEC.c@36487@F@BLEC_CmdHandle@Type",
     "What": "Variable",
     "defdec": "Def",
     "display": "Type",
     "location": {
       "column": "9",
-      "line": "962",
+      "line": "967",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "Type",
@@ -88786,13 +88828,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEC.c@36753@F@BLEC_CmdHandle@Ext",
+    "ID": "c:simpleBLEC.c@36502@F@BLEC_CmdHandle@Ext",
     "What": "Variable",
     "defdec": "Def",
     "display": "Ext",
     "location": {
       "column": "10",
-      "line": "963",
+      "line": "968",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "Ext",
@@ -88800,13 +88842,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEC.c@36768@F@BLEC_CmdHandle@ExtLen",
+    "ID": "c:simpleBLEC.c@36517@F@BLEC_CmdHandle@ExtLen",
     "What": "Variable",
     "defdec": "Def",
     "display": "ExtLen",
     "location": {
       "column": "9",
-      "line": "964",
+      "line": "969",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "ExtLen",
@@ -88814,13 +88856,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEC.c@36785@F@BLEC_CmdHandle@Msg_Executed",
+    "ID": "c:simpleBLEC.c@36534@F@BLEC_CmdHandle@Msg_Executed",
     "What": "Variable",
     "defdec": "Def",
     "display": "Msg_Executed",
     "location": {
       "column": "8",
-      "line": "965",
+      "line": "970",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "Msg_Executed",
@@ -88828,13 +88870,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEC.c@36894@F@BLEC_CmdHandle@PType0",
+    "ID": "c:simpleBLEC.c@36643@F@BLEC_CmdHandle@PType0",
     "What": "Variable",
     "defdec": "Def",
     "display": "PType0",
     "location": {
       "column": "11",
-      "line": "967",
+      "line": "972",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "PType0",
@@ -88842,13 +88884,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEC.c@36894@F@BLEC_CmdHandle@PType1",
+    "ID": "c:simpleBLEC.c@36643@F@BLEC_CmdHandle@PType1",
     "What": "Variable",
     "defdec": "Dec",
     "display": "PType1",
     "location": {
       "column": "19",
-      "line": "967",
+      "line": "972",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "PType1",
@@ -88856,13 +88898,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEC.c@36921@F@BLEC_CmdHandle@PValL",
+    "ID": "c:simpleBLEC.c@36670@F@BLEC_CmdHandle@PValL",
     "What": "Variable",
     "defdec": "Def",
     "display": "PValL",
     "location": {
       "column": "12",
-      "line": "968",
+      "line": "973",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "PValL",
@@ -88870,13 +88912,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEC.c@36940@F@BLEC_CmdHandle@PValArr",
+    "ID": "c:simpleBLEC.c@36689@F@BLEC_CmdHandle@PValArr",
     "What": "Variable",
     "defdec": "Def",
     "display": "PValArr",
     "location": {
       "column": "12",
-      "line": "969",
+      "line": "974",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "PValArr",
@@ -88884,13 +88926,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEC.c@36961@F@BLEC_CmdHandle@PvalArrLen",
+    "ID": "c:simpleBLEC.c@36710@F@BLEC_CmdHandle@PvalArrLen",
     "What": "Variable",
     "defdec": "Def",
     "display": "PvalArrLen",
     "location": {
       "column": "11",
-      "line": "970",
+      "line": "975",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "PvalArrLen",
@@ -88904,7 +88946,7 @@
     "display": "void BLEC_Main_Loop(void)",
     "location": {
       "column": "6",
-      "line": "1125",
+      "line": "1129",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "BLEC_Main_Loop",
@@ -88912,13 +88954,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEC.c@44115@F@BLEC_Main_Loop@_s",
+    "ID": "c:simpleBLEC.c@43604@F@BLEC_Main_Loop@_s",
     "What": "Variable",
     "defdec": "Def",
     "display": "_s",
     "location": {
       "column": "3",
-      "line": "1127",
+      "line": "1131",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEC.c"
     },
     "name": "_s",
@@ -89516,41 +89558,55 @@
     "scope": null
   },
   {
-    "ID": "c:@BLEP_Timer_Record",
-    "What": "Variable",
+    "ID": "c:simpleBLEP.c@3870@macro@TimerIsEnable",
+    "What": "MacroDef",
     "defdec": "Def",
-    "display": "BLEP_Timer_Record",
+    "display": "TimerIsEnable",
     "location": {
-      "column": "8",
+      "column": "9",
       "line": "92",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEP.c"
     },
-    "name": "BLEP_Timer_Record",
+    "name": "TimerIsEnable",
     "origin": "project_file",
     "scope": null
   },
   {
-    "ID": "c:simpleBLEP.c@3901@macro@Timeout",
+    "ID": "c:simpleBLEP.c@3945@macro@TimerStop",
     "What": "MacroDef",
     "defdec": "Def",
-    "display": "Timeout",
+    "display": "TimerStop",
     "location": {
       "column": "9",
-      "line": "93",
+      "line": "94",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEP.c"
     },
-    "name": "Timeout",
+    "name": "TimerStop",
     "origin": "project_file",
     "scope": null
   },
   {
-    "ID": "c:simpleBLEP.c@3987@macro@BLEP_DISCOVERABLE_MODE",
+    "ID": "c:simpleBLEP.c@4107@macro@TimerStart",
+    "What": "MacroDef",
+    "defdec": "Def",
+    "display": "TimerStart",
+    "location": {
+      "column": "9",
+      "line": "99",
+      "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEP.c"
+    },
+    "name": "TimerStart",
+    "origin": "project_file",
+    "scope": null
+  },
+  {
+    "ID": "c:simpleBLEP.c@4295@macro@BLEP_DISCOVERABLE_MODE",
     "What": "MacroDef",
     "defdec": "Def",
     "display": "BLEP_DISCOVERABLE_MODE",
     "location": {
       "column": "9",
-      "line": "95",
+      "line": "104",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEP.c"
     },
     "name": "BLEP_DISCOVERABLE_MODE",
@@ -89558,13 +89614,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEP.c@4380@macro@BLEP_SBP_START_DEVICE_EVT",
+    "ID": "c:simpleBLEP.c@4688@macro@BLEP_SBP_START_DEVICE_EVT",
     "What": "MacroDef",
     "defdec": "Def",
     "display": "BLEP_SBP_START_DEVICE_EVT",
     "location": {
       "column": "9",
-      "line": "101",
+      "line": "110",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEP.c"
     },
     "name": "BLEP_SBP_START_DEVICE_EVT",
@@ -89572,13 +89628,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEP.c@4507@macro@BLEP_RESET_EVT",
+    "ID": "c:simpleBLEP.c@4815@macro@BLEP_RESET_EVT",
     "What": "MacroDef",
     "defdec": "Def",
     "display": "BLEP_RESET_EVT",
     "location": {
       "column": "9",
-      "line": "102",
+      "line": "111",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEP.c"
     },
     "name": "BLEP_RESET_EVT",
@@ -89586,13 +89642,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEP.c@4612@macro@BLEP_SEND_DONE_EVT",
+    "ID": "c:simpleBLEP.c@4920@macro@BLEP_SEND_DONE_EVT",
     "What": "MacroDef",
     "defdec": "Def",
     "display": "BLEP_SEND_DONE_EVT",
     "location": {
       "column": "9",
-      "line": "103",
+      "line": "112",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEP.c"
     },
     "name": "BLEP_SEND_DONE_EVT",
@@ -89600,13 +89656,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEP.c@4721@macro@BLEP_Sleep_EVT",
+    "ID": "c:simpleBLEP.c@5029@macro@BLEP_Sleep_EVT",
     "What": "MacroDef",
     "defdec": "Def",
     "display": "BLEP_Sleep_EVT",
     "location": {
       "column": "9",
-      "line": "104",
+      "line": "113",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEP.c"
     },
     "name": "BLEP_Sleep_EVT",
@@ -89614,13 +89670,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEP.c@4826@macro@BLEP_PARM_SAVE_EVT",
+    "ID": "c:simpleBLEP.c@5134@macro@BLEP_PARM_SAVE_EVT",
     "What": "MacroDef",
     "defdec": "Def",
     "display": "BLEP_PARM_SAVE_EVT",
     "location": {
       "column": "9",
-      "line": "105",
+      "line": "114",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEP.c"
     },
     "name": "BLEP_PARM_SAVE_EVT",
@@ -89628,13 +89684,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEP.c@4936@macro@BLEP_PARM_SAVE_DELAY",
+    "ID": "c:simpleBLEP.c@5244@macro@BLEP_PARM_SAVE_DELAY",
     "What": "MacroDef",
     "defdec": "Def",
     "display": "BLEP_PARM_SAVE_DELAY",
     "location": {
       "column": "9",
-      "line": "107",
+      "line": "116",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEP.c"
     },
     "name": "BLEP_PARM_SAVE_DELAY",
@@ -89648,7 +89704,7 @@
     "display": "",
     "location": {
       "column": "9",
-      "line": "112",
+      "line": "121",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEP.c"
     },
     "members": [
@@ -89659,12 +89715,12 @@
         "display": "BLE_CommFunc",
         "location": {
           "column": "22",
-          "line": "113",
+          "line": "122",
           "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEP.c"
         },
         "name": "BLE_CommFunc",
         "origin": "project_file",
-        "scope": "_anonymous_simpleBLEP_c_112_9"
+        "scope": "_anonymous_simpleBLEP_c_121_9"
       },
       {
         "ID": "c:@SA@BLEP_Type_GlobalVar@FI@EParms",
@@ -89673,12 +89729,12 @@
         "display": "EParms",
         "location": {
           "column": "20",
-          "line": "115",
+          "line": "124",
           "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEP.c"
         },
         "name": "EParms",
         "origin": "project_file",
-        "scope": "_anonymous_simpleBLEP_c_112_9"
+        "scope": "_anonymous_simpleBLEP_c_121_9"
       },
       {
         "ID": "c:@SA@BLEP_Type_GlobalVar@FI@EParms_Save",
@@ -89687,12 +89743,12 @@
         "display": "EParms_Save",
         "location": {
           "column": "20",
-          "line": "116",
+          "line": "125",
           "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEP.c"
         },
         "name": "EParms_Save",
         "origin": "project_file",
-        "scope": "_anonymous_simpleBLEP_c_112_9"
+        "scope": "_anonymous_simpleBLEP_c_121_9"
       },
       {
         "ID": "c:@SA@BLEP_Type_GlobalVar@FI@EParms_Save_Updated",
@@ -89701,12 +89757,12 @@
         "display": "EParms_Save_Updated",
         "location": {
           "column": "8",
-          "line": "117",
+          "line": "126",
           "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEP.c"
         },
         "name": "EParms_Save_Updated",
         "origin": "project_file",
-        "scope": "_anonymous_simpleBLEP_c_112_9"
+        "scope": "_anonymous_simpleBLEP_c_121_9"
       },
       {
         "ID": "c:@SA@BLEP_Type_GlobalVar@FI@TaskId",
@@ -89715,12 +89771,12 @@
         "display": "TaskId",
         "location": {
           "column": "9",
-          "line": "118",
+          "line": "127",
           "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEP.c"
         },
         "name": "TaskId",
         "origin": "project_file",
-        "scope": "_anonymous_simpleBLEP_c_112_9"
+        "scope": "_anonymous_simpleBLEP_c_121_9"
       },
       {
         "ID": "c:@SA@BLEP_Type_GlobalVar@FI@advertData",
@@ -89729,12 +89785,12 @@
         "display": "advertData",
         "location": {
           "column": "9",
-          "line": "121",
+          "line": "130",
           "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEP.c"
         },
         "name": "advertData",
         "origin": "project_file",
-        "scope": "_anonymous_simpleBLEP_c_112_9"
+        "scope": "_anonymous_simpleBLEP_c_121_9"
       },
       {
         "ID": "c:@SA@BLEP_Type_GlobalVar@FI@advertDataLen",
@@ -89743,12 +89799,12 @@
         "display": "advertDataLen",
         "location": {
           "column": "9",
-          "line": "122",
+          "line": "131",
           "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEP.c"
         },
         "name": "advertDataLen",
         "origin": "project_file",
-        "scope": "_anonymous_simpleBLEP_c_112_9"
+        "scope": "_anonymous_simpleBLEP_c_121_9"
       },
       {
         "ID": "c:@SA@BLEP_Type_GlobalVar@FI@centralAddr",
@@ -89757,12 +89813,12 @@
         "display": "centralAddr",
         "location": {
           "column": "9",
-          "line": "123",
+          "line": "132",
           "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEP.c"
         },
         "name": "centralAddr",
         "origin": "project_file",
-        "scope": "_anonymous_simpleBLEP_c_112_9"
+        "scope": "_anonymous_simpleBLEP_c_121_9"
       },
       {
         "ID": "c:@SA@BLEP_Type_GlobalVar@FI@addr",
@@ -89771,12 +89827,12 @@
         "display": "addr",
         "location": {
           "column": "9",
-          "line": "124",
+          "line": "133",
           "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEP.c"
         },
         "name": "addr",
         "origin": "project_file",
-        "scope": "_anonymous_simpleBLEP_c_112_9"
+        "scope": "_anonymous_simpleBLEP_c_121_9"
       },
       {
         "ID": "c:@SA@BLEP_Type_GlobalVar@FI@Connected",
@@ -89785,26 +89841,12 @@
         "display": "Connected",
         "location": {
           "column": "8",
-          "line": "126",
+          "line": "135",
           "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEP.c"
         },
         "name": "Connected",
         "origin": "project_file",
-        "scope": "_anonymous_simpleBLEP_c_112_9"
-      },
-      {
-        "ID": "c:@SA@BLEP_Type_GlobalVar@FI@SendDone",
-        "What": "FieldDecl",
-        "defdec": "Def",
-        "display": "SendDone",
-        "location": {
-          "column": "8",
-          "line": "127",
-          "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEP.c"
-        },
-        "name": "SendDone",
-        "origin": "project_file",
-        "scope": "_anonymous_simpleBLEP_c_112_9"
+        "scope": "_anonymous_simpleBLEP_c_121_9"
       },
       {
         "ID": "c:@SA@BLEP_Type_GlobalVar@FI@SendQueue",
@@ -89813,12 +89855,12 @@
         "display": "SendQueue",
         "location": {
           "column": "18",
-          "line": "128",
+          "line": "136",
           "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEP.c"
         },
         "name": "SendQueue",
         "origin": "project_file",
-        "scope": "_anonymous_simpleBLEP_c_112_9"
+        "scope": "_anonymous_simpleBLEP_c_121_9"
       },
       {
         "ID": "c:@SA@BLEP_Type_GlobalVar@FI@ConnHandle",
@@ -89827,12 +89869,12 @@
         "display": "ConnHandle",
         "location": {
           "column": "9",
-          "line": "130",
+          "line": "138",
           "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEP.c"
         },
         "name": "ConnHandle",
         "origin": "project_file",
-        "scope": "_anonymous_simpleBLEP_c_112_9"
+        "scope": "_anonymous_simpleBLEP_c_121_9"
       },
       {
         "ID": "c:@SA@BLEP_Type_GlobalVar@FI@AdverEnable",
@@ -89841,12 +89883,12 @@
         "display": "AdverEnable",
         "location": {
           "column": "8",
-          "line": "131",
+          "line": "139",
           "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEP.c"
         },
         "name": "AdverEnable",
         "origin": "project_file",
-        "scope": "_anonymous_simpleBLEP_c_112_9"
+        "scope": "_anonymous_simpleBLEP_c_121_9"
       },
       {
         "ID": "c:@SA@BLEP_Type_GlobalVar@FI@PeripheralCBs",
@@ -89855,12 +89897,12 @@
         "display": "PeripheralCBs",
         "location": {
           "column": "17",
-          "line": "132",
+          "line": "140",
           "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEP.c"
         },
         "name": "PeripheralCBs",
         "origin": "project_file",
-        "scope": "_anonymous_simpleBLEP_c_112_9"
+        "scope": "_anonymous_simpleBLEP_c_121_9"
       },
       {
         "ID": "c:@SA@BLEP_Type_GlobalVar@FI@BondMgrCBs",
@@ -89869,12 +89911,12 @@
         "display": "BondMgrCBs",
         "location": {
           "column": "16",
-          "line": "133",
+          "line": "141",
           "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEP.c"
         },
         "name": "BondMgrCBs",
         "origin": "project_file",
-        "scope": "_anonymous_simpleBLEP_c_112_9"
+        "scope": "_anonymous_simpleBLEP_c_121_9"
       },
       {
         "ID": "c:@SA@BLEP_Type_GlobalVar@FI@SimpleProfileCBs",
@@ -89883,12 +89925,12 @@
         "display": "SimpleProfileCBs",
         "location": {
           "column": "22",
-          "line": "134",
+          "line": "142",
           "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEP.c"
         },
         "name": "SimpleProfileCBs",
         "origin": "project_file",
-        "scope": "_anonymous_simpleBLEP_c_112_9"
+        "scope": "_anonymous_simpleBLEP_c_121_9"
       },
       {
         "ID": "c:@SA@BLEP_Type_GlobalVar@FI@gapProfileState",
@@ -89897,12 +89939,12 @@
         "display": "gapProfileState",
         "location": {
           "column": "20",
-          "line": "135",
+          "line": "143",
           "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEP.c"
         },
         "name": "gapProfileState",
         "origin": "project_file",
-        "scope": "_anonymous_simpleBLEP_c_112_9"
+        "scope": "_anonymous_simpleBLEP_c_121_9"
       },
       {
         "ID": "c:simpleBLEP.c@T@BLEP_Type_GlobalVar",
@@ -89911,12 +89953,12 @@
         "display": "struct BLEP_Type_GlobalVar",
         "location": {
           "column": "3",
-          "line": "136",
+          "line": "144",
           "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEP.c"
         },
         "name": "BLEP_Type_GlobalVar",
         "origin": "project_file",
-        "scope": "_anonymous_simpleBLEP_c_112_9"
+        "scope": "_anonymous_simpleBLEP_c_121_9"
       }
     ],
     "name": "",
@@ -89930,7 +89972,7 @@
     "display": "void BLEP_WakeupNotify(void)",
     "location": {
       "column": "6",
-      "line": "141",
+      "line": "149",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEP.c"
     },
     "name": "BLEP_WakeupNotify",
@@ -89944,7 +89986,7 @@
     "display": "void BLEP_Reset_EParms(BLEP_Type_EParms *)",
     "location": {
       "column": "6",
-      "line": "142",
+      "line": "150",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEP.c"
     },
     "name": "BLEP_Reset_EParms",
@@ -89958,7 +90000,7 @@
     "display": "void BLEP_Init_GlobalVar(void)",
     "location": {
       "column": "6",
-      "line": "143",
+      "line": "151",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEP.c"
     },
     "name": "BLEP_Init_GlobalVar",
@@ -89972,7 +90014,7 @@
     "display": "void BLEP_ProcessOSALMsg(osal_event_hdr_t *)",
     "location": {
       "column": "6",
-      "line": "144",
+      "line": "152",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEP.c"
     },
     "name": "BLEP_ProcessOSALMsg",
@@ -89986,7 +90028,7 @@
     "display": "void BLEP_StateNotificationCB(gaprole_States_t)",
     "location": {
       "column": "6",
-      "line": "145",
+      "line": "153",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEP.c"
     },
     "name": "BLEP_StateNotificationCB",
@@ -90000,7 +90042,7 @@
     "display": "void BLEP_ProfileChangeCB(uint8)",
     "location": {
       "column": "6",
-      "line": "146",
+      "line": "154",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEP.c"
     },
     "name": "BLEP_ProfileChangeCB",
@@ -90014,7 +90056,7 @@
     "display": "void BLEP_CmdHandle(uint8 *, uint8)",
     "location": {
       "column": "6",
-      "line": "148",
+      "line": "156",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEP.c"
     },
     "name": "BLEP_CmdHandle",
@@ -90028,7 +90070,7 @@
     "display": "uint32 BLEP_End_Conn(bool)",
     "location": {
       "column": "8",
-      "line": "150",
+      "line": "158",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEP.c"
     },
     "name": "BLEP_End_Conn",
@@ -90042,7 +90084,7 @@
     "display": "void BLEP_Set_AdvertEnable(bool)",
     "location": {
       "column": "6",
-      "line": "151",
+      "line": "159",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEP.c"
     },
     "name": "BLEP_Set_AdvertEnable",
@@ -90056,7 +90098,7 @@
     "display": "void BLEP_CentralPasscodeCB(uint8 *, uint16, uint8, uint8)",
     "location": {
       "column": "6",
-      "line": "152",
+      "line": "160",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEP.c"
     },
     "name": "BLEP_CentralPasscodeCB",
@@ -90070,7 +90112,7 @@
     "display": "void BLEP_CentralPairStateCB(uint16, uint8, uint8)",
     "location": {
       "column": "6",
-      "line": "153",
+      "line": "161",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEP.c"
     },
     "name": "BLEP_CentralPairStateCB",
@@ -90084,7 +90126,7 @@
     "display": "void BLEP_RssiCB(int8)",
     "location": {
       "column": "6",
-      "line": "154",
+      "line": "162",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEP.c"
     },
     "name": "BLEP_RssiCB",
@@ -90098,7 +90140,7 @@
     "display": "void BLEP_ProcessGATTMsg(gattMsgEvent_t *)",
     "location": {
       "column": "6",
-      "line": "155",
+      "line": "163",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEP.c"
     },
     "name": "BLEP_ProcessGATTMsg",
@@ -90112,7 +90154,7 @@
     "display": "bool BLEP_BleSend(uint8, uint8 *, uint8)",
     "location": {
       "column": "6",
-      "line": "156",
+      "line": "164",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEP.c"
     },
     "name": "BLEP_BleSend",
@@ -90126,7 +90168,7 @@
     "display": "void BLEP_Main_Loop(void)",
     "location": {
       "column": "6",
-      "line": "157",
+      "line": "165",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEP.c"
     },
     "name": "BLEP_Main_Loop",
@@ -90140,7 +90182,7 @@
     "display": "BLEP_GVar",
     "location": {
       "column": "22",
-      "line": "161",
+      "line": "169",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEP.c"
     },
     "name": "BLEP_GVar",
@@ -90154,7 +90196,7 @@
     "display": "void BLEP_WakeupNotify(void)",
     "location": {
       "column": "6",
-      "line": "175",
+      "line": "183",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEP.c"
     },
     "name": "BLEP_WakeupNotify",
@@ -90168,7 +90210,7 @@
     "display": "void BLEP_Reset_EParms(BLEP_Type_EParms *)",
     "location": {
       "column": "6",
-      "line": "186",
+      "line": "194",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEP.c"
     },
     "name": "BLEP_Reset_EParms",
@@ -90176,13 +90218,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEP.c@7784@F@BLEP_Reset_EParms@Str",
+    "ID": "c:simpleBLEP.c@8074@F@BLEP_Reset_EParms@Str",
     "What": "Variable",
     "defdec": "Def",
     "display": "Str",
     "location": {
       "column": "3",
-      "line": "197",
+      "line": "205",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEP.c"
     },
     "name": "Str",
@@ -90190,13 +90232,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEP.c@7930@F@BLEP_Reset_EParms@COMPANY_ID",
+    "ID": "c:simpleBLEP.c@8220@F@BLEP_Reset_EParms@COMPANY_ID",
     "What": "Variable",
     "defdec": "Def",
     "display": "COMPANY_ID",
     "location": {
       "column": "9",
-      "line": "200",
+      "line": "208",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEP.c"
     },
     "name": "COMPANY_ID",
@@ -90204,13 +90246,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEP.c@8017@F@BLEP_Reset_EParms@SCAN_DATA",
+    "ID": "c:simpleBLEP.c@8307@F@BLEP_Reset_EParms@SCAN_DATA",
     "What": "Variable",
     "defdec": "Def",
     "display": "SCAN_DATA",
     "location": {
       "column": "27",
-      "line": "201",
+      "line": "209",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEP.c"
     },
     "name": "SCAN_DATA",
@@ -90224,7 +90266,7 @@
     "display": "void BLEP_Init_GlobalVar(void)",
     "location": {
       "column": "6",
-      "line": "214",
+      "line": "222",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEP.c"
     },
     "name": "BLEP_Init_GlobalVar",
@@ -90238,7 +90280,7 @@
     "display": "void BLEP_Set_AdvertEnable(bool)",
     "location": {
       "column": "6",
-      "line": "246",
+      "line": "253",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEP.c"
     },
     "name": "BLEP_Set_AdvertEnable",
@@ -90252,7 +90294,7 @@
     "display": "void BLEP_Init(uint8, BLE_Type_CommFunc *)",
     "location": {
       "column": "6",
-      "line": "268",
+      "line": "275",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEP.c"
     },
     "name": "BLEP_Init",
@@ -90260,13 +90302,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEP.c@10864@F@BLEP_Init@BLE_Argv",
+    "ID": "c:simpleBLEP.c@11131@F@BLEP_Init@BLE_Argv",
     "What": "Variable",
     "defdec": "Def",
     "display": "BLE_Argv",
     "location": {
       "column": "17",
-      "line": "285",
+      "line": "292",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEP.c"
     },
     "name": "BLE_Argv",
@@ -90274,13 +90316,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEP.c@11681@F@BLEP_Init@gapRole_AdvertOffTime",
+    "ID": "c:simpleBLEP.c@11948@F@BLEP_Init@gapRole_AdvertOffTime",
     "What": "Variable",
     "defdec": "Def",
     "display": "gapRole_AdvertOffTime",
     "location": {
       "column": "12",
-      "line": "307",
+      "line": "314",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEP.c"
     },
     "name": "gapRole_AdvertOffTime",
@@ -90288,13 +90330,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEP.c@12816@F@BLEP_Init@advInt",
+    "ID": "c:simpleBLEP.c@13083@F@BLEP_Init@advInt",
     "What": "Variable",
     "defdec": "Def",
     "display": "advInt",
     "location": {
       "column": "12",
-      "line": "322",
+      "line": "329",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEP.c"
     },
     "name": "advInt",
@@ -90302,13 +90344,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEP.c@13294@F@BLEP_Init@passkey",
+    "ID": "c:simpleBLEP.c@13561@F@BLEP_Init@passkey",
     "What": "Variable",
     "defdec": "Def",
     "display": "passkey",
     "location": {
       "column": "12",
-      "line": "331",
+      "line": "338",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEP.c"
     },
     "name": "passkey",
@@ -90316,13 +90358,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEP.c@13319@F@BLEP_Init@pairMode",
+    "ID": "c:simpleBLEP.c@13586@F@BLEP_Init@pairMode",
     "What": "Variable",
     "defdec": "Def",
     "display": "pairMode",
     "location": {
       "column": "11",
-      "line": "332",
+      "line": "339",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEP.c"
     },
     "name": "pairMode",
@@ -90330,13 +90372,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEP.c@13517@F@BLEP_Init@mitm",
+    "ID": "c:simpleBLEP.c@13784@F@BLEP_Init@mitm",
     "What": "Variable",
     "defdec": "Def",
     "display": "mitm",
     "location": {
       "column": "11",
-      "line": "336",
+      "line": "343",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEP.c"
     },
     "name": "mitm",
@@ -90344,13 +90386,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEP.c@13669@F@BLEP_Init@ioCap",
+    "ID": "c:simpleBLEP.c@13936@F@BLEP_Init@ioCap",
     "What": "Variable",
     "defdec": "Def",
     "display": "ioCap",
     "location": {
       "column": "11",
-      "line": "340",
+      "line": "347",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEP.c"
     },
     "name": "ioCap",
@@ -90358,13 +90400,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEP.c@13857@F@BLEP_Init@bonding",
+    "ID": "c:simpleBLEP.c@14124@F@BLEP_Init@bonding",
     "What": "Variable",
     "defdec": "Def",
     "display": "bonding",
     "location": {
       "column": "11",
-      "line": "344",
+      "line": "351",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEP.c"
     },
     "name": "bonding",
@@ -90378,7 +90420,7 @@
     "display": "void BLEP_RssiCB(int8)",
     "location": {
       "column": "6",
-      "line": "389",
+      "line": "396",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEP.c"
     },
     "name": "BLEP_RssiCB",
@@ -90386,13 +90428,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEP.c@15916@F@BLEP_RssiCB@rssiPos",
+    "ID": "c:simpleBLEP.c@16183@F@BLEP_RssiCB@rssiPos",
     "What": "Variable",
     "defdec": "Def",
     "display": "rssiPos",
     "location": {
       "column": "11",
-      "line": "392",
+      "line": "399",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEP.c"
     },
     "name": "rssiPos",
@@ -90406,7 +90448,7 @@
     "display": "uint16 BLEP_ProcessEvent(uint8, uint16)",
     "location": {
       "column": "8",
-      "line": "409",
+      "line": "416",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEP.c"
     },
     "name": "BLEP_ProcessEvent",
@@ -90414,13 +90456,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEP.c@16750@F@BLEP_ProcessEvent@pMsg",
+    "ID": "c:simpleBLEP.c@17017@F@BLEP_ProcessEvent@pMsg",
     "What": "Variable",
     "defdec": "Def",
     "display": "pMsg",
     "location": {
       "column": "12",
-      "line": "415",
+      "line": "422",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEP.c"
     },
     "name": "pMsg",
@@ -90428,13 +90470,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEP.c@17960@F@BLEP_ProcessEvent@NewSend",
+    "ID": "c:simpleBLEP.c@18202@F@BLEP_ProcessEvent@NewSend",
     "What": "Variable",
     "defdec": "Def",
     "display": "NewSend",
     "location": {
       "column": "12",
-      "line": "455",
+      "line": "461",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEP.c"
     },
     "name": "NewSend",
@@ -90442,13 +90484,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEP.c@17981@F@BLEP_ProcessEvent@NewSendLen",
+    "ID": "c:simpleBLEP.c@18223@F@BLEP_ProcessEvent@NewSendLen",
     "What": "Variable",
     "defdec": "Def",
     "display": "NewSendLen",
     "location": {
       "column": "11",
-      "line": "456",
+      "line": "462",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEP.c"
     },
     "name": "NewSendLen",
@@ -90462,7 +90504,7 @@
     "display": "void BLEP_ProcessGATTMsg(gattMsgEvent_t *)",
     "location": {
       "column": "6",
-      "line": "494",
+      "line": "500",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEP.c"
     },
     "name": "BLEP_ProcessGATTMsg",
@@ -90476,7 +90518,7 @@
     "display": "void BLEP_ProcessOSALMsg(osal_event_hdr_t *)",
     "location": {
       "column": "6",
-      "line": "508",
+      "line": "514",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEP.c"
     },
     "name": "BLEP_ProcessOSALMsg",
@@ -90490,7 +90532,7 @@
     "display": "void BLEP_StateNotificationCB(gaprole_States_t)",
     "location": {
       "column": "6",
-      "line": "530",
+      "line": "536",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEP.c"
     },
     "name": "BLEP_StateNotificationCB",
@@ -90498,13 +90540,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEP.c@19982@F@BLEP_StateNotificationCB@ConnectDisConnect",
+    "ID": "c:simpleBLEP.c@20224@F@BLEP_StateNotificationCB@ConnectDisConnect",
     "What": "Variable",
     "defdec": "Def",
     "display": "ConnectDisConnect",
     "location": {
       "column": "9",
-      "line": "532",
+      "line": "538",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEP.c"
     },
     "name": "ConnectDisConnect",
@@ -90512,13 +90554,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEP.c@20081@F@BLEP_StateNotificationCB@TA",
+    "ID": "c:simpleBLEP.c@20323@F@BLEP_StateNotificationCB@TA",
     "What": "Variable",
     "defdec": "Def",
     "display": "TA",
     "location": {
       "column": "15",
-      "line": "537",
+      "line": "543",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEP.c"
     },
     "name": "TA",
@@ -90526,13 +90568,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEP.c@20130@F@BLEP_StateNotificationCB@TAL",
+    "ID": "c:simpleBLEP.c@20372@F@BLEP_StateNotificationCB@TAL",
     "What": "Variable",
     "defdec": "Def",
     "display": "TAL",
     "location": {
       "column": "15",
-      "line": "538",
+      "line": "544",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEP.c"
     },
     "name": "TAL",
@@ -90540,13 +90582,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEP.c@20926@F@BLEP_StateNotificationCB@FLAGS",
+    "ID": "c:simpleBLEP.c@21168@F@BLEP_StateNotificationCB@FLAGS",
     "What": "Variable",
     "defdec": "Def",
     "display": "FLAGS",
     "location": {
       "column": "15",
-      "line": "556",
+      "line": "562",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEP.c"
     },
     "name": "FLAGS",
@@ -90554,13 +90596,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEP.c@21018@F@BLEP_StateNotificationCB@_16BIT",
+    "ID": "c:simpleBLEP.c@21260@F@BLEP_StateNotificationCB@_16BIT",
     "What": "Variable",
     "defdec": "Def",
     "display": "_16BIT",
     "location": {
       "column": "15",
-      "line": "557",
+      "line": "563",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEP.c"
     },
     "name": "_16BIT",
@@ -90568,13 +90610,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEP.c@21119@F@BLEP_StateNotificationCB@ADVERT_DATA",
+    "ID": "c:simpleBLEP.c@21361@F@BLEP_StateNotificationCB@ADVERT_DATA",
     "What": "Variable",
     "defdec": "Def",
     "display": "ADVERT_DATA",
     "location": {
       "column": "33",
-      "line": "558",
+      "line": "564",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEP.c"
     },
     "name": "ADVERT_DATA",
@@ -90588,7 +90630,7 @@
     "display": "void BLEP_ProfileChangeCB(uint8)",
     "location": {
       "column": "6",
-      "line": "630",
+      "line": "631",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEP.c"
     },
     "name": "BLEP_ProfileChangeCB",
@@ -90596,13 +90638,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEP.c@23383@F@BLEP_ProfileChangeCB@pValue",
+    "ID": "c:simpleBLEP.c@23441@F@BLEP_ProfileChangeCB@pValue",
     "What": "Variable",
     "defdec": "Def",
     "display": "pValue",
     "location": {
       "column": "16",
-      "line": "636",
+      "line": "637",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEP.c"
     },
     "name": "pValue",
@@ -90610,13 +90652,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEP.c@23383@F@BLEP_ProfileChangeCB@len",
+    "ID": "c:simpleBLEP.c@23441@F@BLEP_ProfileChangeCB@len",
     "What": "Variable",
     "defdec": "Dec",
     "display": "len",
     "location": {
       "column": "29",
-      "line": "636",
+      "line": "637",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEP.c"
     },
     "name": "len",
@@ -90630,7 +90672,7 @@
     "display": "void BLEP_CentralPairStateCB(uint16, uint8, uint8)",
     "location": {
       "column": "6",
-      "line": "655",
+      "line": "656",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEP.c"
     },
     "name": "BLEP_CentralPairStateCB",
@@ -90644,7 +90686,7 @@
     "display": "void BLEP_CentralPasscodeCB(uint8 *, uint16, uint8, uint8)",
     "location": {
       "column": "6",
-      "line": "680",
+      "line": "681",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEP.c"
     },
     "name": "BLEP_CentralPasscodeCB",
@@ -90658,10 +90700,24 @@
     "display": "uint32 BLEP_End_Conn(bool)",
     "location": {
       "column": "8",
-      "line": "693",
+      "line": "694",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEP.c"
     },
     "name": "BLEP_End_Conn",
+    "origin": "project_file",
+    "scope": null
+  },
+  {
+    "ID": "c:simpleBLEP.c@25082@F@BLEP_End_Conn@NeedDelay",
+    "What": "Variable",
+    "defdec": "Def",
+    "display": "NeedDelay",
+    "location": {
+      "column": "8",
+      "line": "695",
+      "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEP.c"
+    },
+    "name": "NeedDelay",
     "origin": "project_file",
     "scope": null
   },
@@ -90686,7 +90742,7 @@
     "display": "void BLEP_CmdHandle(uint8 *, uint8)",
     "location": {
       "column": "6",
-      "line": "747",
+      "line": "746",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEP.c"
     },
     "name": "BLEP_CmdHandle",
@@ -90694,13 +90750,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEP.c@26619@macro@QM",
+    "ID": "c:simpleBLEP.c@26575@macro@QM",
     "What": "MacroDef",
     "defdec": "Def",
     "display": "QM",
     "location": {
       "column": "9",
-      "line": "748",
+      "line": "747",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEP.c"
     },
     "name": "QM",
@@ -90708,13 +90764,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEP.c@26665@macro@MF",
+    "ID": "c:simpleBLEP.c@26621@macro@MF",
     "What": "MacroDef",
     "defdec": "Def",
     "display": "MF",
     "location": {
       "column": "9",
-      "line": "749",
+      "line": "748",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEP.c"
     },
     "name": "MF",
@@ -90722,13 +90778,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEP.c@26703@macro@MT",
+    "ID": "c:simpleBLEP.c@26659@macro@MT",
     "What": "MacroDef",
     "defdec": "Def",
     "display": "MT",
     "location": {
       "column": "9",
-      "line": "750",
+      "line": "749",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEP.c"
     },
     "name": "MT",
@@ -90736,13 +90792,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEP.c@26734@F@BLEP_CmdHandle@Role",
+    "ID": "c:simpleBLEP.c@26690@F@BLEP_CmdHandle@Role",
     "What": "Variable",
     "defdec": "Def",
     "display": "Role",
     "location": {
       "column": "9",
-      "line": "751",
+      "line": "750",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEP.c"
     },
     "name": "Role",
@@ -90750,13 +90806,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEP.c@26749@F@BLEP_CmdHandle@Type",
+    "ID": "c:simpleBLEP.c@26705@F@BLEP_CmdHandle@Type",
     "What": "Variable",
     "defdec": "Def",
     "display": "Type",
     "location": {
       "column": "9",
-      "line": "752",
+      "line": "751",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEP.c"
     },
     "name": "Type",
@@ -90764,13 +90820,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEP.c@26764@F@BLEP_CmdHandle@Ext",
+    "ID": "c:simpleBLEP.c@26720@F@BLEP_CmdHandle@Ext",
     "What": "Variable",
     "defdec": "Def",
     "display": "Ext",
     "location": {
       "column": "10",
-      "line": "753",
+      "line": "752",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEP.c"
     },
     "name": "Ext",
@@ -90778,13 +90834,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEP.c@26779@F@BLEP_CmdHandle@ExtLen",
+    "ID": "c:simpleBLEP.c@26735@F@BLEP_CmdHandle@ExtLen",
     "What": "Variable",
     "defdec": "Def",
     "display": "ExtLen",
     "location": {
       "column": "9",
-      "line": "754",
+      "line": "753",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEP.c"
     },
     "name": "ExtLen",
@@ -90792,13 +90848,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEP.c@26796@F@BLEP_CmdHandle@Msg_Executed",
+    "ID": "c:simpleBLEP.c@26752@F@BLEP_CmdHandle@Msg_Executed",
     "What": "Variable",
     "defdec": "Def",
     "display": "Msg_Executed",
     "location": {
       "column": "8",
-      "line": "755",
+      "line": "754",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEP.c"
     },
     "name": "Msg_Executed",
@@ -90806,13 +90862,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEP.c@26905@F@BLEP_CmdHandle@PType0",
+    "ID": "c:simpleBLEP.c@26861@F@BLEP_CmdHandle@PType0",
     "What": "Variable",
     "defdec": "Def",
     "display": "PType0",
     "location": {
       "column": "11",
-      "line": "757",
+      "line": "756",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEP.c"
     },
     "name": "PType0",
@@ -90820,13 +90876,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEP.c@26905@F@BLEP_CmdHandle@PType1",
+    "ID": "c:simpleBLEP.c@26861@F@BLEP_CmdHandle@PType1",
     "What": "Variable",
     "defdec": "Dec",
     "display": "PType1",
     "location": {
       "column": "19",
-      "line": "757",
+      "line": "756",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEP.c"
     },
     "name": "PType1",
@@ -90834,13 +90890,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEP.c@26932@F@BLEP_CmdHandle@PValL",
+    "ID": "c:simpleBLEP.c@26888@F@BLEP_CmdHandle@PValL",
     "What": "Variable",
     "defdec": "Def",
     "display": "PValL",
     "location": {
       "column": "12",
-      "line": "758",
+      "line": "757",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEP.c"
     },
     "name": "PValL",
@@ -90848,13 +90904,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEP.c@26951@F@BLEP_CmdHandle@PValArr",
+    "ID": "c:simpleBLEP.c@26907@F@BLEP_CmdHandle@PValArr",
     "What": "Variable",
     "defdec": "Def",
     "display": "PValArr",
     "location": {
       "column": "12",
-      "line": "759",
+      "line": "758",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEP.c"
     },
     "name": "PValArr",
@@ -90862,13 +90918,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEP.c@26972@F@BLEP_CmdHandle@PvalArrLen",
+    "ID": "c:simpleBLEP.c@26928@F@BLEP_CmdHandle@PvalArrLen",
     "What": "Variable",
     "defdec": "Def",
     "display": "PvalArrLen",
     "location": {
       "column": "11",
-      "line": "760",
+      "line": "759",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEP.c"
     },
     "name": "PvalArrLen",
@@ -90882,7 +90938,7 @@
     "display": "void BLEP_Main_Loop(void)",
     "location": {
       "column": "6",
-      "line": "912",
+      "line": "909",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEP.c"
     },
     "name": "BLEP_Main_Loop",
@@ -90890,13 +90946,13 @@
     "scope": null
   },
   {
-    "ID": "c:simpleBLEP.c@33785@F@BLEP_Main_Loop@_s",
+    "ID": "c:simpleBLEP.c@33432@F@BLEP_Main_Loop@_s",
     "What": "Variable",
     "defdec": "Def",
     "display": "_s",
     "location": {
       "column": "3",
-      "line": "913",
+      "line": "910",
       "path": "D:\\Documents\\Sync\\Dropbox\\\u84dd\u7259\\\u4ee3\u7801_\u84dd\u7259\u4e3b\u4ece\u4e00\u4f53_1.4.2\\BLE\\CC254x\\BLE-CC254x-1.4.2-Serial\\Projects\\ble\\SimpleBLECP\\Source\\simpleBLEP.c"
     },
     "name": "_s",

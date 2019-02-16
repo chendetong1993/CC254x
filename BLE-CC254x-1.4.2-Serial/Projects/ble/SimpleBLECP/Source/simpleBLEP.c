@@ -89,9 +89,18 @@
 #define LE(_V0_, _V1_) (_V0_ >= _V1_)
 #define Eq(_V0_, _V1_) (_V0_ == _V1_)
 
-uint16 BLEP_Timer_Record = 0;
-#define Timeout(_Token, _Method)  (BLEP_Timer_Record & _Token) 
-                   
+#define TimerIsEnable(_Token)   (osal_get_timeoutEx(E->TaskId, _Token))
+
+#define TimerStop(_Token)\
+  if(osal_get_timeoutEx(E->TaskId, _Token)){\
+    BLE_CmdRetError(BLE_Error_General, osal_stop_timerEx(E->TaskId, _Token));\
+  }
+
+#define TimerStart(_Token, _Interval)\
+  if(!osal_get_timeoutEx(E->TaskId, _Token)) {\
+    BLE_CmdRetError(BLE_Error_General, osal_start_timerEx(E->TaskId, _Token, _Interval));\
+  }
+
 #define BLEP_DISCOVERABLE_MODE                  GAP_ADTYPE_FLAGS_GENERAL     // Limited discoverable mode advertises for 30.72s, and then stops, General discoverable mode advertises indefinitely
 #if defined(PLUS_BROADCASTER)
   #define BLEP_ADV_IN_CONN_WAIT                    500                          // delay 500 ms
@@ -124,7 +133,6 @@ typedef struct{
   uint8 addr[BLEP_ADDR_LEN];
   //bool Char7DoWrite;
   bool Connected;
-  bool SendDone;
   BLE_Type_Queue SendQueue;
   //BLE Buffer
   uint8 ConnHandle;
@@ -221,7 +229,6 @@ void BLEP_Init_GlobalVar(){
   E->AdverEnable = false;
   E->TaskId = 0;
   E->Connected = false;
-  E->SendDone = true;
   //System
   E->PeripheralCBs.pfnStateChange = BLEP_StateNotificationCB;
   E->PeripheralCBs.pfnRssiRead = BLEP_RssiCB;
@@ -450,7 +457,6 @@ uint16 BLEP_ProcessEvent(uint8 task_id, uint16 events)
     return(events ^ BLEP_PARM_SAVE_EVT);
   }
   if(events & BLEP_SEND_DONE_EVT) {
-    E->SendDone = true;
     BLE_CmdRetTransmitDone(E->ConnHandle, true);
     uint8* NewSend;
     uint8 NewSendLen;
@@ -599,8 +605,6 @@ void BLEP_StateNotificationCB(gaprole_States_t newState)
     if(E->Connected == false){
       E->BLE_CommFunc->ForceWakeup();
       E->Connected = true;
-      E->SendQueue.Len = 0;
-      E->SendDone = true;
       BLE_CmdRetError(BLE_Error_BleStatus, GAPRole_GetParameter(GAPROLE_CONN_BD_ADDR, E->centralAddr));
       BLE_CmdRetConnStatus(&E->Connected, 1); 
     }
@@ -608,10 +612,7 @@ void BLEP_StateNotificationCB(gaprole_States_t newState)
     if(E->Connected == true){
       E->Connected = false;
       BLE_CmdRetError(BLE_Error_BleTerminate, newState);
-      if(E->SendDone == false){
-        BLE_CmdRetError(BLE_Error_General, osal_stop_timerEx(E->TaskId, BLEP_SEND_DONE_EVT));
-        E->SendDone = true;
-      }
+      TimerStop(BLEP_SEND_DONE_EVT);
       BLE_CmdRetConnStatus(&E->Connected, 1); 
     }
   }
@@ -691,17 +692,16 @@ void BLEP_CentralPasscodeCB(uint8 *deviceAddr, uint16 connectionHandle, uint8 ui
  * @return  none
  */
 uint32 BLEP_End_Conn(bool Advert) {
-  if(E->SendDone == false){
-    BLE_CmdRetError(BLE_Error_General, osal_stop_timerEx(E->TaskId, BLEP_SEND_DONE_EVT));
-    E->SendDone = true;
-  }
+  bool NeedDelay = FALSE;
+  TimerStop(BLEP_SEND_DONE_EVT);
   if(E->Connected == true){
+    NeedDelay = true;
     BLE_CmdRetError(BLE_Error_BleStatus, GAPRole_TerminateConnection());
   }
   if(Advert != E->AdverEnable){
     BLEP_Set_AdvertEnable(Advert);
   }
-  return P.END_ALL_SCAN_CONN_REQ_TIME;
+  return (NeedDelay == true) ? P.END_ALL_SCAN_CONN_REQ_TIME : 0;
 }
 
 /*********************************************************************
@@ -713,10 +713,9 @@ uint32 BLEP_End_Conn(bool Advert) {
  */
 bool BLEP_BleSend(uint8 connHandle, uint8* data, uint8 dataLen){
   if(connHandle == E->ConnHandle && E->Connected) {
-    if(E->SendDone){
+    if(!TimerIsEnable(BLEP_SEND_DONE_EVT)){
       if(BLE_CmdRetError(BLE_Error_BleStatus, SimpleProfile_SetParameter(SIMPLEPROFILE_CHAR_CS, data, dataLen)) == SUCCESS){
-        E->SendDone = false;
-        BLE_CmdRetError(BLE_Error_General, osal_start_timerEx(E->TaskId, BLEP_SEND_DONE_EVT, PS.SEND_DONE_DELAY));
+        TimerStart(BLEP_SEND_DONE_EVT, PS.SEND_DONE_DELAY);
         return true;
       } else {
         return false;
@@ -847,14 +846,12 @@ void BLEP_CmdHandle(uint8* Cmd, uint8 CmdLen){
           }
           if(MT){
             E->EParms_Save_Updated = true;
-            if(osal_get_timeoutEx(E->TaskId, BLEP_PARM_SAVE_EVT) == 0){
-              BLE_CmdRetError(BLE_Error_General, osal_start_timerEx(E->TaskId, BLEP_PARM_SAVE_EVT, BLEP_PARM_SAVE_DELAY));
-            }
+            TimerStart(BLEP_PARM_SAVE_EVT, BLEP_PARM_SAVE_DELAY);
           }
         }
         break;
         
-      case BLE_MsgType_Hal_Set:
+      case BLE_MsgType_AdditOper:
         if(BLE_CmdExtParse_8_8(Ext, ExtLen, &PType0, &PType1, true)) {
           switch(PType0){
             case BLE_AddOper_ReadRssi:
@@ -878,18 +875,18 @@ void BLEP_CmdHandle(uint8* Cmd, uint8 CmdLen){
         }
         break;
       case BLE_MsgType_Reboot:
-        if(BLE_CmdExtParse(Ext, ExtLen, true) && QM) BLE_CmdRetError(BLE_Error_General, osal_start_timerEx(E->TaskId, BLEP_RESET_EVT, BLEP_End_Conn(false)));
+        if(BLE_CmdExtParse(Ext, ExtLen, true) && QM) TimerStart(BLEP_RESET_EVT, BLEP_End_Conn(false));
         break;
 #if defined(BLE_CENTRAL)
       case BLE_MsgType_SwitchRole:
         if(BLE_CmdExtParse(Ext, ExtLen, true) && QM) {
           E->BLE_CommFunc->SwitchRole();
-          BLE_CmdRetError(BLE_Error_General, osal_start_timerEx(E->TaskId, BLEP_RESET_EVT, BLEP_End_Conn(false)));
+          TimerStart(BLEP_RESET_EVT, BLEP_End_Conn(false));
         }
         break;
 #endif
       case BLE_MsgType_Sleep:
-        if(BLE_CmdExtParse(Ext, ExtLen, true) && QM) BLE_CmdRetError(BLE_Error_General, osal_start_timerEx(E->TaskId, BLEP_Sleep_EVT, BLEP_End_Conn(E->AdverEnable)));
+        if(BLE_CmdExtParse(Ext, ExtLen, true)&& QM) TimerStart(BLEP_Sleep_EVT, BLEP_End_Conn(E->AdverEnable));
         break;
     }
   }

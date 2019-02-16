@@ -223,7 +223,7 @@ typedef enum {
   BLE_MsgType_SwitchRole = 0x07,
 #endif
   BLE_MsgType_Sleep = 0x08,
-  BLE_MsgType_Hal_Set = 0x09,
+  BLE_MsgType_AdditOper = 0x09,
   BLE_MsgType_Customized_Get = 0x0a,
   
   BLE_MsgType_Cmd_Parsed = 0x78,
@@ -234,7 +234,7 @@ typedef enum {
   BLE_MsgType_UnSended = 0x83,
   BLE_MsgType_Received = 0x84,
   BLE_MsgType_UnReceived = 0x85,
-  BLE_MsgType_Hal_Ret = 0x86,
+  BLE_MsgType_AdditInfo_Ret = 0x86,
   BLE_MsgType_Customized_Ret = 0x87,
 } BLE_Type_MsgType;
 
