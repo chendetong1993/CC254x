@@ -89,7 +89,7 @@ extern "C"
 #define BLE_Array_ItemExist_Value(_A, _AK, _V, _R) {\
     _R = false;\
     for(uint8 ItemIdx = 0, ItemLen = BLE_Array_Len(_A); ItemIdx < ItemLen; ItemIdx++){\
-      if(_A[i]._AK == (_V)){\
+      if(_A[ItemIdx]._AK == (_V)){\
         _R = true;\
         break;\
       }\

@@ -62,7 +62,6 @@
 #include "gapbondmgr.h"
 #include "simpleBLE.h"
 #include "simpleBLEP.h"
-#include "npi.h"
 /*********************************************************************
  * MACROS
  */

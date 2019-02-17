@@ -59,21 +59,21 @@ extern "C"
   
 // Simple Profile Service UUID
 #define SIMPLEPROFILE_SERV_UUID                         0xFFF0
-    
-// Simple Keys Profile Services bit fields
-#define SIMPLEPROFILE_SERVICE                           0x00000001
   
-// Key Pressed UUID
-#define SIMPLEPROFILE_CHAR_SC_UUID                      0xFFF1
-#define SIMPLEPROFILE_CHAR_CS_UUID                      0xFFF2
+#define SIMPLEPROFILE_SERV_HANDLE_START                 0x0025
 
-#define SIMPLEPROFILE_CHAR_SC_UUID_WRITE_HANDLE         0x0026
-#define SIMPLEPROFILE_CHAR_SC_UUID_READ_HANDLE          0x0025
-  
-#define SIMPLEPROFILE_CHAR_CS_UUID_WRITE_HANDLE         0x0029
-#define SIMPLEPROFILE_CHAR_CS_UUID_READ_HANDLE          0x0028
+  // Simple Keys Profile Services bit fields
+#define SIMPLEPROFILE_SERVICE                           0x00000001
+
+// Key Pressed UUID
+#define SIMPLEPROFILE_CHAR_SC_UUID                      (SIMPLEPROFILE_SERV_UUID + 1)                                                                   //0xFFF1
+#define SIMPLEPROFILE_CHAR_CS_UUID                      (SIMPLEPROFILE_SERV_UUID + 2)                                                                   //0xFFF2
+
+#define SIMPLEPROFILE_CHAR_SC_UUID_HANDLE               (SIMPLEPROFILE_SERV_HANDLE_START)   //0x0025
+#define SIMPLEPROFILE_CHAR_CS_UUID_HANDLE               (SIMPLEPROFILE_SERV_HANDLE_START + 3)   //0x0028
   
 #define SIMPLEPROFILE_CHAR_SC_CS_LEN                    20
+  
   
 /*********************************************************************
  * TYPEDEFS
@@ -87,7 +87,7 @@ extern "C"
 /*********************************************************************
  * Profile Callbacks
  */
-
+#if defined(BLE_PERIPHERAL)
 // Callback when a characteristic value has changed
 typedef NULL_OK void (*simpleProfileChange_t)( uint8 paramID );
 
@@ -95,14 +95,14 @@ typedef struct
 {
   simpleProfileChange_t        pfnSimpleProfileChange;  // Called when characteristic value changes
 } simpleProfileCBs_t;
-
+#endif
     
 
 /*********************************************************************
  * API FUNCTIONS 
  */
-
-
+   
+#if defined(BLE_PERIPHERAL)
 /*
  * SimpleProfile_AddService- Initializes the Simple GATT Profile service by registering
  *          GATT attributes with the GATT server.
@@ -147,8 +147,11 @@ extern bStatus_t SimpleProfile_GetParameter( uint8 param, uint8 **value, uint8**
 /*
  * SimpleProfile_WriteCharValue -
  */
-bStatus_t SimpleProfile_WriteCharValue(uint8 taskId, uint16 connHandle, uint16 handle, void *value, uint8 len );
+#endif
 
+#if defined(BLE_CENTRAL)
+extern bStatus_t SimpleProfile_WriteCharValue(uint8 taskId, uint16 connHandle, uint16 handle, void *value, uint8 len );
+#endif
 /*********************************************************************
 *********************************************************************/
 

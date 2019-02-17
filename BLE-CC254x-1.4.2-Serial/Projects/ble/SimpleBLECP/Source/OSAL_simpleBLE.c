@@ -60,6 +60,8 @@
   #include "app_UartModule.h"
 #elif defined ( APP_RSSI_CHECK )
   #include "app_RssiCheck.h"
+#else
+  APP Not Defined;
 #endif
 
 /* HAL */

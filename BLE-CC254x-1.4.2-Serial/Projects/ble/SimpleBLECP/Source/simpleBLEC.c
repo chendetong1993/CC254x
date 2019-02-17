@@ -57,7 +57,6 @@
 #include "SimpleBLEC.h"
 #include "OSAL_snv.h"
 #include "simpleBLE.h"
-#include "npi.h"
 /*********************************************************************
  * MACROS
  */
@@ -142,6 +141,7 @@ typedef struct{
   uint16 SvcStartHdl;   // Discovered service start and end handle
   uint16 SvcEndHdl;
   uint16 CharHdSC;       // Discovered characteristic handle
+  uint16 CharHdCS;       // Discovered characteristic handle
   bool CharSCDoWrite;
   BLEC_Type_ConnStatus ConnStatus;
   uint8 addrType;
@@ -185,7 +185,6 @@ void BLEC_ProcessGATTMsg(gattMsgEvent_t *);
 void BLEC_RssiCB(uint16 connHandle, int8);
 uint8 BLEC_EventCB(gapCentralRoleEvent_t *);
 void BLEC_ProcessOSALMsg(osal_event_hdr_t *);
-void BLEC_GATTDiscoveryEvent(gattMsgEvent_t *);
 bool BLEC_ScanAdvertDataSearch(uint8 type, uint8 *, uint8, uint8*, uint8*);
 void BLEC_Connect();
 void BLEC_CmdHandle(uint8*, uint8);
@@ -529,10 +528,8 @@ void BLEC_ProcessGATTMsg(gattMsgEvent_t *pMsg)
           }
         }
       }
-    } else if(T->DiscState != BLE_DISC_STATE_IDLE) {
-      BLEC_GATTDiscoveryEvent(pMsg);
     } else if((pMsg->method == ATT_HANDLE_VALUE_NOTI)){    //通知 
-      if(pMsg->msg.handleValueNoti.handle == SIMPLEPROFILE_CHAR_CS_UUID_READ_HANDLE){   //CHAR7的通知  串口打印
+      if(pMsg->msg.handleValueNoti.handle == SIMPLEPROFILE_CHAR_CS_UUID_HANDLE){   //CHAR7的通知  串口打印
         BLE_BleRetToExter(T->Token, pMsg->msg.handleValueNoti.pValue, pMsg->msg.handleValueNoti.len);
       }
     }
@@ -732,13 +729,9 @@ uint8 BLEC_EventCB(gapCentralRoleEvent_t *pEvent)
             E->PERIOD_SCAN_DEVICE_COUNT = 0;
             TimerStop(BLEC_END_SCAN_EVT);
             E->Scanning = FALSE;
-            uint8 ScannMatchedCount = 0;
-            for(uint8 i = 0; i < BLEC_Dev_Max_Num; i++){
-              if(E->DevList[i].ConnStatus == BLEC_ConnStatus_Scanned) {
-                ScannMatchedCount++;
-              }
-            }
-            if(ScannMatchedCount == 0){
+            bool ScannMatched;
+            BLE_Array_ItemExist_Value(E->DevList, ConnStatus, BLEC_ConnStatus_Scanned, ScannMatched);
+            if(!ScannMatched){
               BLE_CmdRetError(BLE_Error_BleStatus, bleNoResources);
             } else {
               TimerStart(BLEC_CONNECT_EVT, P.MULTI_CONNECT_INTERVAL)
@@ -757,10 +750,6 @@ uint8 BLEC_EventCB(gapCentralRoleEvent_t *pEvent)
             for(uint8 i = 0; i < BLEC_Dev_Max_Num; i++){
               T = &E->DevList[i];
               if(T->ConnStatus == BLEC_ConnStatus_Connecting && osal_memcmp(T->addr, pEvent->linkCmpl.devAddr, BLEC_ADDR_LEN) == true){
-                T->DiscState = BLE_DISC_STATE_SVC;
-                T->SvcStartHdl = 0;
-                T->SvcEndHdl = 0;
-                T->CharHdSC = 0;
                 T->CharSCDoWrite = true;
                 T->SendQueue.Len = 0;
                 T->ConnHandle = pEvent->linkCmpl.connectionHandle;
@@ -803,7 +792,7 @@ uint8 BLEC_EventCB(gapCentralRoleEvent_t *pEvent)
         uint8 Send[] = { 0x01, 0x00 };
         BLE_CmdRetError(
           BLE_Error_BleStatus, 
-          SimpleProfile_WriteCharValue(E->TaskId, pEvent->linkUpdate.connectionHandle, SIMPLEPROFILE_CHAR_CS_UUID_WRITE_HANDLE, Send, sizeof(Send))
+          SimpleProfile_WriteCharValue(E->TaskId, pEvent->linkUpdate.connectionHandle, SIMPLEPROFILE_CHAR_CS_UUID_HANDLE + 1, Send, sizeof(Send))
         );
       }
       break;
@@ -830,55 +819,6 @@ void BLEC_Connect()
       E->DevList[i].ConnStatus = BLEC_ConnStatus_Connecting;
       BLE_CmdRetError(BLE_Error_BleStatus, GAPCentralRole_EstablishLink(BLEC_LINK_HIGH_DUTY_CYCLE, BLEC_LINK_WHITE_LIST, E->DevList[i].addrType, E->DevList[i].addr));
       break;
-    }
-  }
-}
-
-/*********************************************************************
- * @fn      BLEC_GATTDiscoveryEvent
- *
- * @brief   Process GATT discovery event
- *
- * @return  none
- */
-void BLEC_GATTDiscoveryEvent(gattMsgEvent_t *pMsg)
-{
-  BLEC_Type_Dev* T;
-  BLE_Array_ItemFind_Value(E->DevList, ConnHandle, pMsg->connHandle, T);
-  if(T != 0){
-    if(T->DiscState == BLE_DISC_STATE_SVC)
-    {
-      // Service found, store handles
-      if(pMsg->method == ATT_FIND_BY_TYPE_VALUE_RSP && pMsg->msg.findByTypeValueRsp.numInfo > 0) {
-        T->SvcStartHdl = ATT_ATTR_HANDLE(pMsg->msg.findByTypeValueRsp.pHandlesInfo, 0);
-        T->SvcEndHdl = ATT_GRP_END_HANDLE(pMsg->msg.findByTypeValueRsp.pHandlesInfo, 0);
-      }
-      // If procedure complete
-      if((pMsg->method == ATT_FIND_BY_TYPE_VALUE_RSP && pMsg->hdr.status == bleProcedureComplete) ||(pMsg->method == ATT_ERROR_RSP)) {
-        if(T->SvcStartHdl != 0){
-          // Discover characteristic
-          attReadByTypeReq_t req;
-          T->DiscState = BLE_DISC_STATE_CHAR_SC;
-          req.startHandle = T->SvcStartHdl;
-          req.endHandle = T->SvcEndHdl;
-          req.type.len = ATT_BT_UUID_SIZE;
-          req.type.uuid[0] = LO_UINT16(SIMPLEPROFILE_CHAR_SC_UUID);
-          req.type.uuid[1] = HI_UINT16(SIMPLEPROFILE_CHAR_SC_UUID);
-          BLE_CmdRetError(BLE_Error_BleStatus, GATT_ReadUsingCharUUID(T->ConnHandle, &req, E->TaskId));
-        }
-      }
-    }
-    else if(T->DiscState == BLE_DISC_STATE_CHAR_SC){
-      // Characteristic found, store handle
-      if(pMsg->method == ATT_READ_BY_TYPE_RSP && pMsg->msg.readByTypeRsp.numPairs > 0){
-        T->CharHdSC = BUILD_UINT16(pMsg->msg.readByTypeRsp.pDataList[0], pMsg->msg.readByTypeRsp.pDataList[1]);
-        if(P.ENABLE_UPDATE_REQUEST == true) {
-          if(SUCCESS != BLE_CmdRetError(BLE_Error_BleStatus, GAPCentralRole_UpdateLink(T->ConnHandle, P.UPDATE_MIN_CONN_INTERVAL, P.UPDATE_MAX_CONN_INTERVAL, P.UPDATE_SLAVE_LATENCY, P.UPDATE_CONN_TIMEOUT))){
-            BLE_CmdRetError(BLE_Error_BleStatus, GAPCentralRole_TerminateLink(T->ConnHandle));
-          }
-        }
-      }
-      T->DiscState = BLE_DISC_STATE_IDLE;       
     }
   }
 }
@@ -929,7 +869,7 @@ bool BLEC_BleSend(uint8 DevToken, uint8* data, uint8 dataLen){
   if((DevToken < BLEC_Dev_Max_Num) &&(dataLen <= SIMPLEPROFILE_CHAR_SC_CS_LEN) &&(E->DevList[DevToken].ConnStatus == BLEC_ConnStatus_Connected)) {
     BLEC_Type_Dev* T = &E->DevList[DevToken];
     if(T->CharSCDoWrite){
-      if(BLE_CmdRetError(BLE_Error_BleStatus, SimpleProfile_WriteCharValue(E->TaskId, T->ConnHandle, T->CharHdSC, data, dataLen)) == SUCCESS){
+      if(BLE_CmdRetError(BLE_Error_BleStatus, SimpleProfile_WriteCharValue(E->TaskId, T->ConnHandle, SIMPLEPROFILE_CHAR_SC_UUID_HANDLE, data, dataLen)) == SUCCESS){
         T->CharSCDoWrite = false;
         return true;
       } else {

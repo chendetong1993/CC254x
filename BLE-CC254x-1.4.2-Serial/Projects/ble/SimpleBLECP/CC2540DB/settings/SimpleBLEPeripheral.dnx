@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <settings>
     <DebugChecksum>
-        <Checksum>1206949702</Checksum>
+        <Checksum>3058663234</Checksum>
     </DebugChecksum>
     <DisAssemblyWindow>
         <NumStates>_ 1</NumStates>
@@ -65,7 +65,8 @@
         <Bp2>_ "STD_CODE" "{C:\Windows\system32}.715.3" 0 0 0 0 "" 0 ""</Bp2>
         <Bp3>_ "STD_CODE" "{C:\Windows\system32}.1131.20" 0 0 0 0 "" 0 ""</Bp3>
         <Bp4>_ "STD_CODE" "{$PROJ_DIR$\..\..\Profiles\GATT\gattservapp_util.c}.1.1" 0 0 0 0 "" 0 ""</Bp4>
-        <Count>5</Count>
+        <Bp5>_ "STD_CODE" "{$PROJ_DIR$\..\Source\simpleBLEC.c}.1076.1" 0 0 0 0 "" 0 ""</Bp5>
+        <Count>6</Count>
     </Breakpoints>
     <ChipconEmu>
         <StopTimersOnHalt>0</StopTimersOnHalt>

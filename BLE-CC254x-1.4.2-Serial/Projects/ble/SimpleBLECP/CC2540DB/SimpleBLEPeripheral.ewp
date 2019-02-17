@@ -521,7 +521,7 @@
                 </option>
                 <option>
                     <name>CCOptLevel</name>
-                    <state>3</state>
+                    <state>0</state>
                 </option>
                 <option>
                     <name>CCOptStrategy</name>
@@ -530,7 +530,7 @@
                 </option>
                 <option>
                     <name>CCOptLevelSlave</name>
-                    <state>3</state>
+                    <state>0</state>
                 </option>
                 <option>
                     <name>CompilerMisraRules04</name>
@@ -576,7 +576,7 @@
                 <option>
                     <name>CCAllowList2</name>
                     <version>0</version>
-                    <state>1111110</state>
+                    <state>0000000</state>
                 </option>
                 <option>
                     <name>CCOptStrategySlave</name>
@@ -2312,7 +2312,7 @@
             <name>$PROJ_DIR$\..\Source\simpleBLEC.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\Source\simpleBLEC.h</name>
+            <name>$PROJ_DIR$\..\Source\SimpleBLEC.h</name>
         </file>
         <file>
             <name>$PROJ_DIR$\..\Source\simpleBLEP.c</name>
